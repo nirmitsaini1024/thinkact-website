@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "@/components/Footer";
-import RiskMind from "@/components/Home/RiskMind";
+// import RiskMind from "@/components/Home/RiskMind";
 import Navbar from "@/components/Navbar";
 import React, { useLayoutEffect, useState } from "react";
 
@@ -19,7 +19,6 @@ const Page = () => {
       <div
         className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isRibbonClosed ? "pt-16" : "pt-24"} overflow-hidden`}
       >
-        <RiskMind />
       </div>
       {/* <section className="w-full px-4 py-5 mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-4">
