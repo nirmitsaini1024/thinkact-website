@@ -127,7 +127,7 @@ const Navbar: React.FC = () => {
             >
               {child.icon && (
                 <span className="mr-2 text-zinc-500">
-                  {React.cloneElement(child.icon as React.ReactElement, {
+                  {React.cloneElement(child.icon as React.ReactElement<{ className?: string }>, {
                     className: 'w-4 h-4',
                   })}
                 </span>
@@ -163,7 +163,7 @@ const Navbar: React.FC = () => {
               >
                 <div className="flex items-center">
                   <span className="mr-2 text-zinc-500">
-                    {React.cloneElement(item.icon as React.ReactElement, {
+                    {React.cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
                       className: 'w-4 h-4',
                     })}
                   </span>{' '}

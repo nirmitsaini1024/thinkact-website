@@ -113,7 +113,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         <div className="flex items-center">
           {item.icon && (
             <span className="mr-2 text-zinc-500">
-              {React.cloneElement(item.icon as React.ReactElement, {
+              {React.cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
                 className: 'w-4 h-4',
               })}
             </span>

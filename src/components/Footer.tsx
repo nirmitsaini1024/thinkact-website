@@ -111,7 +111,7 @@ const Footer: FC = () => {
                       className="shrink-0 text-zinc-500"
                     />
                     <p className="hover:text-primary transition">
-                      Parsippany, NJ
+                      New Jersey, USA
                     </p>
                   </li>
                   <li className="flex items-center space-x-3">
