@@ -73,10 +73,6 @@ const ProductShowcase = () => {
     };
   }, []);
 
-  const openVideoModal = (videoUrl) => {
-    setCurrentVideo(videoUrl);
-    setIsVideoModalOpen(true);
-  };
 
   const closeVideoModal = () => {
     setIsVideoModalOpen(false);
