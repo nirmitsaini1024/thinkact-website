@@ -1,3 +1,5 @@
+'use client';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   FileText,
   Shield,
@@ -17,10 +19,127 @@ import {
   Clock,
   DollarSign,
   CheckCheck,
+  X,
 } from 'lucide-react';
-import Link from 'next/link';
 
 const ProductShowcase = () => {
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState('');
+  const [isPlaying1, setIsPlaying1] = useState(false);
+  const [isPlaying2, setIsPlaying2] = useState(false);
+
+  const videoRef1 = useRef(null);
+  const videoRef2 = useRef(null);
+  const previewRef1 = useRef(null);
+  const previewRef2 = useRef(null);
+
+  // Video URLs - replace with your actual video files
+  const productDemoVideo = '/videos/dap.mp4';
+  const howItWorksVideo = '/videos/knowledger.mp4';
+
+  useEffect(() => {
+    const cleanups = [];
+
+    const setupPreview = (previewRef, startTime = 0, endTime = 3) => {
+      const video = previewRef.current;
+      if (!video) return;
+
+      const handleLoadedData = () => {
+        video.currentTime = startTime;
+        video.play().catch((e) => console.log('Preview autoplay failed:', e));
+      };
+
+      const handleTimeUpdate = () => {
+        if (video.currentTime >= endTime) {
+          video.currentTime = startTime;
+        }
+      };
+
+      video.addEventListener('loadeddata', handleLoadedData);
+      video.addEventListener('timeupdate', handleTimeUpdate);
+
+      // Push cleanup
+      cleanups.push(() => {
+        video.removeEventListener('loadeddata', handleLoadedData);
+        video.removeEventListener('timeupdate', handleTimeUpdate);
+      });
+    };
+
+    setupPreview(previewRef1, 0, 3);
+    setupPreview(previewRef2, 0, 3);
+
+    return () => {
+      cleanups.forEach((cleanup) => cleanup());
+    };
+  }, []);
+
+  const openVideoModal = (videoUrl) => {
+    setCurrentVideo(videoUrl);
+    setIsVideoModalOpen(true);
+  };
+
+  const closeVideoModal = () => {
+    setIsVideoModalOpen(false);
+    setCurrentVideo('');
+  };
+
+  const toggleVideo = (videoRef, setIsPlaying, previewRef) => {
+    const video = videoRef.current;
+    const preview = previewRef.current;
+
+    if (!video) return;
+
+    if (video.paused) {
+      video.currentTime = 0;
+      video
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+          if (preview) preview.pause();
+        })
+        .catch((e) => console.log('Video play error:', e));
+    } else {
+      video.pause();
+      setIsPlaying(false);
+      if (preview) {
+        preview.currentTime = 0;
+        preview.play().catch((e) => console.log('Preview resume failed:', e));
+      }
+    }
+  };
+
+  const handleDemoClick = (videoUrl, videoRef, setIsPlaying, previewRef) => {
+    toggleVideo(videoRef, videoRef.current?.paused, setIsPlaying, previewRef);
+  };
+
+  // VideoModal Component
+  const VideoModal = () => {
+    if (!isVideoModalOpen) return null;
+
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4">
+        <div className="relative w-full max-w-4xl bg-white rounded-lg shadow-xl">
+          <button
+            onClick={closeVideoModal}
+            className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors duration-200 z-10"
+          >
+            <X className="w-8 h-8" />
+          </button>
+
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <video
+              src={currentVideo}
+              className="absolute top-0 left-0 w-full h-full rounded-lg"
+              controls
+              autoPlay
+              playsInline
+            />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const smartAIFeatures = [
     {
       icon: <FileText className="w-6 h-6" />,
@@ -107,6 +226,9 @@ const ProductShowcase = () => {
 
   return (
     <div className="bg-white">
+      {/* Video Modal */}
+      <VideoModal />
+
       <section
         id="dap"
         className="relative py-24 px-4 bg-white overflow-hidden"
@@ -149,13 +271,21 @@ const ProductShowcase = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Link href="/contact-us">
-                    <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center space-x-2 group shadow-md">
-                      <span>Start Free Trial</span>
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                    </button>
-                  </Link>
-                  <button className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-all duration-300 flex items-center justify-center space-x-2">
+                  <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center space-x-2 group shadow-md">
+                    <span>Start Free Trial</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </button>
+                  <button
+                    onClick={() =>
+                      handleDemoClick(
+                        productDemoVideo,
+                        videoRef1,
+                        setIsPlaying1,
+                        previewRef1
+                      )
+                    }
+                    className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-all duration-300 flex items-center justify-center space-x-2"
+                  >
                     <Play className="w-5 h-5" />
                     <span>Watch Demo</span>
                   </button>
@@ -166,16 +296,60 @@ const ProductShowcase = () => {
             {/* Right */}
             <div className="relative">
               <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
-                <div className="bg-gray-900 rounded-xl aspect-video flex items-center justify-center group cursor-pointer hover:bg-gray-800 transition-all duration-300 mb-6">
-                  <div className="text-center">
-                    <Play className="w-16 h-16 text-white mb-4 mx-auto group-hover:scale-110 transition-transform duration-300" />
-                    <p className="text-white text-base font-medium">
-                      Product Demo
-                    </p>
-                  </div>
+                {/* Video Container */}
+                <div className="relative rounded-xl overflow-hidden aspect-video">
+                  {/* Preview Video (looping background) */}
+                  <video
+                    ref={previewRef1}
+                    src={productDemoVideo}
+                    className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
+                      isPlaying1 ? 'opacity-0' : 'opacity-100'
+                    }`}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+
+                  {/* Main Video */}
+                  <video
+                    ref={videoRef1}
+                    src={productDemoVideo}
+                    className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
+                      isPlaying1 ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    controls={isPlaying1}
+                    playsInline
+                    onEnded={() => {
+                      setIsPlaying1(false);
+                      if (previewRef1.current) {
+                        previewRef1.current.currentTime = 0;
+                        previewRef1.current
+                          .play()
+                          .catch((e) =>
+                            console.log('Preview restart failed:', e)
+                          );
+                      }
+                    }}
+                  />
+
+                  {/* Overlay when not playing */}
+                  {!isPlaying1 && (
+                    <div
+                      className="absolute inset-0 bg-black bg-opacity-10 flex items-center justify-center cursor-pointer group hover:bg-opacity-50 transition-all duration-300"
+                      onClick={() =>
+                        toggleVideo(videoRef1, setIsPlaying1, previewRef1)
+                      }
+                    >
+                      <div className="text-center text-white">
+                        <Play className="w-16 h-16 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+                        <p className="text-base font-medium">Click to play</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 mt-6">
                   <div className="bg-gray-50 rounded-lg p-4 text-center">
                     <div className="text-xl font-bold text-blue-600">99.9%</div>
                     <div className="text-sm text-gray-600">Accuracy</div>
@@ -252,16 +426,59 @@ const ProductShowcase = () => {
             {/* Left Visual */}
             <div className="relative order-2 lg:order-1">
               <div className="bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-700">
-                <div className="bg-gray-700 rounded-xl aspect-video flex items-center justify-center group cursor-pointer hover:bg-gray-600 transition-all duration-300 mb-6">
-                  <div className="text-center">
-                    <Play className="w-16 h-16 text-white mb-4 mx-auto group-hover:scale-110 transition-transform duration-300" />
-                    <p className="text-white text-base font-medium">
-                      How It Works
-                    </p>
-                  </div>
+                {/* Video Container */}
+                <div className="relative rounded-xl overflow-hidden aspect-video">
+                  {/* Preview Video (looping background) */}
+                  <video
+                    ref={previewRef2}
+                    src={howItWorksVideo}
+                    className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
+                      isPlaying2 ? 'opacity-0' : 'opacity-100'
+                    }`}
+                    muted
+                    loop
+                    playsInline
+                  />
+
+                  {/* Main Video */}
+                  <video
+                    ref={videoRef2}
+                    src={howItWorksVideo}
+                    className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
+                      isPlaying2 ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    controls={isPlaying2}
+                    playsInline
+                    onEnded={() => {
+                      setIsPlaying2(false);
+                      if (previewRef2.current) {
+                        previewRef2.current.currentTime = 0;
+                        previewRef2.current
+                          .play()
+                          .catch((e) =>
+                            console.log('Preview restart failed:', e)
+                          );
+                      }
+                    }}
+                  />
+
+                  {/* Overlay when not playing */}
+                  {!isPlaying2 && (
+                    <div
+                      className="absolute inset-0 bg-black bg-opacity-10 flex items-center justify-center cursor-pointer group hover:bg-opacity-50 transition-all duration-300"
+                      onClick={() =>
+                        toggleVideo(videoRef2, setIsPlaying2, previewRef2)
+                      }
+                    >
+                      <div className="text-center text-white">
+                        <Play className="w-16 h-16 mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
+                        <p className="text-base font-medium">Click to play</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-4 mt-6">
                   <div className="bg-gray-700 rounded-lg p-4">
                     <div className="flex items-center space-x-3">
                       <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
@@ -325,13 +542,21 @@ const ProductShowcase = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Link href="/contact-us">
-                  <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center space-x-2 group shadow-md">
-                    <span>Get Started</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                  </button>
-                </Link>
-                <button className="border border-gray-600 text-gray-300 px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-300 flex items-center justify-center space-x-2">
+                <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center space-x-2 group shadow-md">
+                  <span>Get Started</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+                <button
+                  onClick={() =>
+                    handleDemoClick(
+                      howItWorksVideo,
+                      videoRef2,
+                      setIsPlaying2,
+                      previewRef2
+                    )
+                  }
+                  className="border border-gray-600 text-gray-300 px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-300 flex items-center justify-center space-x-2"
+                >
                   <Play className="w-5 h-5" />
                   <span>View Demo</span>
                 </button>
@@ -340,6 +565,7 @@ const ProductShowcase = () => {
           </div>
         </div>
       </section>
+
       <section className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">

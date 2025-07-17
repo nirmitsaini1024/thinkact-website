@@ -186,25 +186,6 @@ const OrchestrationPage = () => {
           ))}
         </div>
       </section>
-
-      {/* CTA */}
-      <section className="w-full py-24 bg-blue-600">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Ready to Orchestrate?
-          </h2>
-          <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-            Build your intelligent workflows using ThinkAct’s agentic
-            coordination platform.
-          </p>
-          <button className="group bg-white text-blue-600 font-bold py-4 px-8 rounded-xl hover:bg-blue-50 transition-all duration-300 shadow-lg">
-            <span className="flex items-center space-x-2">
-              <span>Get Started Now</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </button>
-        </div>
-      </section>
     </div>
   );
 };

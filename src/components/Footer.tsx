@@ -36,7 +36,7 @@ const Footer: FC = () => {
                 <Link href="/" className="flex items-center gap-0 -ml-2">
                   <div className="">
                     <Image
-                      src="/1122.svg"
+                      src="/thinkact-logo.svg"
                       alt="Logo"
                       height={50}
                       width={50}

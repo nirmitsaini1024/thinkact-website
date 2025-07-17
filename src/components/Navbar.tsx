@@ -56,7 +56,7 @@ const navigationData: NavigationData = {
         {
           icon: <IoFlowerOutline />,
           name: 'Orchestration',
-          path: '/orchestration',
+          path: '/#thinkagentic',
         },
       ],
     },
@@ -127,9 +127,12 @@ const Navbar: React.FC = () => {
             >
               {child.icon && (
                 <span className="mr-2 text-zinc-500">
-                  {React.cloneElement(child.icon as React.ReactElement<{ className?: string }>, {
-                    className: 'w-4 h-4',
-                  })}
+                  {React.cloneElement(
+                    child.icon as React.ReactElement<{ className?: string }>,
+                    {
+                      className: 'w-4 h-4',
+                    }
+                  )}
                 </span>
               )}
               {child.name}
@@ -163,9 +166,12 @@ const Navbar: React.FC = () => {
               >
                 <div className="flex items-center">
                   <span className="mr-2 text-zinc-500">
-                    {React.cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
-                      className: 'w-4 h-4',
-                    })}
+                    {React.cloneElement(
+                      item.icon as React.ReactElement<{ className?: string }>,
+                      {
+                        className: 'w-4 h-4',
+                      }
+                    )}
                   </span>{' '}
                   {item.name}
                 </div>
@@ -195,7 +201,7 @@ const Navbar: React.FC = () => {
             <Link href="/" className="flex items-center gap-0">
               <div className="">
                 <Image
-                  src="/1122.svg"
+                  src="/thinkact-logo.svg"
                   alt="Logo"
                   height={50}
                   width={50}
@@ -257,10 +263,15 @@ const Navbar: React.FC = () => {
       </header>
 
       {isOpen && (
-        <div className="lg:hidden fixed top-0 inset-x-0 z-50 bg-white text-zinc-900 flex flex-col overflow-y-auto h-full pt-16">
-          <div className="flex justify-between items-center p-4 shadow-md border-b">
+        <div className="lg:hidden fixed top-0 inset-x-0 z-50 bg-white text-zinc-900 flex flex-col overflow-y-auto h-full pt-1">
+          <div className="flex justify-between items-center p-2 shadow-md border-b border-gray-100">
             <Link href="/" onClick={handleMenuClose}>
-              <Image src="/1122.svg" alt="Logo" height={40} width={40} />
+              <Image
+                src="/thinkact-logo.svg"
+                alt="Logo"
+                height={50}
+                width={50}
+              />
             </Link>
             <button onClick={handleMenuClose}>
               <IoClose size={32} className="text-zinc-900" />
