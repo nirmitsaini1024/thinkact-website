@@ -105,7 +105,7 @@ const ProductShowcase = () => {
   };
 
   const handleDemoClick = (videoUrl, videoRef, setIsPlaying, previewRef) => {
-    toggleVideo(videoRef, videoRef.current?.paused, setIsPlaying, previewRef);
+    toggleVideo(videoRef, setIsPlaying, previewRef);
   };
 
   // VideoModal Component
