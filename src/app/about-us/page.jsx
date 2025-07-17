@@ -228,7 +228,7 @@ export default function AboutUs() {
   const whyChooseData = [
     {
       title: "Industry-Specific Expertise",
-      description: "Purpose-built solutions for mortgage lending and airport security",
+      // description: "Purpose-built solutions for mortgage lending and airport security",
       icon: "🏭"
     },
     // {
@@ -238,7 +238,7 @@ export default function AboutUs() {
     // },
     {
       title: "Enterprise-Grade Security",
-      description: "SOC 2 Type II certified with role-based access controls",
+      // description: "SOC 2 Type II certified with role-based access controls",
       icon: "🛡️"
     },
     {
@@ -257,7 +257,7 @@ export default function AboutUs() {
     <>
       <div className="overflow-hidden">
         {/* Hero Section */}
-        <section ref={heroRef} className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden">
+        <section ref={heroRef} className="relative py-40 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGRlZnM+CjxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPgo8cGF0aCBkPSJNIDYwIDAgTCAwIDAgMCA2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTVlN2ViIiBzdHJva2Utd2lkdGg9IjEiLz4KPC9wYXR0ZXJuPgo8L2RlZnM+CjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz4KPC9zdmc+')] opacity-30"></div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -346,7 +346,7 @@ export default function AboutUs() {
                 <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-100">
                   <div className="flex items-center mb-6">
                     <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mr-4">
-                      🔮
+                      💡
                     </div>
                     <h3 className="text-3xl font-bold text-gray-900">Our Vision</h3>
                   </div>
@@ -503,7 +503,7 @@ export default function AboutUs() {
                 <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-100 h-full flex flex-col">
                   <div className="flex flex-col items-center text-center flex-grow">
                     <Image
-                      src="/assets/profile-manjeet.png"
+                      src="/assets/profile-manjeet.webp"
                       alt="Manjeet Singh"
                       width={200}
                       height={200}

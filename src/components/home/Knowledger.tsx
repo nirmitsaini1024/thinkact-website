@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react'; // Removed useEffect as preview logic is gone
 import {
   Shield,
   Database,
@@ -13,53 +13,39 @@ import {
   Play,
   CheckCheck,
 } from 'lucide-react';
+import Image from 'next/image'; // Assuming you're using Next.js Image component
 
 const Knowledger: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const previewRef = useRef<HTMLVideoElement | null>(null);
+  // Removed previewRef as it's no longer needed
 
-  const howItWorksVideo = '/videos/knowledger.mp4';
+  const howItWorksVideo = '/videos/knowledger.mp4'; // This will now be only for the main video
+  const gifPoster = '/gif/knowledger.gif'; // This GIF will be used for the overlay background
 
-  useEffect(() => {
-    const preview = previewRef.current;
-    if (!preview) return;
-
-    const handleLoadedData = () => {
-      preview.currentTime = 0;
-      preview.play().catch((e) => console.log('Preview autoplay failed:', e));
-    };
-
-    const handleTimeUpdate = () => {
-      if (preview.currentTime >= 3) {
-        preview.currentTime = 0;
-      }
-    };
-
-    preview.addEventListener('loadeddata', handleLoadedData);
-    preview.addEventListener('timeupdate', handleTimeUpdate);
-
-    return () => {
-      preview.removeEventListener('loadeddata', handleLoadedData);
-      preview.removeEventListener('timeupdate', handleTimeUpdate);
-    };
-  }, []);
+  // Removed useEffect for preview video logic
 
   const startMainVideo = () => {
     const video = videoRef.current;
-    const preview = previewRef.current;
-    if (!video) return;
+    if (!video) {
+      console.warn('Main video element not found. Cannot play/pause.');
+      return;
+    }
 
-    video.currentTime = 0;
+    // Attempt to play the main video
+    video.currentTime = 0; // Ensure main video starts from beginning
     video
       .play()
       .then(() => {
-        setIsPlaying(true);
-        preview?.pause();
+        setIsPlaying(true); // Set state to show main video and hide overlay
       })
-      .catch((e) => console.log('Video play error:', e));
+      .catch((e) => {
+        console.error('Main video play error:', e); // Log any play errors
+        // Optionally, you could provide user feedback here if it fails
+      });
   };
 
+  // --- No changes below this point for features and benefits arrays ---
   const thinkActFeatures = [
     {
       icon: <Database className="w-6 h-6" />,
@@ -122,42 +108,41 @@ const Knowledger: React.FC = () => {
             <div className="relative order-2 lg:order-1">
               <div className="bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-700">
                 <div className="relative rounded-xl overflow-hidden aspect-video">
-                  {/* Preview Video */}
-                  <video
-                    ref={previewRef}
-                    src={howItWorksVideo}
-                    className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
-                      isPlaying ? 'opacity-0' : 'opacity-100'
-                    }`}
-                    muted
-                    playsInline
-                    autoPlay
-                  />
-
-                  {/* Main Video */}
+                  {/* Main Video - Always present, its opacity is controlled */}
                   <video
                     ref={videoRef}
                     src={howItWorksVideo}
                     className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
-                      isPlaying ? 'opacity-100' : 'opacity-0'
+                      isPlaying ? 'opacity-100' : 'opacity-0' // Main video is visible when playing
                     }`}
-                    controls={isPlaying}
+                    controls={isPlaying} // Controls only when playing
                     playsInline
                     onEnded={() => {
-                      setIsPlaying(false);
-                      previewRef.current?.play().catch(() => {});
+                      setIsPlaying(false); // Hide main video, show overlay with GIF
+                      // Removed previewRef.current?.play() as preview video is gone
                     }}
                   />
 
-                  {/* Overlay */}
+                  {/* Overlay with GIF background - Visible only when main video is NOT playing */}
                   {!isPlaying && (
                     <div
-                      className="absolute inset-0 bg-black bg-opacity-10 backdrop-blur-sm flex items-center justify-center cursor-pointer group hover:bg-opacity-20 transition-all duration-300"
-                      onClick={startMainVideo}
+                      className="absolute inset-0 cursor-pointer group z-10" // Outer container for GIF + overlay + button
+                      onClick={startMainVideo} // Click anywhere on this container to play
                     >
-                      <div className="text-center text-white drop-shadow-md">
-                        <Play className="w-16 h-16 mx-auto mb-2 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
-                        <p className="text-base font-medium">Click to play</p>
+                      {/* GIF image as background */}
+                      <Image
+                        src={gifPoster}
+                        alt="How it Works Preview"
+                        fill // Use fill to make the image cover its parent
+                        className="object-cover" // Ensures the image covers the area without distortion
+                      />
+                      {/* Semi-transparent overlay on top of the GIF */}
+                      <div className="absolute inset-0 bg-gray-300/30  flex items-center justify-center transition-all duration-300 hover:bg-opacity-20">
+                        {/* Play button and text on top of the overlay */}
+                        <div className="text-center text-white drop-shadow-md">
+                          <Play className="w-16 h-16 mx-auto mb-2 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
+                          <p className="text-base font-medium">Click to play</p>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -228,7 +213,7 @@ const Knowledger: React.FC = () => {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                 </button>
                 <button
-                  onClick={startMainVideo}
+                  onClick={startMainVideo} // This button directly calls the function to start the main video
                   className="border border-gray-600 text-gray-300 px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <Play className="w-5 h-5" />

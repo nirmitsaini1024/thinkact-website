@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   FileText,
   Shield,
@@ -13,59 +13,37 @@ import {
   Play,
   Star,
 } from 'lucide-react';
+import Image from 'next/image'; // Make sure you import Image from 'next/image'
 
 const DocAgentic: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const previewRef = useRef<HTMLVideoElement | null>(null);
   const productDemoVideo = '/videos/dap.mp4';
-
-  useEffect(() => {
-    const preview = previewRef.current;
-    if (!preview) return;
-
-    const handleLoadedData = () => {
-      preview.currentTime = 0;
-      preview.play().catch((e) => console.log('Preview autoplay failed:', e));
-    };
-
-    const handleTimeUpdate = () => {
-      if (preview.currentTime >= 3) {
-        preview.currentTime = 0;
-      }
-    };
-
-    preview.addEventListener('loadeddata', handleLoadedData);
-    preview.addEventListener('timeupdate', handleTimeUpdate);
-
-    return () => {
-      preview.removeEventListener('loadeddata', handleLoadedData);
-      preview.removeEventListener('timeupdate', handleTimeUpdate);
-    };
-  }, []);
 
   const toggleVideo = () => {
     const video = videoRef.current;
-    const preview = previewRef.current;
-    if (!video) return;
+    if (!video) {
+      console.warn('Video element not found. Cannot play/pause.');
+      return;
+    }
 
-    if (video.paused) {
-      video.currentTime = 0;
+    if (isPlaying) {
+      // If currently playing, pause it and reset state
+      video.pause();
+      setIsPlaying(false);
+    } else {
+      // If not playing, reset to start and play
+      video.currentTime = 0; // Always start from the beginning on play
       video
         .play()
         .then(() => {
           setIsPlaying(true);
-          preview?.pause();
         })
-        .catch((e) => console.log('Video play error:', e));
-    } else {
-      video.pause();
-      setIsPlaying(false);
-      if (preview) {
-        preview.currentTime = 0;
-        preview.play().catch((e) => console.log('Preview resume failed:', e));
-      }
+        .catch((e) => {
+          // Log error if video play fails (e.g., due to browser autoplay policies)
+          console.error('Video play failed:', e);
+          // You might want to provide user feedback here if playing fails
+        });
     }
   };
 
@@ -153,8 +131,8 @@ const DocAgentic: React.FC = () => {
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                   </button>
                   <button
-                    onClick={toggleVideo}
-                    className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-all duration-300 flex items-center justify-center space-x-2"
+                    onClick={toggleVideo} // This button now correctly triggers the video playback
+                    className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-600 transition-all duration-300 flex items-center justify-center space-x-2"
                   >
                     <Play className="w-5 h-5" />
                     <span>Watch Demo</span>
@@ -167,43 +145,38 @@ const DocAgentic: React.FC = () => {
             <div className="relative">
               <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
                 <div className="relative rounded-xl overflow-hidden aspect-video">
-                  {/* Preview video */}
-                  <video
-                    ref={previewRef}
-                    src={productDemoVideo}
-                    className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
-                      isPlaying ? 'opacity-0' : 'opacity-100'
-                    }`}
-                    muted
-                    playsInline
-                    loop
-                    autoPlay
-                  />
-
-                  {/* Main video */}
                   <video
                     ref={videoRef}
                     src={productDemoVideo}
+                    // Removed poster attribute here, as the GIF is now explicitly handled by the overlay
                     className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
-                      isPlaying ? 'opacity-100' : 'opacity-0'
+                      isPlaying ? 'opacity-100' : 'opacity-0' // Video content visible/invisible
                     }`}
-                    controls={isPlaying}
+                    controls={isPlaying} // Only show controls when the video is playing
                     playsInline
-                    onEnded={() => {
-                      setIsPlaying(false);
-                      previewRef.current?.play().catch(() => {});
-                    }}
+                    onEnded={() => setIsPlaying(false)} // Reset state when video finishes
                   />
 
-                  {/* Overlay */}
+                  {/* Conditional Overlay with GIF background when video is not playing */}
                   {!isPlaying && (
                     <div
-                      className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center cursor-pointer group hover:bg-opacity-30 transition-all duration-300"
-                      onClick={toggleVideo}
+                      className="absolute inset-0 cursor-pointer group z-10" // Outer container for GIF + overlay + button
+                      onClick={toggleVideo} // Click anywhere on this container to play
                     >
-                      <div className="text-center text-white">
-                        <Play className="w-16 h-16 mx-auto mb-2 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
-                        <p className="text-base font-medium">Click to play</p>
+                      {/* GIF image as background */}
+                      <Image
+                        src="/dap.gif"
+                        alt="Product Demo Preview"
+                        fill // Use fill to make the image cover its parent
+                        className="object-cover" // Ensures the image covers the area without distortion
+                      />
+                      {/* Semi-transparent black overlay on top of the GIF */}
+                      <div className="absolute inset-0 bg-gray-200/30 flex items-center justify-center transition-all duration-300 hover:bg-opacity-30">
+                        {/* Play button and text on top of the black overlay */}
+                        <div className="text-center text-white">
+                          <Play className="w-16 h-16 mx-auto mb-2 text-blue-400 group-hover:scale-110 transition-transform duration-300" />
+                          <p className="text-base font-medium">Click to play</p>
+                        </div>
                       </div>
                     </div>
                   )}

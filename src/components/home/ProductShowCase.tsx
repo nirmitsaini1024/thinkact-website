@@ -28,19 +28,19 @@ const ProductShowcase = () => {
   const [isPlaying1, setIsPlaying1] = useState(false);
   const [isPlaying2, setIsPlaying2] = useState(false);
 
-  const videoRef1 = useRef(null);
-  const videoRef2 = useRef(null);
-  const previewRef1 = useRef(null);
-  const previewRef2 = useRef(null);
+  const videoRef1 = useRef<HTMLVideoElement>(null);
+  const videoRef2 = useRef<HTMLVideoElement>(null);
+  const previewRef1 = useRef<HTMLVideoElement>(null);
+  const previewRef2 = useRef<HTMLVideoElement>(null);
 
   // Video URLs - replace with your actual video files
   const productDemoVideo = '/videos/dap.mp4';
   const howItWorksVideo = '/videos/knowledger.mp4';
 
   useEffect(() => {
-    const cleanups = [];
+    const cleanups: (() => void)[] = [];
 
-    const setupPreview = (previewRef, startTime = 0, endTime = 3) => {
+    const setupPreview = (previewRef: React.RefObject<HTMLVideoElement | null>, startTime = 0, endTime = 3) => {
       const video = previewRef.current;
       if (!video) return;
 
@@ -79,7 +79,7 @@ const ProductShowcase = () => {
     setCurrentVideo('');
   };
 
-  const toggleVideo = (videoRef, setIsPlaying, previewRef) => {
+  const toggleVideo = (videoRef: React.RefObject<HTMLVideoElement | null>, setIsPlaying: (playing: boolean) => void, previewRef: React.RefObject<HTMLVideoElement | null>) => {
     const video = videoRef.current;
     const preview = previewRef.current;
 
@@ -104,7 +104,7 @@ const ProductShowcase = () => {
     }
   };
 
-  const handleDemoClick = (videoUrl, videoRef, setIsPlaying, previewRef) => {
+  const handleDemoClick = (videoUrl: string, videoRef: React.RefObject<HTMLVideoElement | null>, setIsPlaying: (playing: boolean) => void, previewRef: React.RefObject<HTMLVideoElement | null>) => {
     toggleVideo(videoRef, setIsPlaying, previewRef);
   };
 

@@ -67,7 +67,7 @@ const Footer: FC = () => {
                   </a>
                 ))}
                 <a
-                  href="https://www.linkedin.com/company/ThinkAct-ai/"
+                  href="https://www.linkedin.com/company/108176624"
                   className="text-zinc-500 hover:text-primary transition"
                   aria-label="LinkedIn"
                   target="_blank"

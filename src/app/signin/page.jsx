@@ -48,7 +48,7 @@ export default function SignIn() {
 
           <div className="mb-4 flex flex-col items-center md:items-start">
             <Image
-              src="/assets/logo-small.png"
+              src="/assets/logo-small.webp"
               alt="Logo"
               className="w-10 h-10 mb-2 mx-auto md:mx-0"
               width={40}
@@ -172,7 +172,7 @@ export default function SignIn() {
         {/* Right Section */}
         <div className="hidden md:w-1/2 md:block bg-[#F3F6FF] rounded-2xl p-5">
           <Image
-            src="/assets/signin/sign-in.png"
+            src="/assets/signin/sign-in.webp"
             alt="Sign In"
             className="w-full p-4"
             width={500}

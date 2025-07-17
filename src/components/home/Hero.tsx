@@ -22,11 +22,11 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.1]"
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.1] whitespace-nowrap"
         >
-          Where <span className="text-black">Complexity</span> meets{' '}
-          <span className="text-blue-600">Simplicity</span> - <br /> The AI{' '}
-          <span className="text-blue-600">Agentic</span> Way
+          &quot;Where <span className="text-black">Complexity</span> meets{' '}
+          <span className="text-blue-600">Simplicity</span> - <br />The AI{' '}
+          <span className="text-blue-600">Agentic</span> Way&quot;
         </motion.h1>
 
         <motion.p
