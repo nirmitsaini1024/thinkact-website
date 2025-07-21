@@ -184,12 +184,24 @@ const DocAgentic: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-4 mt-6">
                   <div className="bg-gray-50 rounded-lg p-4 text-center">
-                    <div className="text-xl font-bold text-blue-600">99.9%</div>
-                    <div className="text-sm text-gray-600">Accuracy</div>
+                    <div className="inline-flex items-center justify-center gap-1 text-blue-600 text-xl font-bold">
+                      <span className="text-sm bg-blue-100 px-2 py-0.5 rounded-full font-medium">
+                        Up to
+                      </span>
+                      99.9%
+                    </div>
+                    <div className="text-sm text-gray-600 mt-1">Accuracy</div>
                   </div>
                   <div className="bg-gray-50 rounded-lg p-4 text-center">
-                    <div className="text-xl font-bold text-green-600">60%</div>
-                    <div className="text-sm text-gray-600">Cost Reduction</div>
+                    <div className="inline-flex items-center justify-center gap-1 text-green-600 text-xl font-bold">
+                      <span className="text-sm bg-green-100 px-2 py-0.5 rounded-full font-medium">
+                        Up to
+                      </span>
+                      60%
+                    </div>
+                    <div className="text-sm text-gray-600 mt-1">
+                      Cost Reduction
+                    </div>
                   </div>
                 </div>
               </div>

@@ -17,16 +17,16 @@ const HeroSection = () => {
 
       <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_30%,black)]" />
 
-      <div className="relative z-20 max-w-5xl text-center pt-16 sm:pt-24 lg:pt-32 px-4">
+      <div className="relative z-20 max-w-5xl text-center pt-16 sm:pt-24 lg:pt-32 px-2">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.1] whitespace-nowrap"
+          className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight leading-[1.1] "
         >
           &quot;Where <span className="text-black">Complexity</span> meets{' '}
-          <span className="text-blue-600">Simplicity</span> - <br />The AI{' '}
-          <span className="text-blue-600">Agentic</span> Way&quot;
+          <span className="text-blue-600">Simplicity</span> - <br />
+          The AI <span className="text-blue-600">Agentic</span> Way&quot;
         </motion.h1>
 
         <motion.p

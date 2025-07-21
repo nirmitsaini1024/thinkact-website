@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { BsEye, BsEyeSlash } from "react-icons/bs";
+import React, { useState } from 'react';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 // import signIn from "../../../public/assets/signin/sign-in.png";
 // import logo from "../../../public/assets/logo-small.png";
-import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa";
-import Image from "next/image";
+import Link from 'next/link';
+import { FaArrowLeft } from 'react-icons/fa';
+import Image from 'next/image';
 
 export default function SignIn() {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!isPasswordVisible);
@@ -20,26 +20,19 @@ export default function SignIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add your sign-in logic here
-    console.log("Attempting sign-in", { email, password });
+    console.log('Attempting sign-in', { email, password });
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-gray-50">
+    <div className="min-h-screen flex items-center justify-center p-6 bg-gray-50 py-24">
       <div className="w-full max-w-5xl p-5 flex items-center gap-6 bg-white rounded-2xl shadow-lg border border-[#B3C2FF] overflow-hidden relative">
         {/* Large Screen Back Button - Positioned absolutely in body */}
-        <Link
-          href={"/"}
-          className="fixed top-6 left-6 z-50 text-gray-600 hover:text-gray-800 h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition duration-300 max-md:hidden"
-          aria-label="Go back"
-        >
-          <FaArrowLeft size={20} />
-        </Link>
 
         {/* Left Section */}
         <div className="p-4 w-full md:w-1/2 flex flex-col justify-center relative">
           {/* Mobile Back Button - Inside the div */}
           <Link
-            href={"/"}
+            href={'/'}
             className="absolute top-0 left-0 text-gray-600 hover:text-gray-800 h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition duration-300 md:hidden"
             aria-label="Go back"
           >
@@ -48,7 +41,7 @@ export default function SignIn() {
 
           <div className="mb-4 flex flex-col items-center md:items-start">
             <Image
-              src="/assets/logo-small.webp"
+              src="/thinkact-logo.svg"
               alt="Logo"
               className="w-10 h-10 mb-2 mx-auto md:mx-0"
               width={40}
@@ -99,7 +92,7 @@ export default function SignIn() {
               </label>
               <div className="relative">
                 <input
-                  type={isPasswordVisible ? "text" : "password"}
+                  type={isPasswordVisible ? 'text' : 'password'}
                   placeholder="Enter your password"
                   value={password}
                   id="password"
@@ -137,12 +130,12 @@ export default function SignIn() {
                   Remember me
                 </label>
               </div>
-              <Link
+              {/* <Link
                 href="/reset-password"
                 className="text-sm text-[#2B2B2B] font-semibold"
               >
                 Forgot Password?
-              </Link>
+              </Link> */}
             </div>
 
             <button
@@ -158,7 +151,7 @@ export default function SignIn() {
 
           <div className="text-center mt-6">
             <p className="text-gray-600 text-sm">
-              Don&apos;t have an account?{" "}
+              Don&apos;t have an account?{' '}
               <Link
                 href="/signup"
                 className="text-[#2B2B2B] font-semibold hover:underline"

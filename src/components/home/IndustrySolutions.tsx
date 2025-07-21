@@ -37,7 +37,7 @@ interface Industry {
 
 const industries: Record<string, Industry> = {
   mortgage: {
-    title: 'Mortgage',
+    title: 'Financial Services',
     icon: Building2,
     color: 'text-emerald-600',
     bg: 'bg-emerald-50',
@@ -141,7 +141,7 @@ const industries: Record<string, Industry> = {
     ],
   },
   corporate: {
-    title: 'Corporate',
+    title: 'Enterprise',
     icon: Briefcase,
     color: 'text-yellow-600',
     bg: 'bg-yellow-50',
@@ -170,6 +170,42 @@ const industries: Record<string, Industry> = {
         title: 'Access Control Compliance',
         description: 'Ensure document access matches enterprise policy.',
         details: 'RBAC support with logs and audit-ready permission snapshots.',
+      },
+    ],
+  },
+  healthcare: {
+    title: 'Healthcare',
+    icon: ClipboardCheck,
+    color: 'text-rose-600',
+    bg: 'bg-rose-50',
+    description:
+      'Accelerate clinical workflows, improve patient safety, and automate compliance tasks.',
+    stats: {
+      efficiency: '30% faster patient intake',
+      accuracy: '99% diagnostic document accuracy',
+      compliance: 'Full HIPAA compliance',
+    },
+    features: [
+      {
+        icon: FileText,
+        title: 'Patient Intake Automation',
+        description: 'Digitize and process patient registration documents.',
+        details:
+          'Auto-extract insurance details, consent forms, and medical history with high accuracy.',
+      },
+      {
+        icon: Shield,
+        title: 'Medical Data Privacy',
+        description: 'Ensure all health records remain secure and private.',
+        details:
+          'Supports HIPAA, HITECH, and local data protection standards with full audit logs.',
+      },
+      {
+        icon: FileCheck,
+        title: 'Claims & Billing Automation',
+        description: 'Automate insurance claim generation and validation.',
+        details:
+          'Validate CPT/ICD codes, check eligibility, and reduce manual errors in billing.',
       },
     ],
   },
