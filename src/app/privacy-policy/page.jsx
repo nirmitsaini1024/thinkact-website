@@ -8,304 +8,146 @@ export default function PrivacyPolicy() {
           Privacy Policy
         </h1>
         <p className="text-center text-gray-500 mt-5 font-medium">
-          Last Updated December 2024
+          Last updated: 10/1/2025
         </p>
 
-        <p className="mt-10 text-gray-700 leading-relaxed">
-          This Privacy Policy will help you better understand how we collect,
-          use, and share your personal information.
-        </p>
+        <div className="mt-10 space-y-8">
+          <div>
+            <h2 className="text-2xl font-bold mb-5">1. INTRODUCTION</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              This Privacy Policy describes how Smart AI Docs (“ThinkAct AI”"we," "us," or "our") collects, uses, and discloses your personal information when you use our software as a service (the "Service").
+            </p>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              We are committed to protecting your personal information and your right to privacy. When you visit our software as a service and use our products, you trust us with your personal information. We take your privacy very seriously. In this Privacy Policy, we seek to explain to you in the clearest way possible what information we collect, how we use it, and what rights you have in relation to it.
+            </p>
+            <p className="text-gray-700 leading-relaxed">
+              This Privacy Policy applies to all information collected through our software as a service, as well as any related services, sales, marketing, or events. Please read this Privacy Policy carefully as it will help you understand what we do with the information we collect.
+            </p>
+          </div>
 
-        <div>
-          <h3 className="text-2xl font-bold mt-10 mb-5">Overview</h3>
-          <p className="text-gray-700 leading-relaxed">
-            This Privacy Policy describes how we, Smart AI Docs LLC (referred to
-            as "ThinkAct AI," "we," "our," or "us"), collect, use, and share
-            your personal information. This Privacy Policy applies to
-            information that we collect when you visit our website,
-            https://www.thinkact.ai (“thinkact.ai”), when you interact with the
-            features of our Site, when you interact with us through our email,
-            advertising, or social media campaigns, or when you use our services
-            (“Services”). By accessing or using our Site or Services, you agree
-            to this Privacy Policy. With respect to our Services, we enter into
-            data processing agreements with our customers, and those data
-            processing agreements control with respect to our obligations to our
-            customers. Individuals should refer to our customers’ privacy
-            policies for information about how our customers collect, use, and
-            share information, including through their use of our Services. In
-            this Privacy Policy, we clearly describe where we collect
-            information on our own behalf for business purposes and on our
-            customers’ behalf as a service provider or data processor. This
-            Privacy Policy does not apply to employees or job applicants. Our
-            services are not intended for individuals under the age of 16. We do
-            not knowingly collect personal information from individuals under
-            16. If we learn that we have collected personal information from
-            individuals under the age of 16, we will delete that information.
-          </p>
-          <p className="text-gray-700 leading-relaxed">
-            This policy is intended to help you understand:
-          </p>
-          <ol className="list-decimal list-inside  text-gray-700 leading-relaxed space-y-3">
-            <li>
-              Personal Information We Collect, Purpose for Processing &
-              Categories of Third Parties Personal Information is Shared With.
-            </li>
-            <li>How We Collect Personal Information.</li>
-            <li>How We Use and Share Personal Information.</li>
-            <li>Your Rights Under Applicable Law.</li>
-            <li>How We Protect Personal Information.</li>
-            <li>How Long We Retain Personal Information.</li>
-            <li>Your Choices with Respect to Your Personal Information.</li>
-            <li>How We Can Make Changes to this Policy.</li>
-          </ol>
-        </div>
-        <div className="mt-10 space-y-6">
-          <h3 className="font-bold text-xl">
-            Personal Information We Collect, Purpose for Processing & Categories
-            of Third Parties Personal Information Is Shared With
-          </h3>
-          <table className="w-full border-collapse bg-white shadow-sm">
-            <thead>
-              <tr className="bg-gray-50">
-                <th className="border border-gray-200 p-4 text-left font-semibold text-gray-700">
-                  Categories of Personal Information
-                </th>
-                <th className="border border-gray-200 p-4 text-left font-semibold text-gray-700">
-                  Example
-                </th>
-                <th className="border border-gray-200 p-4 text-left font-semibold text-gray-700">
-                  Purpose for Processing
-                </th>
-                <th className="border border-gray-200 p-4 text-left font-semibold text-gray-700">
-                  Categories of Third Parties Shared With
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-200 p-4">Identifiers</td>
-                <td className="border border-gray-200 p-4">
-                  Name, email address, unique identifier, online identifier,
-                  transaction identifiers, device ID, advertising ID, and IP
-                  address
-                </td>
-                <td className="border border-gray-200 p-4">
-                  <ul className="list-disc pl-5 space-y-2">
-                    <li>
-                      To provide, support and improve our website or services
-                    </li>
-                    <li>
-                      To communicate with you about our products and services
-                    </li>
-                    <li>For our own billing and administrative purposes</li>
-                    <li>For security purposes</li>
-                    <li>Market and advertise our Services</li>
-                    <li>For internal training purposes (e.g., sales team)</li>
-                  </ul>
-                </td>
-                <td className="border border-gray-200 p-4">
-                  Service Providers<br></br>Third Party Analytics & Social Media
-                  Providers
-                </td>
-              </tr>
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-200 p-4">
-                  Select information in customer records
-                </td>
-                <td className="border border-gray-200 p-4">
-                  Name, email address, physical address, telephone number;
-                  payment processors may collect transaction details (e.g.,
-                  transaction date, payment info)
-                </td>
-                <td className="border border-gray-200 p-4">
-                  <ul>
-                    <li>
-                      To provide, support and improve our website or services
-                    </li>
-                    <li>To communicate with you about products/services</li>
-                    <li>For billing/administrative purposes</li>
-                  </ul>
-                </td>
-                <td className="border border-gray-200 p-4">
-                  Service Providers
-                </td>
-              </tr>
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-200 p-4">Geolocation</td>
-                <td className="border border-gray-200 p-4">
-                  Course IP address
-                </td>
-                <td className="border border-gray-200 p-4">
-                  <ul>
-                    <li>
-                      To provide, support and improve our website or services
-                    </li>
-                    <li>For security purposes</li>
-                  </ul>
-                </td>
-                <td className="border border-gray-200 p-4">
-                  Service Providers
-                </td>
-              </tr>
-              <tr className="hover:bg-gray-50">
-                <td className="border border-gray-200 p-4">
-                  Commercial information
-                </td>
-                <td className="border border-gray-200 p-4">
-                  Name, address, telephone number; products/services purchased
-                  or considered; other purchasing/consuming histories
-                </td>
-                <td className="border border-gray-200 p-4">
-                  <ul>
-                    <li>To provide/support/improve services</li>
-                    <li>To communicate about products/services</li>
-                    <li>For billing/administrative purposes</li>
-                  </ul>
-                </td>
-                <td className="border border-gray-200 p-4">
-                  Service Providers
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className="mt-10 space-y-6 mb-20">
-          <h3 className="font-bold text-xl">
-            How We Collect Personal Information
-          </h3>
-          <p className="text-gray-700 leading-relaxed">
-            We collect personal information as follows:
-          </p>
-          <ul className="list-disc pl-5 space-y-3">
-            <li className="text-gray-700">
-              Automatically through your interaction with the Site or Service
-              (e.g., cookies), which may include IP address, network activity
-              data, geolocation data, browser type/settings, device information
-              (e.g., device ID), etc.
-            </li>
-            <li className="text-gray-700">
-              Directly from you when you fill out forms/questionnaires or
-              interact with marketing campaigns.
-            </li>
-            <li className="text-gray-700">
-              From third parties like marketing/analytics tools (e.g., name,
-              email address).
-            </li>
-            <li className="text-gray-700">
-              Through social media accounts (e.g., name, profile picture).
-            </li>
-          </ul>
-        </div>
-        <div className="mt-10 space-y-6 mb-20">
-          <h3 className="font-bold text-xl">How We Use Personal Information</h3>
-          <p className="text-gray-700 leading-relaxed">
-            We use your personal information for purposes such as:
-          </p>
-          <ul className="list-disc pl-5 space-y-3">
-            <li className="text-gray-700">
-              Providing/supporting/improving the Site and Services.
-            </li>
-            <li className="text-gray-700">
-              Customizing your experience with recommendations.
-            </li>
-            <li className="text-gray-700">
-              Communicating about events/products/services.
-            </li>
-            <li className="text-gray-700">
-              Validating your financial accounts.
-            </li>
-            <li className="text-gray-700">
-              Conducting internal research/development.
-            </li>
-            <li className="text-gray-700">
-              Protecting against fraud/misuse/misconduct.
-            </li>
-          </ul>
-        </div>
-        <div className="mt-10 space-y-6 mb-20">
-          <h3 className="font-bold text-xl">
-            How We Share Personal Information
-          </h3>
-          <p className="text-gray-700 leading-relaxed">
-            We share personal information with:
-          </p>
-          <ul className="list-disc pl-5 space-y-3">
-            <li className="text-gray-700">
-              Service Providers (e.g., marketing/analytics/cloud storage).
-            </li>
-            <li className="text-gray-700">
-              Marketing Service Providers (e.g., Google Analytics).
-            </li>
-            <li className="text-gray-700">
-              Legal Authorities (when required by law).
-            </li>
-            <li className="text-gray-700">
-              Corporate Transactions (e.g., mergers/sales).
-            </li>
-          </ul>
-        </div>
-        <div className="mt-10 space-y-6 mb-20">
-          <h3 className="font-bold text-xl">European Data Privacy Rights</h3>
-          <p className="text-gray-700 leading-relaxed">
-            Residents of the EEA/UK/Switzerland are entitled to rights such as:
-          </p>
-          <ul className="list-disc pl-5 space-y-3">
-            <li className="text-gray-700">Right of access/portability.</li>
-            <li className="text-gray-700">
-              Right of rectification/restricting processing.
-            </li>
-          </ul>
-          <p className="text-gray-700 leading-relaxed">
-            Requests can be submitted via{' '}
-            <a href="mailto:support@thinkact.ai">support@thinkact.ai</a>.
-          </p>
-        </div>
-        <div className="mt-10 space-y-6 mb-20">
-          <h3 className="font-bold text-xl">Cross-border Transfer of Data</h3>
-          <p className="text-gray-700 leading-relaxed">
-            Data collected may be transferred/stored in the U.S. or other
-            countries where ThinkAct AI operates.
-          </p>
-        </div>
-        <div className="mt-10 space-y-6 mb-20">
-          <h3 className="font-bold text-xl">U.S. State Privacy Rights</h3>
-          <p className="text-gray-700 leading-relaxed">
-            Residents of certain U.S. states have rights such as:
-          </p>
-          <ul className="list-disc pl-5 space-y-3">
-            <li className="text-gray-700">
-              Right to Know/Access/Delete/Correct personal data.
-            </li>
-            <li className="text-gray-700">
-              Right to Opt-Out of Sales/Sharing.
-            </li>
-          </ul>
-          <p className="text-gray-700 leading-relaxed">
-            Requests can be submitted via{' '}
-            <a href="mailto:support@thinkact.ai">support@thinkact.ai</a>.
-          </p>
-        </div>
-        <div className="mt-10 space-y-6 mb-20">
-          <h3 className="font-bold text-xl">
-            How We Protect Personal Information{' '}
-          </h3>
-          <p className="text-gray-700 leading-relaxed">
-            We take reasonable steps to secure your data but cannot guarantee
-            complete security due to inherent risks in online communication.
-          </p>
-        </div>
-        <div className="mt-10 space-y-6 mb-20">
-          <h3 className="font-bold text-xl">Changes to This Policy</h3>
-          <p className="text-gray-700 leading-relaxed">
-            Changes will be posted here and become effective upon posting.
-          </p>
-        </div>
-        <div className="mt-10 space-y-6 mb-20">
-          <h3 className="font-bold text-xl">Contact Us</h3>
-          <p className="text-gray-700 leading-relaxed">
-            For questions about this policy:{' '}
-            <a href="mailto:support@thinkact.ai">support@thinkact.ai</a>
-          </p>
+          <div>
+            <h2 className="text-2xl font-bold mb-5">2. DEFINITIONS</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              To help explain things as clearly as possible in this Privacy Policy, every time any of these terms are referenced, they are strictly defined as:
+            </p>
+            <ul className="list-disc pl-5 space-y-3 text-gray-700">
+              <li><strong>"Personal Information"</strong> means any information that identifies, relates to, describes, or is capable of being associated with, or could reasonably be linked, directly or indirectly, with a particular consumer or household.</li>
+              <li><strong>"Service"</strong> refers to the Smart AI Docs software as a service platform.</li>
+              <li><strong>"User," "you," and "your"</strong> refers to the individual or entity accessing or using the Service.</li>
+              <li><strong>"Company"</strong> refers to Smart AI Docs.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold mb-5">3. INFORMATION WE COLLECT</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              We collect information that you provide directly to us, including:
+            </p>
+            <ul className="list-disc pl-5 space-y-3 text-gray-700">
+              <li>Account information (name, email address, password)</li>
+              <li>Profile information (company name, job title, contact details)</li>
+              <li>Usage data and analytics</li>
+              <li>Communication preferences</li>
+              <li>Payment information (processed securely through third-party providers)</li>
+            </ul>
+            <p className="text-gray-700 leading-relaxed mt-4">
+              We also automatically collect certain information when you use our Service, including IP address, browser type, operating system, and usage patterns.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold mb-5">4. HOW WE USE YOUR INFORMATION</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              We use the information we collect to:
+            </p>
+            <ul className="list-disc pl-5 space-y-3 text-gray-700">
+              <li>Provide, maintain, and improve our Service</li>
+              <li>Process transactions and send related information</li>
+              <li>Send technical notices, updates, and support messages</li>
+              <li>Respond to your comments and questions</li>
+              <li>Communicate with you about products, services, and events</li>
+              <li>Monitor and analyze trends, usage, and activities</li>
+              <li>Detect, investigate, and prevent fraudulent transactions</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold mb-5">5. INFORMATION SHARING AND DISCLOSURE</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except in the following circumstances:
+            </p>
+            <ul className="list-disc pl-5 space-y-3 text-gray-700">
+              <li>With service providers who assist in operating our Service</li>
+              <li>To comply with legal obligations</li>
+              <li>To protect our rights and safety</li>
+              <li>In connection with a business transfer or merger</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold mb-5">6. DATA SECURITY</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
+            </p>
+            <p className="text-gray-700 leading-relaxed">
+              However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold mb-5">7. YOUR RIGHTS AND CHOICES</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              You have the right to:
+            </p>
+            <ul className="list-disc pl-5 space-y-3 text-gray-700">
+              <li>Access and update your personal information</li>
+              <li>Request deletion of your personal information</li>
+              <li>Opt-out of marketing communications</li>
+              <li>Request data portability</li>
+              <li>Lodge a complaint with supervisory authorities</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold mb-5">8. COOKIES AND TRACKING TECHNOLOGIES</h2>
+            <p className="text-gray-700 leading-relaxed">
+              We use cookies and similar tracking technologies to enhance your experience on our Service. You can control cookie settings through your browser preferences.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold mb-5">9. CHILDREN'S PRIVACY</h2>
+            <p className="text-gray-700 leading-relaxed">
+              Our Service is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold mb-5">10. INTERNATIONAL DATA TRANSFERS</h2>
+            <p className="text-gray-700 leading-relaxed">
+              Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place for such transfers.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold mb-5">11. CHANGES TO THIS PRIVACY POLICY</h2>
+            <p className="text-gray-700 leading-relaxed">
+              We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.
+            </p>
+          </div>
+
+          <div className="mb-20">
+            <h2 className="text-2xl font-bold mb-5">12. CONTACT US</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              If you have any questions about this Privacy Policy, please contact us at:
+            </p>
+            <div className="text-gray-700 leading-relaxed">
+              <p><strong>Email:</strong> <a href="mailto:privacy@thinkact.ai" className="text-blue-600 hover:underline">privacy@thinkact.ai</a></p>
+              <p className="mt-2"><strong>Address:</strong></p>
+              <p>26 Lenard Way</p>
+              <p>Parsippany, NJ 07054</p>
+            </div>
+          </div>
         </div>
       </div>
     </>
