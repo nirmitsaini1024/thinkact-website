@@ -105,7 +105,7 @@ export default function PrivacyPolicy() {
               <li>Opt-out of marketing communications</li>
               <li>Request data portability</li>
               <li>Lodge a complaint with supervisory authorities</li>
-              <li>SMS/text messaging originator opt-in data and consent will not be shared with any third parties except as needed to provide the service; it will not be sold, rented, or transferred.</li>
+              <li>SMS/text messaging originator opt-in data and consent will not be shared, sold, rented, or transferred (even to affiliates or vendors).</li>
             </ul>
           </div>
 
