@@ -596,6 +596,15 @@ export default function AboutUs() {
                       to enhance trust, transparency, and security in digital
                       ecosystems.
                     </p>
+                    <a
+                      href="https://www.linkedin.com/in/manjeet-singh-36b98219/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full pt-3 items-center gap-2 text-blue-600 hover:text-blue-800 mb-4 transition"
+                    >
+                      <FaLinkedin className="w-5 h-5" />
+                      Connect on LinkedIn
+                    </a>
                   </div>
                 </div>
               </div>
@@ -604,38 +613,24 @@ export default function AboutUs() {
                 <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-100 h-full flex flex-col">
                   <div className="flex flex-col items-center text-center flex-grow">
                     <Image
-                      src="/assets/profile-gallo.jpg"
-                      alt="Christopher Gallo"
-                      width={200}
-                      height={200}
+                      src="/assets/profile-suman.png"
+                      alt="Sumandeep Singh"
+                      width={130}
+                      height={130}
                       className="rounded-2xl mb-6 shadow-lg"
                     />
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                      Christopher Gallo
+                      Sumandeep Singh
                     </h3>
                     <p className="text-blue-600 font-semibold mb-2">
-                      Chief Sales Officer
+                      Chief Operating Officer
                     </p>
 
                     <p className="text-gray-600 leading-relaxed flex-grow">
-                      Christopher Gallo is a results-driven sales executive with
-                      a proven track record of originating and managing billions
-                      of dollars in sales, particularly within the mortgage and
-                      financial services sector. Over the course of more than 20
-                      years, he has consistently built and led high-performing
-                      teams, streamlined complex processes, and delivered
-                      exceptional value to clients and business partners. Known
-                      for his strategic mindset and commitment to operational
-                      excellence, Christopher has earned a reputation as a
-                      trusted advisor and forward-thinking leader in sales. His
-                      success is rooted in a deep understanding of customer
-                      needs, a relentless pursuit of efficiency, and a passion
-                      for using technology to drive scalable growth. Based in
-                      New Jersey, he balances his career with a strong
-                      commitment to family and personal well-being.
+                      Sumandeep Singh is a seasoned entrepreneur and financial professional with over two decades of experience spanning banking, auditing, real estate, transportation, and financial technology. He founded and successfully scaled a transportation and logistics company from the ground up, leading its operations and growth for more than eight years. Earlier in his career, Sumandeep held auditing roles at both Fannie Mae and Freddie Mac, where he specialized in risk management, compliance, and operational governance within the secondary mortgage market. With more than ten years in retail and commercial banking, he developed a deep understanding of lending operations, credit risk, and client portfolio management. His track record reflects a rare combination of entrepreneurial execution and institutional insight—driving innovation, scalability, and sustainable value creation across multiple industries.
                     </p>
                     <a
-                      href="https://www.linkedin.com/in/christopher-gallo-7014b69/"
+                      href="https://www.linkedin.com/in/sumandeep1/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex w-full pt-3 items-center gap-2 text-blue-600 hover:text-blue-800 mb-4 transition"
