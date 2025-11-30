@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, ChevronDown, Sparkles, Zap, Crown, ArrowRight } from 'lucide-react';
+import { ChevronDown, Sparkles, Zap, Crown, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export default function PricingPage() {
@@ -117,7 +117,7 @@ export default function PricingPage() {
               <Card>
                 <CardContent className="p-6">
                   <h4 className="font-semibold text-foreground mb-2">What happens if I exceed my monthly loan limit?</h4>
-                  <p className="text-sm text-muted-foreground">You can easily upgrade to the next tier or purchase additional loan capacity at $10 per loan. We'll notify you when you're approaching your limit.</p>
+                  <p className="text-sm text-muted-foreground">You can easily upgrade to the next tier or purchase additional loan capacity at $10 per loan. We&apos;ll notify you when you&apos;re approaching your limit.</p>
                 </CardContent>
               </Card>
               <Card>
@@ -129,7 +129,7 @@ export default function PricingPage() {
               <Card>
                 <CardContent className="p-6">
                   <h4 className="font-semibold text-foreground mb-2">Can I cancel anytime?</h4>
-                  <p className="text-sm text-muted-foreground">Absolutely. There are no long-term contracts. You can cancel your subscription at any time, and you'll retain access until the end of your billing period.</p>
+                  <p className="text-sm text-muted-foreground">Absolutely. There are no long-term contracts. You can cancel your subscription at any time, and you&apos;ll retain access until the end of your billing period.</p>
                 </CardContent>
               </Card>
               <Card>

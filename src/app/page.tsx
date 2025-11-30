@@ -1,5 +1,3 @@
-import Hero from '@/components/home/Hero';
-import AiSteps from '@/components/home/AiSteps';
 import TamiPage from '@/components/tami/TamiPage';
 
 export default function Home() {

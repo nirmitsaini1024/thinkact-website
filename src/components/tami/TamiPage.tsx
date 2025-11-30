@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
-  Sparkles,
   FileText,
   Shield,
   MessageSquare,
@@ -21,7 +20,6 @@ import {
   FolderOpen,
   Upload,
   Play,
-  DollarSign,
   Zap,
   Briefcase,
   Building2,

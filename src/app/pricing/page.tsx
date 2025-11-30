@@ -3,7 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Sparkles, Zap, Crown, ArrowRight } from 'lucide-react';
+import { Sparkles, Zap, Crown, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -30,7 +30,7 @@ export default function PricingPage() {
     if (path.includes('#')) {
       e.preventDefault();
       e.stopPropagation();
-      const [basePath, hash] = path.split('#');
+      const [, hash] = path.split('#');
       
       // Handle home page hash links
       if (pathname !== '/') {
@@ -149,13 +149,13 @@ export default function PricingPage() {
           </div>
           <div className="flex items-center justify-center gap-6 mb-4 text-sm">
             <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</Link>
-            <a
+            <Link
               href="/#tami"
               className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
               onClick={(e) => handleSmoothScroll(e, '/#tami')}
             >
               TAMI
-            </a>
+            </Link>
             <Link href="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</Link>
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
           </div>

@@ -125,6 +125,25 @@ function ChartTooltipContent({
     indicator?: 'line' | 'dot' | 'dashed'
     nameKey?: string
     labelKey?: string
+    active?: boolean
+    label?: string | number
+    labelFormatter?: (value: unknown, payload: unknown[]) => React.ReactNode
+    labelClassName?: string
+    formatter?: (
+      value: number | string,
+      name: string,
+      item: unknown,
+      index: number,
+      payload: unknown
+    ) => React.ReactNode
+    color?: string
+    payload?: Array<{
+      name?: string
+      value?: number | string
+      dataKey?: string
+      color?: string
+      payload?: Record<string, unknown>
+    }>
   }) {
   const { config } = useChart()
 
@@ -182,7 +201,7 @@ function ChartTooltipContent({
         {payload.map((item, index) => {
           const key = `${nameKey || item.name || item.dataKey || 'value'}`
           const itemConfig = getPayloadConfigFromPayload(config, item, key)
-          const indicatorColor = color || item.payload.fill || item.color
+          const indicatorColor = color || item.payload?.fill || item.color
 
           return (
             <div
@@ -193,7 +212,7 @@ function ChartTooltipContent({
               )}
             >
               {formatter && item?.value !== undefined && item.name ? (
-                formatter(item.value, item.name, item, index, item.payload)
+                formatter(item.value, item.name, item, index, item.payload ?? {})
               ) : (
                 <>
                   {itemConfig?.icon ? (
@@ -256,11 +275,16 @@ function ChartLegendContent({
   payload,
   verticalAlign = 'bottom',
   nameKey,
-}: React.ComponentProps<'div'> &
-  Pick<RechartsPrimitive.LegendProps, 'payload' | 'verticalAlign'> & {
-    hideIcon?: boolean
-    nameKey?: string
-  }) {
+}: React.ComponentProps<'div'> & {
+  hideIcon?: boolean
+  nameKey?: string
+  verticalAlign?: 'top' | 'bottom'
+  payload?: Array<{
+    value?: string
+    dataKey?: string
+    color?: string
+  }>
+}) {
   const { config } = useChart()
 
   if (!payload?.length) {
