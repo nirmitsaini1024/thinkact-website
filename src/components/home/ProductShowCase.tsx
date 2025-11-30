@@ -227,7 +227,7 @@ const ProductShowcase = () => {
 
       <section
         id="dap"
-        className="relative py-24 px-4 bg-white overflow-hidden"
+        className="relative py-24 px-4 bg-blue-50 overflow-hidden"
       >
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         <div className="max-w-7xl mx-auto">
@@ -293,7 +293,7 @@ const ProductShowcase = () => {
             <div className="relative">
               <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
                 {/* Video Container */}
-                <div className="relative rounded-xl overflow-hidden aspect-video">
+                <div className="relative rounded-xl overflow-hidden aspect-video" suppressHydrationWarning>
                   {/* Preview Video (looping background) */}
                   <video
                     ref={previewRef1}
@@ -305,6 +305,7 @@ const ProductShowcase = () => {
                     muted
                     loop
                     playsInline
+                    suppressHydrationWarning
                   />
 
                   {/* Main Video */}
@@ -316,6 +317,7 @@ const ProductShowcase = () => {
                     }`}
                     controls={isPlaying1}
                     playsInline
+                    suppressHydrationWarning
                     onEnded={() => {
                       setIsPlaying1(false);
                       if (previewRef1.current) {
@@ -423,7 +425,7 @@ const ProductShowcase = () => {
             <div className="relative order-2 lg:order-1">
               <div className="bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-700">
                 {/* Video Container */}
-                <div className="relative rounded-xl overflow-hidden aspect-video">
+                <div className="relative rounded-xl overflow-hidden aspect-video" suppressHydrationWarning>
                   {/* Preview Video (looping background) */}
                   <video
                     ref={previewRef2}
@@ -434,6 +436,7 @@ const ProductShowcase = () => {
                     muted
                     loop
                     playsInline
+                    suppressHydrationWarning
                   />
 
                   {/* Main Video */}
@@ -445,6 +448,7 @@ const ProductShowcase = () => {
                     }`}
                     controls={isPlaying2}
                     playsInline
+                    suppressHydrationWarning
                     onEnded={() => {
                       setIsPlaying2(false);
                       if (previewRef2.current) {

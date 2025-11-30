@@ -1,7 +1,19 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import { Geist, Geist_Mono } from 'next/font/google';
+import ConditionalLayout from '@/components/ConditionalLayout';
+
+const geist = Geist({ 
+  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  display: 'swap',
+})
+
+const geistMono = Geist_Mono({ 
+  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'ThinkAct AI',
@@ -15,13 +27,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={` bg-b
-        ackground text-foreground font-sans`}
-      >
-        <Navbar />
-        <main className="">{children}</main>
-        <Footer />
+      <body className={`${geist.variable} ${geistMono.variable} bg-background text-foreground font-sans antialiased`}>
+        <ConditionalLayout>{children}</ConditionalLayout>
       </body>
     </html>
   );

@@ -1,23 +1,17 @@
 import Hero from '@/components/home/Hero';
-import IndustrySolutions from '@/components/home/IndustrySolutions';
-import Cta from '@/components/home/Cta';
-import ThinkActAgentic from '@/components/home/ThinikActAgentic';
-import FAQSection from '@/components/home/Faq';
 import AiSteps from '@/components/home/AiSteps';
-import DocAgentic from '@/components/home/DocAgentic';
-import Knowledger from '@/components/home/Knowledger';
+import TamiPage from '@/components/tami/TamiPage';
 
 export default function Home() {
   return (
-    <div>
-      <Hero />
-      <AiSteps />
-      <DocAgentic />
-      <Knowledger />
-      <ThinkActAgentic />
-      <IndustrySolutions />
-      <FAQSection />
-      <Cta />
+    <div className="opacity-0 animate-[fadeIn_0.5s_ease-in-out_forwards]">
+      <main className="min-h-screen flex flex-col">
+        {/* <Hero /> */}
+        {/* <AiSteps /> */}
+        <div id="tami">
+          <TamiPage />
+        </div>
+      </main>
     </div>
   );
 }

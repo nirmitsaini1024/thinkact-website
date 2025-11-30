@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { IoIosArrowDown } from 'react-icons/io';
 
 interface NavigationItem {
@@ -26,10 +27,34 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 }) => {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState<boolean>(false);
   const hasChildren = !!(item.children || item.items || item.items2);
+  const pathname = usePathname();
 
   const toggleSubMenu = (): void => {
     if (hasChildren) {
       setIsSubMenuOpen((prev) => !prev);
+    }
+  };
+
+  const isSamePageAnchor = (path?: string): boolean => {
+    if (!path || !path.includes('#')) return false;
+    if (path.startsWith('#')) return true;
+    if (path.startsWith('/#')) {
+      return pathname === '/';
+    }
+    return false;
+  };
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, path: string): void => {
+    if (isSamePageAnchor(path)) {
+      e.preventDefault();
+      const hash = path.split('#')[1];
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        onClose();
+      }
+    } else {
+      onClose();
     }
   };
 
@@ -123,7 +148,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
           ) : (
             <Link
               href={item.path || '#'}
-              onClick={onClose}
+              onClick={(e) => handleSmoothScroll(e, item.path || '#')}
               className="hover:underline"
             >
               {item.name}

@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { CgMenuLeft } from 'react-icons/cg';
 import { RxCross2 } from 'react-icons/rx';
 import { FaChevronDown, FaCalendarDay, FaChevronRight } from 'react-icons/fa';
@@ -39,24 +40,24 @@ interface NavItem {
 }
 
 const navigationData: NavigationData = {
-  Platform: [
+  Framework: [
     {
       title: 'Industries',
       items: [
         {
           icon: <LuBookOpenText />,
           name: 'D.A.P.',
-          path: '/#dap',
+          path: '/platform#dap',
         },
         {
           icon: <Database />,
           name: 'KnowLedger',
-          path: '/#ledgeriq',
+          path: '/platform#ledgeriq',
         },
         {
           icon: <IoFlowerOutline />,
           name: 'Orchestration',
-          path: '/#thinkagentic',
+          path: '/platform#thinkagentic',
         },
       ],
     },
@@ -70,6 +71,28 @@ const navigationData: NavigationData = {
         { icon: <LuMessageSquareText />, name: 'Careers', path: '/careers' },
         { icon: <LuContact />, name: 'Contact Us', path: '/contact-us' },
         { icon: <RiCustomerService2Fill />, name: 'Support', path: '/support' },
+        {
+          icon: <IoFlowerOutline />,
+          name: 'Framework',
+          path: '/platform',
+          children: [
+            {
+              icon: <LuBookOpenText />,
+              name: 'D.A.P.',
+              path: '/platform#dap',
+            },
+            {
+              icon: <Database />,
+              name: 'KnowLedger',
+              path: '/platform#ledgeriq',
+            },
+            {
+              icon: <IoFlowerOutline />,
+              name: 'Orchestration',
+              path: '/platform#thinkagentic',
+            },
+          ],
+        },
       ],
     },
   ],
@@ -79,15 +102,14 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [hoveredSubItem, setHoveredSubItem] = useState<string | null>(null);
+  const pathname = usePathname();
+  const router = useRouter();
+  const subItemTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const navItems: NavItem[] = [
     { name: 'Home', path: '/', hasDropdown: false },
-    {
-      name: 'Platform',
-      path: '',
-      hasDropdown: true,
-      data: navigationData.Platform,
-    },
+    { name: 'TAMI', path: '/#tami', hasDropdown: false },
+    { name: 'Pricing', path: '/pricing', hasDropdown: false },
     {
       name: 'Company',
       path: '',
@@ -114,16 +136,80 @@ const Navbar: React.FC = () => {
   const handleMenuToggle = (): void => setIsOpen(!isOpen);
   const handleMenuClose = (): void => setIsOpen(false);
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, path: string): void => {
+    if (path.includes('#')) {
+      e.preventDefault();
+      const [basePath, hash] = path.split('#');
+      
+      // If path is /platform#section, navigate to platform page
+      if (basePath === '/platform') {
+        if (pathname !== '/platform') {
+          router.push(path);
+          // Wait for navigation and page load, then scroll
+          setTimeout(() => {
+            const element = document.getElementById(hash);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 500);
+        } else {
+          // Already on platform page, just scroll
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      } else {
+        // Handle home page hash links
+        if (pathname !== '/') {
+          router.push(path);
+          // Wait for navigation and page load, then scroll
+          setTimeout(() => {
+            const element = document.getElementById(hash);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 500);
+        } else {
+          // Already on home page, just scroll
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }
+      handleMenuClose();
+    }
+  };
+
   const renderNestedDropdown = (children: NavigationItem[]) => {
     return (
-      <div className="absolute left-full top-0 ml-1 bg-white border border-zinc-200 shadow-xl rounded-xl w-48 z-50">
+      <div 
+        className="absolute left-full top-0 ml-1 bg-white border border-zinc-200 shadow-xl rounded-xl w-48 z-[60] transition-all duration-200 ease-out"
+        onMouseEnter={() => {
+          // Clear any pending timeout when hovering over nested dropdown
+          if (subItemTimeoutRef.current) {
+            clearTimeout(subItemTimeoutRef.current);
+            subItemTimeoutRef.current = null;
+          }
+        }}
+        onMouseLeave={() => {
+          // Small delay before closing to allow moving back to parent
+          subItemTimeoutRef.current = setTimeout(() => {
+            setHoveredSubItem(null);
+          }, 200);
+        }}
+      >
         <div className="p-2">
           {children.map((child) => (
             <Link
               key={child.name}
               href={child.path}
-              className="flex items-center px-3 py-2 hover:bg-zinc-100 rounded text-sm text-zinc-700"
-              onClick={handleMenuClose}
+              className="flex items-center px-3 py-2 hover:bg-zinc-100 rounded text-sm text-zinc-700 transition-colors duration-150"
+              onClick={(e) => {
+                handleSmoothScroll(e, child.path);
+                handleMenuClose();
+              }}
             >
               {child.icon && (
                 <span className="mr-2 text-zinc-500">
@@ -148,21 +234,44 @@ const Navbar: React.FC = () => {
     if (!dropdownData) return null;
 
     return (
-      <div className="absolute mt-2 bg-white border border-zinc-200 shadow-xl rounded-xl w-60 z-50">
+      <div className="absolute mt-2 bg-white border border-zinc-200 shadow-xl rounded-xl w-60 z-50 animate-[fadeInSlideDown_0.2s_ease-out]">
         <div className="p-2">
           {dropdownData[0].items.map((item) => (
             <div
               key={item.name}
               className="relative"
-              onMouseEnter={() =>
-                item.children && handleSubItemHover(item.name)
-              }
-              onMouseLeave={() => setHoveredSubItem(null)}
+              onMouseEnter={() => {
+                if (item.children) {
+                  // Clear any pending timeout
+                  if (subItemTimeoutRef.current) {
+                    clearTimeout(subItemTimeoutRef.current);
+                    subItemTimeoutRef.current = null;
+                  }
+                  handleSubItemHover(item.name);
+                }
+              }}
+              onMouseLeave={() => {
+                if (item.children) {
+                  // Small delay to allow moving to nested dropdown
+                  subItemTimeoutRef.current = setTimeout(() => {
+                    setHoveredSubItem(null);
+                  }, 200);
+                }
+              }}
             >
               <Link
                 href={item.path}
-                className="flex items-center justify-between px-3 py-2 hover:bg-zinc-100 rounded text-sm text-zinc-700"
-                onClick={handleMenuClose}
+                className="flex items-center justify-between px-3 py-2 hover:bg-zinc-100 rounded text-sm text-zinc-700 transition-colors duration-150"
+                onClick={(e) => {
+                  if (!item.children) {
+                    handleSmoothScroll(e, item.path);
+                    handleMenuClose();
+                  } else {
+                    // If Framework has children, navigate to platform page
+                    e.preventDefault();
+                    router.push(item.path);
+                  }
+                }}
               >
                 <div className="flex items-center">
                   <span className="mr-2 text-zinc-500">
@@ -198,7 +307,7 @@ const Navbar: React.FC = () => {
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between  h-16">
-            <Link href="/" className="flex items-center gap-0">
+            <Link href="/" className="flex items-center gap-0 transition-opacity duration-200 hover:opacity-80">
               <div className="">
                 <Image
                   src="/thinkact-logo.svg"
@@ -220,16 +329,44 @@ const Navbar: React.FC = () => {
                   onMouseEnter={() => handleMouseEnter(item)}
                   className="relative"
                 >
-                  <Link href={item.path || '#'} className="flex items-center">
-                    {item.name}
-                    {item.hasDropdown && (
-                      <FaChevronDown
-                        className={`ml-1 h-3 w-3 transition-transform ${
-                          activeDropdown === item.name ? 'rotate-180' : ''
-                        }`}
-                      />
-                    )}
-                  </Link>
+                  {item.path && item.path.includes('#') ? (
+                    <a
+                      href={item.path}
+                      className="flex items-center transition-colors duration-200 hover:text-zinc-900 cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleSmoothScroll(e, item.path);
+                      }}
+                    >
+                      {item.name}
+                      {item.hasDropdown && (
+                        <FaChevronDown
+                          className={`ml-1 h-3 w-3 transition-transform duration-200 ${
+                            activeDropdown === item.name ? 'rotate-180' : ''
+                          }`}
+                        />
+                      )}
+                    </a>
+                  ) : (
+                    <Link 
+                      href={item.path || '#'} 
+                      className="flex items-center transition-colors duration-200 hover:text-zinc-900"
+                      onClick={(e) => {
+                        if (item.hasDropdown && !item.path) {
+                          e.preventDefault();
+                        }
+                      }}
+                    >
+                      {item.name}
+                      {item.hasDropdown && (
+                        <FaChevronDown
+                          className={`ml-1 h-3 w-3 transition-transform duration-200 ${
+                            activeDropdown === item.name ? 'rotate-180' : ''
+                          }`}
+                        />
+                      )}
+                    </Link>
+                  )}
                   {activeDropdown === item.name && item.hasDropdown && (
                     <div className="absolute top-full left-0">
                       {renderDropdown(item.name)}
@@ -241,20 +378,20 @@ const Navbar: React.FC = () => {
 
             <div className="hidden lg:flex items-center space-x-4">
               <Link href="/signin">
-                <button className="text-sm font-light text-zinc-700 hover:text-black px-4 py-2 rounded-full border border-zinc-300 hover:bg-zinc-100">
+                <button className="text-sm font-light text-zinc-700 hover:text-black px-4 py-2 rounded-full border border-zinc-300 hover:bg-zinc-100 transition-all duration-200">
                   Sign In
                 </button>
               </Link>
               <Link href="/book-a-demo">
-                <button className="flex items-center bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700">
+                <button className="flex items-center bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition-colors duration-200">
                   <FaCalendarDay size={16} className="mr-2" />
                   Book a Demo
                 </button>
               </Link>
             </div>
 
-            <div className="lg:hidden">
-              <button onClick={handleMenuToggle} className="text-zinc-800 p-2">
+            <div className="lg:hidden flex items-center space-x-2">
+              <button onClick={handleMenuToggle} className="text-zinc-800 p-2 transition-opacity duration-200 hover:opacity-70">
                 {isOpen ? <RxCross2 size={24} /> : <CgMenuLeft size={24} />}
               </button>
             </div>
@@ -263,7 +400,7 @@ const Navbar: React.FC = () => {
       </header>
 
       {isOpen && (
-        <div className="lg:hidden fixed top-0 inset-x-0 z-50 bg-white text-zinc-900 flex flex-col overflow-y-auto h-full pt-1">
+        <div className="lg:hidden fixed top-0 inset-x-0 z-50 bg-white text-zinc-900 flex flex-col overflow-y-auto h-full pt-1 animate-[slideDown_0.3s_ease-out]">
           <div className="flex justify-between items-center p-2 shadow-md border-b border-gray-100">
             <Link href="/" onClick={handleMenuClose}>
               <Image
@@ -291,14 +428,29 @@ const Navbar: React.FC = () => {
                   ))}
                 </div>
               ) : (
-                <Link
-                  key={item.name}
-                  href={item.path}
-                  onClick={handleMenuClose}
-                  className="block py-3 border-b border-zinc-200"
-                >
-                  {item.name}
-                </Link>
+                item.path && item.path.includes('#') ? (
+                  <a
+                    key={item.name}
+                    href={item.path}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleSmoothScroll(e, item.path);
+                      handleMenuClose();
+                    }}
+                    className="block py-3 border-b border-zinc-200 transition-colors duration-200 hover:text-blue-600 cursor-pointer"
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.name}
+                    href={item.path}
+                    onClick={handleMenuClose}
+                    className="block py-3 border-b border-zinc-200 transition-colors duration-200 hover:text-blue-600"
+                  >
+                    {item.name}
+                  </Link>
+                )
               )
             )}
           </div>

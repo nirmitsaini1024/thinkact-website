@@ -24,7 +24,7 @@ const FAQSection = () => {
     setOpenIndex(openIndex === index ? null : index);
 
   return (
-    <section className="py-20 md:py-28 px-6 md:px-12 lg:px-24 bg-gray-50  border-t border-gray-200">
+    <section className="py-20 md:py-28 px-6 md:px-12 lg:px-24 bg-slate-200 border-t border-gray-200">
       <div className="max-w-4xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-14">

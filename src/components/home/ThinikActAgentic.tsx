@@ -161,7 +161,7 @@ const ThinkActAgentic: React.FC = () => {
       </section>
 
       {/* Orchestration Features */}
-      <section className="w-full py-24 px-6 md:px-12 lg:px-24 bg-blue-50">
+      <section className="w-full py-24 px-6 md:px-12 lg:px-24 bg-indigo-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-semibold text-blue-900 mb-4">
@@ -199,7 +199,7 @@ const ThinkActAgentic: React.FC = () => {
       </section>
 
       {/* Workflow Steps */}
-      <section className="w-full py-24 px-6 md:px-12 lg:px-24 ">
+      <section className="w-full py-24 px-6 md:px-12 lg:px-24 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-semibold text-slate-900 mb-4">
