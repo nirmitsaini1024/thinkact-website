@@ -223,7 +223,7 @@ export default function TAMIPage() {
       </section>
 
       {/* Features Section */}
-      <section id="b2p-platform" className="relative bg-slate-200 overflow-hidden py-4 md:py-6 min-h-[600px] md:min-h-[700px] flex items-center">
+      <section id="b2p-platform" className="relative bg-slate-100 overflow-hidden py-4 md:py-6 min-h-screen flex items-center">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] bg-[size:65px_65px]"></div>
         <div className="container mx-auto px-4 md:px-6 flex flex-col gap-2 md:gap-3 relative">
           <div className="text-center max-w-3xl mx-auto mb-2 md:mb-3">
@@ -237,39 +237,39 @@ export default function TAMIPage() {
               <div className="text-center">
                 <div className="mb-0.5">
                   <div className="flex items-center justify-center gap-1 mb-0.5">
-                    <div className="w-5 h-5 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
-                      <FileText className="w-3.5 h-3.5" />
+                    <div className="w-4 h-4 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
+                      <FileText className="w-3 h-3" />
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-900 leading-tight">Intelligent Document Review</h3>
+                    <h3 className="text-xs font-semibold text-gray-900 leading-tight">Intelligent Document Review</h3>
                   </div>
                 </div>
 
-                <div className="space-y-0.5 text-sm leading-tight">
+                <div className="space-y-0.5 text-xs leading-tight">
                   <div>
-                    <p className="font-semibold text-blue-700 mb-0.5 text-sm">Why It Matters:</p>
-                    <p className="text-gray-600 leading-tight text-sm">Manual review leads to errors and late discovery of missing docs.</p>
+                    <p className="font-semibold text-blue-700 mb-0.5 text-xs">Why It Matters:</p>
+                    <p className="text-gray-600 leading-tight text-xs">Manual review leads to errors and late discovery of missing docs.</p>
                   </div>
 
                   <div>
-                    <p className="font-semibold text-blue-700 mb-0.5 text-sm">TAMI Delivers:</p>
+                    <p className="font-semibold text-blue-700 mb-0.5 text-xs">TAMI Delivers:</p>
                     <ul className="space-y-0.5 text-gray-600">
                       <li className="flex items-center justify-center gap-1">
                         <span className="text-blue-600 flex-shrink-0">
-                          <Zap className="w-2.5 h-2.5" />
+                          <Zap className="w-2 h-2" />
                         </span>
-                        <span className="leading-tight text-sm">Auto-verification, extraction & classification</span>
+                        <span className="leading-tight text-xs">Auto-verification, extraction & classification</span>
                       </li>
                       <li className="flex items-center justify-center gap-1">
                         <span className="text-blue-600 flex-shrink-0">
-                          <Zap className="w-2.5 h-2.5" />
+                          <Zap className="w-2 h-2" />
                         </span>
-                        <span className="leading-tight text-sm">Risk/highlight insights</span>
+                        <span className="leading-tight text-xs">Risk/highlight insights</span>
                       </li>
                       <li className="flex items-center justify-center gap-1">
                         <span className="text-blue-600 flex-shrink-0">
-                          <Zap className="w-2.5 h-2.5" />
+                          <Zap className="w-2 h-2" />
                         </span>
-                        <span className="leading-tight text-sm">Zero manual entry</span>
+                        <span className="leading-tight text-xs">Zero manual entry</span>
                       </li>
                     </ul>
                   </div>
@@ -282,10 +282,10 @@ export default function TAMIPage() {
               <div className="text-center">
                 <div className="mb-0.5">
                   <div className="flex items-center justify-center gap-1 mb-0.5">
-                    <div className="w-5 h-5 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
-                      <Eye className="w-3.5 h-3.5" />
+                    <div className="w-4 h-4 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
+                      <Eye className="w-3 h-3" />
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-900 leading-tight">Borrower Transparency</h3>
+                    <h3 className="text-xs font-semibold text-gray-900 leading-tight">Borrower Transparency</h3>
                   </div>
                 </div>
 
@@ -327,10 +327,10 @@ export default function TAMIPage() {
               <div className="text-center">
                 <div className="mb-0.5">
                   <div className="flex items-center justify-center gap-1 mb-0.5">
-                    <div className="w-5 h-5 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
-                      <MessageSquare className="w-3.5 h-3.5" />
+                    <div className="w-4 h-4 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
+                      <MessageSquare className="w-3 h-3" />
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-900 leading-tight">Communication Hub</h3>
+                    <h3 className="text-xs font-semibold text-gray-900 leading-tight">Communication Hub</h3>
                   </div>
                 </div>
 
@@ -372,10 +372,10 @@ export default function TAMIPage() {
               <div className="text-center">
                 <div className="mb-0.5">
                   <div className="flex items-center justify-center gap-1 mb-0.5">
-                    <div className="w-5 h-5 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
-                      <Calculator className="w-3.5 h-3.5" />
+                    <div className="w-4 h-4 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
+                      <Calculator className="w-3 h-3" />
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-900 leading-tight">Business Income Analysis</h3>
+                    <h3 className="text-xs font-semibold text-gray-900 leading-tight">Business Income Analysis</h3>
                   </div>
                 </div>
 
@@ -417,7 +417,7 @@ export default function TAMIPage() {
               <img
                 src="/images/Tami3.png"
                 alt="TAMI Platform Wheel"
-                className="w-full h-auto max-h-[200px] object-contain"
+                className="w-full h-auto max-h-[150px] object-contain"
               />
             </div>
 
@@ -426,10 +426,10 @@ export default function TAMIPage() {
               <div className="text-center">
                 <div className="mb-0.5">
                   <div className="flex items-center justify-center gap-1 mb-0.5">
-                    <div className="w-5 h-5 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
-                      <Shield className="w-3.5 h-3.5" />
+                    <div className="w-4 h-4 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
+                      <Shield className="w-3 h-3" />
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-900 leading-tight">Risk & Compliance</h3>
+                    <h3 className="text-xs font-semibold text-gray-900 leading-tight">Risk & Compliance</h3>
                   </div>
                 </div>
 
@@ -471,10 +471,10 @@ export default function TAMIPage() {
               <div className="text-center">
                 <div className="mb-0.5">
                   <div className="flex items-center justify-center gap-1 mb-0.5">
-                    <div className="w-5 h-5 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
-                      <Lock className="w-3.5 h-3.5" />
+                    <div className="w-4 h-4 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
+                      <Lock className="w-3 h-3" />
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-900 leading-tight">Security & Privacy</h3>
+                    <h3 className="text-xs font-semibold text-gray-900 leading-tight">Security & Privacy</h3>
                   </div>
                 </div>
 
@@ -516,10 +516,10 @@ export default function TAMIPage() {
               <div className="text-center">
                 <div className="mb-0.5">
                   <div className="flex items-center justify-center gap-1 mb-0.5">
-                    <div className="w-5 h-5 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
-                      <FolderOpen className="w-3.5 h-3.5" />
+                    <div className="w-4 h-4 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
+                      <FolderOpen className="w-3 h-3" />
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-900 leading-tight">Loan Packaging</h3>
+                    <h3 className="text-xs font-semibold text-gray-900 leading-tight">Loan Packaging</h3>
                   </div>
                 </div>
 
@@ -561,10 +561,10 @@ export default function TAMIPage() {
               <div className="text-center">
                 <div className="mb-0.5">
                   <div className="flex items-center justify-center gap-1 mb-0.5">
-                    <div className="w-5 h-5 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
-                      <BookOpen className="w-3.5 h-3.5" />
+                    <div className="w-4 h-4 flex items-center justify-center rounded-lg bg-blue-200 text-blue-700 flex-shrink-0">
+                      <BookOpen className="w-3 h-3" />
                     </div>
-                    <h3 className="text-sm font-semibold text-gray-900 leading-tight">Policy Intelligence</h3>
+                    <h3 className="text-xs font-semibold text-gray-900 leading-tight">Policy Intelligence</h3>
                   </div>
                 </div>
 
@@ -605,7 +605,7 @@ export default function TAMIPage() {
       </section>
 
       {/* TAMI POS Section 1 - Heading, Image, and Subheading */}
-      <section className="relative w-full bg-white py-3 md:py-4 overflow-hidden flex items-center min-h-[600px] md:min-h-[700px]">
+      <section className="relative w-full bg-white py-3 md:py-4 overflow-hidden flex items-center min-h-screen">
         <div className="absolute inset-0 bg-grid-slate-100/60 [mask-image:linear-gradient(180deg,rgba(255,255,255,0.8),transparent)]" />
         <div className="container mx-auto px-4 md:px-6 w-full relative">
           <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-start w-full">
@@ -640,15 +640,15 @@ export default function TAMIPage() {
       </section>
 
       {/* TAMI-POS in Action Section */}
-      <section className="relative bg-slate-200 overflow-hidden py-3 md:py-4 flex items-center min-h-[550px] md:min-h-[650px]">
+      <section className="relative bg-slate-100 overflow-hidden py-2 md:py-3 flex items-center min-h-screen mt-8 md:mt-12">
         <div className="container mx-auto px-4 md:px-6 w-full relative">
-          <div className="text-center mb-4 md:mb-5 w-full">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-2 md:mb-3">TAMI-<span className="text-blue-600">POS in Action</span></h2>
+          <div className="text-center mb-2 md:mb-3 w-full">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-1 md:mb-2">TAMI-<span className="text-blue-600">POS in Action</span></h2>
           </div>
 
           {/* POS Demo Tabs */}
-          <div className="w-full mb-4 md:mb-5">
-            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-2 md:gap-3 mb-4 md:mb-5 p-2 bg-slate-100 rounded-2xl mx-auto overflow-x-auto">
+          <div className="w-full mb-2 md:mb-3">
+            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-2 md:gap-3 mb-2 md:mb-3 p-2 bg-slate-100 rounded-2xl mx-auto overflow-x-auto">
               <Button
                 variant="ghost"
                 size="lg"
@@ -656,7 +656,7 @@ export default function TAMIPage() {
                 className={`text-base h-12 px-6 rounded-xl transition-colors min-w-[170px] shrink-0 ${
                   selectedPOSDemo === "upload"
                     ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-200"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                 }`}
               >
                 <Upload className="w-5 h-5 mr-2" />
@@ -669,7 +669,7 @@ export default function TAMIPage() {
                 className={`text-base h-12 px-6 rounded-xl transition-colors min-w-[170px] shrink-0 ${
                   selectedPOSDemo === "classification"
                     ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-200"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                 }`}
               >
                 <FileCheck className="w-5 h-5 mr-2" />
@@ -682,7 +682,7 @@ export default function TAMIPage() {
                 className={`text-base h-12 px-6 rounded-xl transition-colors min-w-[170px] shrink-0 ${
                   selectedPOSDemo === "tracking"
                     ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-200"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                 }`}
               >
                 <Eye className="w-5 h-5 mr-2" />
@@ -695,7 +695,7 @@ export default function TAMIPage() {
                 className={`text-base h-12 px-6 rounded-xl transition-colors min-w-[170px] shrink-0 ${
                   selectedPOSDemo === "communication"
                     ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-200"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                 }`}
               >
                 <MessageSquare className="w-5 h-5 mr-2" />
@@ -707,23 +707,23 @@ export default function TAMIPage() {
             <Card className="border-2 shadow-2xl overflow-visible rounded-2xl">
               <CardContent className="p-0">
                 {selectedPOSDemo === "upload" && (
-                  <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start w-full p-4 md:p-6">
+                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
                     <div className="max-w-2xl relative">
-                      <div className="space-y-3 md:space-y-4">
+                      <div className="space-y-2 md:space-y-3">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-2 md:mb-3 text-xs">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-2 text-xs">
                             <Upload className="w-3 h-3 mr-1.5" />
                             Secure Document Upload
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-3">Upload Any Document Format</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-3 md:mb-4">
+                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">Upload Any Document Format</h3>
+                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-2 md:mb-3">
                             Borrowers can securely upload PDFs, images, Word docs, and more. TAMI handles all formats with
                             enterprise-grade security.
                           </p>
                         </div>
-                        <div className="space-y-2 md:space-y-2.5">
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="space-y-1.5 md:space-y-2">
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">Multi-Format Support</p>
                             <p className="text-xs md:text-sm text-muted-foreground">
@@ -731,22 +731,22 @@ export default function TAMIPage() {
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">Drag & Drop Interface</p>
                             <p className="text-xs md:text-sm text-muted-foreground">Intuitive upload experience on any device</p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">Bank-Level Security</p>
                             <p className="text-xs md:text-sm text-muted-foreground">End-to-end encryption for all documents</p>
                           </div>
                         </div>
                       </div>
-                        <div className="flex gap-2 md:gap-3 pt-2 md:pt-3">
+                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
                           <Badge variant="secondary" className="bg-green-100 text-green-700">
                             Secure
                           </Badge>
@@ -772,23 +772,23 @@ export default function TAMIPage() {
                 )}
 
                 {selectedPOSDemo === "classification" && (
-                  <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start w-full p-4 md:p-6">
+                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
                     <div className="max-w-2xl relative">
-                      <div className="space-y-3 md:space-y-4">
+                      <div className="space-y-2 md:space-y-3">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-2 md:mb-3 text-xs">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-2 text-xs">
                             <FileCheck className="w-3 h-3 mr-1.5" />
                             Intelligent Auto-Classification
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-3">AI Identifies Every Document Type</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-3 md:mb-4">
+                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">AI Identifies Every Document Type</h3>
+                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-2 md:mb-3">
                             TAMI automatically identifies W-2s, 1040s, 1065s, paystubs, bank statements, and more with
                             99.9% accuracy using OCR and IDP.
                           </p>
                         </div>
-                        <div className="space-y-2 md:space-y-2.5">
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="space-y-1.5 md:space-y-2">
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">Smart Recognition</p>
                             <p className="text-xs md:text-sm text-muted-foreground">
@@ -796,8 +796,8 @@ export default function TAMIPage() {
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">OCR Data Extraction</p>
                             <p className="text-xs md:text-sm text-muted-foreground">
@@ -805,15 +805,15 @@ export default function TAMIPage() {
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">Zero Manual Sorting</p>
                             <p className="text-xs md:text-sm text-muted-foreground">Documents organized instantly upon upload</p>
                           </div>
                         </div>
                         </div>
-                        <div className="flex gap-2 md:gap-3 pt-2 md:pt-3">
+                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
                           <Badge variant="secondary" className="bg-green-100 text-green-700">
                             99.9% accurate
                           </Badge>
@@ -827,7 +827,7 @@ export default function TAMIPage() {
                       <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
                       <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-3 sm:p-4">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50 aspect-video">
-                          <div className="absolute inset-0 bg-slate-200 flex items-center justify-center">
+                          <div className="absolute inset-0 bg-slate-100 flex items-center justify-center">
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center pointer-events-none">
                               <Play className="w-12 h-12 text-white opacity-90 drop-shadow-lg transition-transform duration-300 group-hover:scale-110" />
                             </div>
@@ -842,23 +842,23 @@ export default function TAMIPage() {
                 )}
 
                 {selectedPOSDemo === "tracking" && (
-                  <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start w-full p-4 md:p-6">
+                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
                     <div className="max-w-2xl relative">
-                      <div className="space-y-3 md:space-y-4">
+                      <div className="space-y-2 md:space-y-3">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-2 md:mb-3 text-xs">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-2 text-xs">
                             <Eye className="w-3 h-3 mr-1.5" />
                             Real-Time Status Tracking
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-3">Complete Visibility For Everyone</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-3 md:mb-4">
+                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">Complete Visibility For Everyone</h3>
+                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-2 md:mb-3">
                             Borrowers and loan officers get real-time status updates, smart checklists, and expiration
                             tracking all in one dashboard.
                           </p>
                         </div>
-                        <div className="space-y-2 md:space-y-2.5">
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="space-y-1.5 md:space-y-2">
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">Live Progress Bar</p>
                             <p className="text-xs md:text-sm text-muted-foreground">
@@ -866,15 +866,15 @@ export default function TAMIPage() {
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">Missing Document Tracker</p>
                             <p className="text-xs md:text-sm text-muted-foreground">Smart checklist based on borrower profile</p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">Expiration Alerts</p>
                             <p className="text-xs md:text-sm text-muted-foreground">
@@ -883,7 +883,7 @@ export default function TAMIPage() {
                           </div>
                         </div>
                         </div>
-                        <div className="flex gap-2 md:gap-3 pt-2 md:pt-3">
+                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
                           <Badge variant="secondary" className="bg-green-100 text-green-700">
                             100% visibility
                           </Badge>
@@ -897,7 +897,7 @@ export default function TAMIPage() {
                       <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
                       <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-3 sm:p-4">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50 aspect-video">
-                          <div className="absolute inset-0 bg-slate-200 flex items-center justify-center">
+                          <div className="absolute inset-0 bg-slate-100 flex items-center justify-center">
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center pointer-events-none">
                               <Play className="w-12 h-12 text-white opacity-90 drop-shadow-lg transition-transform duration-300 group-hover:scale-110" />
                             </div>
@@ -912,30 +912,30 @@ export default function TAMIPage() {
                 )}
 
                 {selectedPOSDemo === "communication" && (
-                  <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start w-full p-4 md:p-6">
+                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
                     <div className="max-w-2xl relative">
-                      <div className="space-y-3 md:space-y-4">
+                      <div className="space-y-2 md:space-y-3">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-2 md:mb-3 text-xs">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-2 text-xs">
                             <MessageSquare className="w-3 h-3 mr-1.5" />
                             Unified Communication Hub
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-3">In-App Chat, Email & SMS</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-3 md:mb-4">
+                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">In-App Chat, Email & SMS</h3>
+                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-2 md:mb-3">
                             Borrowers and loan officers communicate seamlessly through in-app messaging, email, or SMS
                             with automated reminders for missing documents.
                           </p>
                         </div>
-                        <div className="space-y-2 md:space-y-2.5">
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="space-y-1.5 md:space-y-2">
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">Multi-Channel Messaging</p>
                             <p className="text-xs md:text-sm text-muted-foreground">In-app, email, and SMS all synchronized</p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">Automated Reminders</p>
                             <p className="text-xs md:text-sm text-muted-foreground">
@@ -943,15 +943,15 @@ export default function TAMIPage() {
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-3">
-                          <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-2 md:gap-2.5">
+                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
                             <p className="font-semibold text-foreground text-sm md:text-base">Central Inbox</p>
                             <p className="text-xs md:text-sm text-muted-foreground">All communication history in one place</p>
                           </div>
                         </div>
                         </div>
-                        <div className="flex gap-2 md:gap-3 pt-2 md:pt-3">
+                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
                           <Badge variant="secondary" className="bg-green-100 text-green-700">
                             40-50% fewer calls
                           </Badge>
@@ -965,7 +965,7 @@ export default function TAMIPage() {
                       <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
                       <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-3 sm:p-4">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50 aspect-video">
-                          <div className="absolute inset-0 bg-slate-200 flex items-center justify-center">
+                          <div className="absolute inset-0 bg-slate-100 flex items-center justify-center">
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center pointer-events-none">
                               <Play className="w-12 h-12 text-white opacity-90 drop-shadow-lg transition-transform duration-300 group-hover:scale-110" />
                             </div>
@@ -985,7 +985,7 @@ export default function TAMIPage() {
       </section>
 
       {/* TAMI Loan Processor */}
-      <section className="relative bg-white overflow-hidden py-3 md:py-4 flex items-center min-h-[600px] md:min-h-[700px]">
+      <section className="relative bg-white overflow-hidden py-3 md:py-4 flex items-center min-h-screen">
         <div className="container mx-auto px-4 md:px-6 w-full relative">
           <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center w-full">
             <div className="max-w-2xl relative">
@@ -1059,9 +1059,9 @@ export default function TAMIPage() {
       </section>
 
       {/* See TAMI In Action */}
-      <section className="relative bg-slate-200 overflow-hidden py-2 md:py-3 min-h-[500px] md:min-h-[600px] flex items-center">
+      <section className="relative bg-slate-100 overflow-hidden py-2 md:py-3 min-h-screen flex items-center mt-8 md:mt-12">
         <div className="container mx-auto px-4 md:px-6 w-full relative">
-          <div className="text-center mb-3 md:mb-4 w-full">
+          <div className="text-center mb-2 md:mb-3 w-full">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-0.5">See TAMI-<span className="text-blue-600">Processor In Action</span></h2>
             <p className="text-xs md:text-sm text-slate-600 leading-relaxed max-w-3xl mx-auto">
               Experience real-time intelligent automation across every mortgage workflow
@@ -1069,8 +1069,8 @@ export default function TAMIPage() {
           </div>
 
           {/* Interactive Demo Tabs */}
-          <div className="w-full mb-3 md:mb-4">
-            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-2 md:gap-3 mb-3 md:mb-4 p-2 bg-slate-100 rounded-2xl mx-auto overflow-x-auto">
+          <div className="w-full mb-2 md:mb-3">
+            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-2 md:gap-3 mb-2 md:mb-3 p-2 bg-slate-100 rounded-2xl mx-auto overflow-x-auto">
               <Button
                 variant="ghost"
                 size="lg"
@@ -1078,7 +1078,7 @@ export default function TAMIPage() {
                 className={`text-sm h-10 px-5 rounded-xl transition-colors min-w-[160px] shrink-0 ${
                   selectedDemo === "document"
                     ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-200"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                 }`}
               >
                 <FileCheck className="w-4 h-4 mr-2" />
@@ -1091,7 +1091,7 @@ export default function TAMIPage() {
                 className={`text-sm h-10 px-5 rounded-xl transition-colors min-w-[160px] shrink-0 ${
                   selectedDemo === "analysis"
                     ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-200"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                 }`}
               >
                 <TrendingUp className="w-4 h-4 mr-2" />
@@ -1104,7 +1104,7 @@ export default function TAMIPage() {
                 className={`text-sm h-10 px-5 rounded-xl transition-colors min-w-[160px] shrink-0 ${
                   selectedDemo === "dashboard"
                     ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-200"
+                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                 }`}
               >
                 <Shield className="w-4 h-4 mr-2" />
@@ -1116,23 +1116,23 @@ export default function TAMIPage() {
             <Card className="border-2 shadow-2xl overflow-visible rounded-2xl w-full">
               <CardContent className="p-0">
                 {selectedDemo === "document" && (
-                  <div className="grid lg:grid-cols-2 gap-8 md:gap-10 items-start w-full p-3 md:p-4">
+                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
                     <div className="max-w-2xl relative">
-                      <div className="space-y-3 md:space-y-3">
+                      <div className="space-y-2 md:space-y-2.5">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-2 text-xs">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-1.5 text-xs">
                             <FileCheck className="w-3 h-3 mr-1.5" />
                             Intelligent Document Processing
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2">Automate Document Review</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-2">
+                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-1.5">Automate Document Review</h3>
+                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-1.5 md:mb-2">
                             Upload any loan document and watch TAMI instantly extract, verify, and analyze critical
                             information with 99.9% accuracy.
                           </p>
                         </div>
-                        <div className="space-y-2 md:space-y-2.5">
-                          <div className="flex items-start gap-2 md:gap-3">
-                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="space-y-1.5 md:space-y-2">
+                          <div className="flex items-start gap-2 md:gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
                               <p className="font-semibold text-foreground text-sm md:text-base">Auto-Classification</p>
                               <p className="text-xs md:text-sm text-muted-foreground">
@@ -1140,8 +1140,8 @@ export default function TAMIPage() {
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-3">
-                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-2 md:gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
                               <p className="font-semibold text-foreground text-sm md:text-base">Risk Highlighting</p>
                               <p className="text-xs md:text-sm text-muted-foreground">
@@ -1149,8 +1149,8 @@ export default function TAMIPage() {
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-3">
-                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-2 md:gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
                               <p className="font-semibold text-foreground text-sm md:text-base">Zero Manual Entry</p>
                               <p className="text-xs md:text-sm text-muted-foreground">
@@ -1159,7 +1159,7 @@ export default function TAMIPage() {
                             </div>
                           </div>
                         </div>
-                        <div className="flex gap-2 md:gap-3 pt-2 md:pt-3">
+                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
                           <Badge variant="secondary" className="bg-green-100 text-green-700">
                             75% faster
                           </Badge>
@@ -1185,23 +1185,23 @@ export default function TAMIPage() {
                 )}
 
                 {selectedDemo === "analysis" && (
-                  <div className="grid lg:grid-cols-2 gap-8 md:gap-10 items-start w-full p-3 md:p-4">
+                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
                     <div className="max-w-2xl relative">
-                      <div className="space-y-3 md:space-y-3">
+                      <div className="space-y-2 md:space-y-2.5">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-2 text-xs">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-1.5 text-xs">
                             <TrendingUp className="w-3 h-3 mr-1.5" />
                             AI-Powered Income Analysis
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2">Business Income Intelligence</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-2">
+                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-1.5">Business Income Intelligence</h3>
+                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-1.5 md:mb-2">
                             Automated cash flow analysis for all entity types with real-time Fannie Mae compliance
                             calculations.
                           </p>
                         </div>
-                        <div className="space-y-2 md:space-y-2.5">
-                          <div className="flex items-start gap-2 md:gap-3">
-                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="space-y-1.5 md:space-y-2">
+                          <div className="flex items-start gap-2 md:gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
                               <p className="font-semibold text-foreground text-sm md:text-base">Multi-Entity Support</p>
                               <p className="text-xs md:text-sm text-muted-foreground">
@@ -1209,8 +1209,8 @@ export default function TAMIPage() {
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-3">
-                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-2 md:gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
                               <p className="font-semibold text-foreground text-sm md:text-base">Cash Flow Breakdown</p>
                               <p className="text-xs md:text-sm text-muted-foreground">
@@ -1218,8 +1218,8 @@ export default function TAMIPage() {
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-3">
-                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-2 md:gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
                               <p className="font-semibold text-foreground text-sm md:text-base">Fannie Mae Compliant</p>
                               <p className="text-xs md:text-sm text-muted-foreground">
@@ -1228,7 +1228,7 @@ export default function TAMIPage() {
                             </div>
                           </div>
                         </div>
-                        <div className="flex gap-2 md:gap-3 pt-2 md:pt-3">
+                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
                           <Badge variant="secondary" className="bg-green-100 text-green-700">
                             10x faster
                           </Badge>
@@ -1254,23 +1254,23 @@ export default function TAMIPage() {
                 )}
 
                 {selectedDemo === "dashboard" && (
-                  <div className="grid lg:grid-cols-2 gap-8 md:gap-10 items-start w-full p-3 md:p-4">
+                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
                     <div className="max-w-2xl relative">
-                      <div className="space-y-3 md:space-y-3">
+                      <div className="space-y-2 md:space-y-2.5">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-2 text-xs">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-1.5 text-xs">
                             <Shield className="w-3 h-3 mr-1.5" />
                             Real-Time Risk Monitoring
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2">Live Compliance Dashboard</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-2">
+                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-1.5">Live Compliance Dashboard</h3>
+                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-1.5 md:mb-2">
                             Monitor all loans in real-time with instant alerts for compliance issues, credit risks, and
                             required actions.
                           </p>
                         </div>
-                        <div className="space-y-2 md:space-y-2.5">
-                          <div className="flex items-start gap-2 md:gap-3">
-                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="space-y-1.5 md:space-y-2">
+                          <div className="flex items-start gap-2 md:gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
                               <p className="font-semibold text-foreground text-sm md:text-base">24/7 Monitoring</p>
                               <p className="text-xs md:text-sm text-muted-foreground">
@@ -1278,8 +1278,8 @@ export default function TAMIPage() {
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-3">
-                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-2 md:gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
                               <p className="font-semibold text-foreground text-sm md:text-base">Instant Alerts</p>
                               <p className="text-xs md:text-sm text-muted-foreground">
@@ -1287,8 +1287,8 @@ export default function TAMIPage() {
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-3">
-                            <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-2 md:gap-2.5">
+                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
                               <p className="font-semibold text-foreground text-sm md:text-base">Dynamic Eligibility</p>
                               <p className="text-xs md:text-sm text-muted-foreground">
@@ -1297,7 +1297,7 @@ export default function TAMIPage() {
                             </div>
                           </div>
                         </div>
-                        <div className="flex gap-2 md:gap-3 pt-2 md:pt-3">
+                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
                           <Badge variant="secondary" className="bg-green-100 text-green-700">
                             Proactive
                           </Badge>
@@ -1414,7 +1414,7 @@ export default function TAMIPage() {
         </div>
 
         {/* Built For Forward Thinking Lending institutions Section */}
-        <div className="flex-1 bg-slate-200 flex items-center min-h-0 overflow-hidden pb-8 md:pb-0">
+        <div className="flex-1 bg-slate-100 flex items-center min-h-0 overflow-hidden pb-8 md:pb-0">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full py-4 md:py-6">
             <div className="text-center mb-4 md:mb-6 max-w-5xl mx-auto px-4 sm:px-2">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2 md:mb-3 leading-tight break-words md:whitespace-nowrap">
