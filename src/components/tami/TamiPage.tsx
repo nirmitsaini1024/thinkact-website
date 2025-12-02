@@ -223,7 +223,7 @@ export default function TAMIPage() {
       </section>
 
       {/* Features Section */}
-      <section id="b2p-platform" className="relative bg-slate-100 overflow-hidden py-4 md:py-6 min-h-screen flex items-center">
+      <section id="b2p-platform" className="relative bg-slate-100 overflow-hidden py-2 md:py-3 min-h-screen flex items-center">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] bg-[size:65px_65px]"></div>
         <div className="container mx-auto px-4 md:px-6 flex flex-col gap-2 md:gap-3 relative">
           <div className="text-center max-w-3xl mx-auto mb-2 md:mb-3">
