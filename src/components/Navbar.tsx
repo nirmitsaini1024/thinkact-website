@@ -102,9 +102,31 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [hoveredSubItem, setHoveredSubItem] = useState<string | null>(null);
+  const [currentHash, setCurrentHash] = useState<string>('');
   const pathname = usePathname();
   const router = useRouter();
   const subItemTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Track hash changes for active state
+  React.useEffect(() => {
+    const updateHash = () => {
+      setCurrentHash(window.location.hash);
+    };
+    updateHash();
+    const handleHashChange = () => {
+      updateHash();
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    // Also check hash on scroll to detect when user scrolls to sections
+    const handleScroll = () => {
+      updateHash();
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [pathname]);
 
   const navItems: NavItem[] = [
     { name: 'Home', path: '/', hasDropdown: false },
@@ -117,6 +139,56 @@ const Navbar: React.FC = () => {
       data: navigationData.Company,
     },
   ];
+
+  // Helper function to check if a nav item is active
+  const isActive = (item: NavItem): boolean => {
+    if (!item.path) {
+      // For dropdown items without path (like Company), check if any child is active
+      if (item.name === 'Company') {
+        return pathname?.startsWith('/platform') || 
+               pathname === '/blog' || 
+               pathname === '/about-us' || 
+               pathname === '/careers' || 
+               pathname === '/contact-us' || 
+               pathname === '/support';
+      }
+      return false;
+    }
+    
+    // Handle hash links (like /#tami)
+    if (item.path.includes('#')) {
+      const [, hash] = item.path.split('#');
+      // For TAMI, only highlight if we're on home page AND hash matches
+      return pathname === '/' && currentHash === `#${hash}`;
+    }
+    
+    // Handle exact path matches for Home
+    if (item.path === '/') {
+      // Home should only be active if we're on home page AND not on TAMI section (hash should be empty or not #tami)
+      return pathname === '/' && currentHash !== '#tami';
+    }
+    
+    // Handle paths that start with the item path
+    return pathname?.startsWith(item.path) || false;
+  };
+
+  // Helper function to check if a dropdown item is active
+  const isDropdownItemActive = (itemPath: string): boolean => {
+    if (itemPath.includes('#')) {
+      const [basePath, hash] = itemPath.split('#');
+      if (basePath === '/platform') {
+        // For platform hash links, check if we're on platform page and hash matches
+        return pathname === '/platform' && (currentHash === `#${hash}` || (currentHash === '' && hash === ''));
+      }
+      // For home page hash links
+      return pathname === '/' && currentHash === `#${hash}`;
+    }
+    // For Framework (/platform), it should be active when on /platform page
+    if (itemPath === '/platform') {
+      return pathname === '/platform';
+    }
+    return pathname === itemPath || pathname?.startsWith(itemPath);
+  };
 
   const handleMouseEnter = (item: NavItem): void => {
     if (item.hasDropdown) setActiveDropdown(item.name);
@@ -201,29 +273,36 @@ const Navbar: React.FC = () => {
         }}
       >
         <div className="p-2">
-          {children.map((child) => (
-            <Link
-              key={child.name}
-              href={child.path}
-              className="flex items-center px-3 py-2 hover:bg-zinc-100 rounded text-sm text-zinc-700 transition-colors duration-150"
-              onClick={(e) => {
-                handleSmoothScroll(e, child.path);
-                handleMenuClose();
-              }}
-            >
-              {child.icon && (
-                <span className="mr-2 text-zinc-500">
-                  {React.cloneElement(
-                    child.icon as React.ReactElement<{ className?: string }>,
-                    {
-                      className: 'w-4 h-4',
-                    }
-                  )}
-                </span>
-              )}
-              {child.name}
-            </Link>
-          ))}
+          {children.map((child) => {
+            const isChildActive = isDropdownItemActive(child.path);
+            return (
+              <Link
+                key={child.name}
+                href={child.path}
+                className={`flex items-center px-3 py-2 rounded text-sm transition-colors duration-150 ${
+                  isChildActive
+                    ? 'bg-blue-50 text-blue-600 font-medium'
+                    : 'hover:bg-zinc-100 text-zinc-700'
+                }`}
+                onClick={(e) => {
+                  handleSmoothScroll(e, child.path);
+                  handleMenuClose();
+                }}
+              >
+                {child.icon && (
+                  <span className={`mr-2 ${isChildActive ? 'text-blue-600' : 'text-zinc-500'}`}>
+                    {React.cloneElement(
+                      child.icon as React.ReactElement<{ className?: string }>,
+                      {
+                        className: 'w-4 h-4',
+                      }
+                    )}
+                  </span>
+                )}
+                {child.name}
+              </Link>
+            );
+          })}
         </div>
       </div>
     );
@@ -236,63 +315,70 @@ const Navbar: React.FC = () => {
     return (
       <div className="absolute mt-2 bg-white border border-zinc-200 shadow-xl rounded-xl w-60 z-50 animate-[fadeInSlideDown_0.2s_ease-out]">
         <div className="p-2">
-          {dropdownData[0].items.map((item) => (
-            <div
-              key={item.name}
-              className="relative"
-              onMouseEnter={() => {
-                if (item.children) {
-                  // Clear any pending timeout
-                  if (subItemTimeoutRef.current) {
-                    clearTimeout(subItemTimeoutRef.current);
-                    subItemTimeoutRef.current = null;
+          {dropdownData[0].items.map((item) => {
+            const isItemActive = isDropdownItemActive(item.path);
+            return (
+              <div
+                key={item.name}
+                className="relative"
+                onMouseEnter={() => {
+                  if (item.children) {
+                    // Clear any pending timeout
+                    if (subItemTimeoutRef.current) {
+                      clearTimeout(subItemTimeoutRef.current);
+                      subItemTimeoutRef.current = null;
+                    }
+                    handleSubItemHover(item.name);
                   }
-                  handleSubItemHover(item.name);
-                }
-              }}
-              onMouseLeave={() => {
-                if (item.children) {
-                  // Small delay to allow moving to nested dropdown
-                  subItemTimeoutRef.current = setTimeout(() => {
-                    setHoveredSubItem(null);
-                  }, 200);
-                }
-              }}
-            >
-              <Link
-                href={item.path}
-                className="flex items-center justify-between px-3 py-2 hover:bg-zinc-100 rounded text-sm text-zinc-700 transition-colors duration-150"
-                onClick={(e) => {
-                  if (!item.children) {
-                    handleSmoothScroll(e, item.path);
-                    handleMenuClose();
-                  } else {
-                    // If Framework has children, navigate to platform page
-                    e.preventDefault();
-                    router.push(item.path);
+                }}
+                onMouseLeave={() => {
+                  if (item.children) {
+                    // Small delay to allow moving to nested dropdown
+                    subItemTimeoutRef.current = setTimeout(() => {
+                      setHoveredSubItem(null);
+                    }, 200);
                   }
                 }}
               >
-                <div className="flex items-center">
-                  <span className="mr-2 text-zinc-500">
-                    {React.cloneElement(
-                      item.icon as React.ReactElement<{ className?: string }>,
-                      {
-                        className: 'w-4 h-4',
-                      }
-                    )}
-                  </span>{' '}
-                  {item.name}
-                </div>
-                {item.children && (
-                  <FaChevronRight className="h-3 w-3 text-zinc-400" />
-                )}
-              </Link>
-              {item.children &&
-                hoveredSubItem === item.name &&
-                renderNestedDropdown(item.children)}
-            </div>
-          ))}
+                <Link
+                  href={item.path}
+                  className={`flex items-center justify-between px-3 py-2 rounded text-sm transition-colors duration-150 ${
+                    isItemActive
+                      ? 'bg-blue-50 text-blue-600 font-medium'
+                      : 'hover:bg-zinc-100 text-zinc-700'
+                  }`}
+                  onClick={(e) => {
+                    if (!item.children) {
+                      handleSmoothScroll(e, item.path);
+                      handleMenuClose();
+                    } else {
+                      // If Framework has children, navigate to platform page
+                      e.preventDefault();
+                      router.push(item.path);
+                    }
+                  }}
+                >
+                  <div className="flex items-center">
+                    <span className={`mr-2 ${isItemActive ? 'text-blue-600' : 'text-zinc-500'}`}>
+                      {React.cloneElement(
+                        item.icon as React.ReactElement<{ className?: string }>,
+                        {
+                          className: 'w-4 h-4',
+                        }
+                      )}
+                    </span>{' '}
+                    {item.name}
+                  </div>
+                  {item.children && (
+                    <FaChevronRight className={`h-3 w-3 ${isItemActive ? 'text-blue-600' : 'text-zinc-400'}`} />
+                  )}
+                </Link>
+                {item.children &&
+                  hoveredSubItem === item.name &&
+                  renderNestedDropdown(item.children)}
+              </div>
+            );
+          })}
         </div>
       </div>
     );
@@ -323,57 +409,68 @@ const Navbar: React.FC = () => {
             </Link>
 
             <div className="hidden lg:flex space-x-6 text-zinc-700 font-light">
-              {navItems.map((item) => (
-                <div
-                  key={item.name}
-                  onMouseEnter={() => handleMouseEnter(item)}
-                  className="relative"
-                >
-                  {item.path && item.path.includes('#') ? (
-                    <a
-                      href={item.path}
-                      className="flex items-center transition-colors duration-200 hover:text-zinc-900 cursor-pointer"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleSmoothScroll(e, item.path);
-                      }}
-                    >
-                      {item.name}
-                      {item.hasDropdown && (
-                        <FaChevronDown
-                          className={`ml-1 h-3 w-3 transition-transform duration-200 ${
-                            activeDropdown === item.name ? 'rotate-180' : ''
-                          }`}
-                        />
-                      )}
-                    </a>
-                  ) : (
-                    <Link 
-                      href={item.path || '#'} 
-                      className="flex items-center transition-colors duration-200 hover:text-zinc-900"
-                      onClick={(e) => {
-                        if (item.hasDropdown && !item.path) {
+              {navItems.map((item) => {
+                const active = isActive(item);
+                return (
+                  <div
+                    key={item.name}
+                    onMouseEnter={() => handleMouseEnter(item)}
+                    className="relative"
+                  >
+                    {item.path && item.path.includes('#') ? (
+                      <a
+                        href={item.path}
+                        className={`flex items-center transition-colors duration-200 cursor-pointer ${
+                          active 
+                            ? 'text-blue-600 font-medium' 
+                            : 'hover:text-zinc-900'
+                        }`}
+                        onClick={(e) => {
                           e.preventDefault();
-                        }
-                      }}
-                    >
-                      {item.name}
-                      {item.hasDropdown && (
-                        <FaChevronDown
-                          className={`ml-1 h-3 w-3 transition-transform duration-200 ${
-                            activeDropdown === item.name ? 'rotate-180' : ''
-                          }`}
-                        />
-                      )}
-                    </Link>
-                  )}
-                  {activeDropdown === item.name && item.hasDropdown && (
-                    <div className="absolute top-full left-0">
-                      {renderDropdown(item.name)}
-                    </div>
-                  )}
-                </div>
-              ))}
+                          handleSmoothScroll(e, item.path);
+                        }}
+                      >
+                        {item.name}
+                        {item.hasDropdown && (
+                          <FaChevronDown
+                            className={`ml-1 h-3 w-3 transition-transform duration-200 ${
+                              activeDropdown === item.name ? 'rotate-180' : ''
+                            }`}
+                          />
+                        )}
+                      </a>
+                    ) : (
+                      <Link 
+                        href={item.path || '#'} 
+                        className={`flex items-center transition-colors duration-200 ${
+                          active 
+                            ? 'text-blue-600 font-medium' 
+                            : 'hover:text-zinc-900'
+                        }`}
+                        onClick={(e) => {
+                          if (item.hasDropdown && !item.path) {
+                            e.preventDefault();
+                          }
+                        }}
+                      >
+                        {item.name}
+                        {item.hasDropdown && (
+                          <FaChevronDown
+                            className={`ml-1 h-3 w-3 transition-transform duration-200 ${
+                              activeDropdown === item.name ? 'rotate-180' : ''
+                            }`}
+                          />
+                        )}
+                      </Link>
+                    )}
+                    {activeDropdown === item.name && item.hasDropdown && (
+                      <div className="absolute top-full left-0">
+                        {renderDropdown(item.name)}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             <div className="hidden lg:flex items-center space-x-4">
@@ -415,8 +512,9 @@ const Navbar: React.FC = () => {
             </button>
           </div>
           <div className="p-4">
-            {navItems.map((item) =>
-              item.hasDropdown ? (
+            {navItems.map((item) => {
+              const active = isActive(item);
+              return item.hasDropdown ? (
                 <div key={item.name}>
                   <div className="font-semibold py-2">{item.name}</div>
                   {item.data?.[0]?.items.map((subItem) => (
@@ -437,7 +535,11 @@ const Navbar: React.FC = () => {
                       handleSmoothScroll(e, item.path);
                       handleMenuClose();
                     }}
-                    className="block py-3 border-b border-zinc-200 transition-colors duration-200 hover:text-blue-600 cursor-pointer"
+                    className={`block py-3 border-b border-zinc-200 transition-colors duration-200 cursor-pointer ${
+                      active 
+                        ? 'text-blue-600 font-medium' 
+                        : 'hover:text-blue-600'
+                    }`}
                   >
                     {item.name}
                   </a>
@@ -446,13 +548,17 @@ const Navbar: React.FC = () => {
                     key={item.name}
                     href={item.path}
                     onClick={handleMenuClose}
-                    className="block py-3 border-b border-zinc-200 transition-colors duration-200 hover:text-blue-600"
+                    className={`block py-3 border-b border-zinc-200 transition-colors duration-200 ${
+                      active 
+                        ? 'text-blue-600 font-medium' 
+                        : 'hover:text-blue-600'
+                    }`}
                   >
                     {item.name}
                   </Link>
                 )
-              )
-            )}
+              );
+            })}
           </div>
         </div>
       )}

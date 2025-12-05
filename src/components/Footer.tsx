@@ -2,146 +2,120 @@
 
 import type { FC } from 'react';
 import Link from 'next/link';
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-  FaMapMarkerAlt,
-  FaEnvelope,
-} from 'react-icons/fa';
+import { FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa';
 import Image from 'next/image';
 
 const Footer: FC = () => {
-  const currentYear: number = new Date().getFullYear();
-
   return (
-    <footer>
-      <div className="relative bg-[#f2f2f2] text-zinc-700">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
-          <div className="absolute inset-0 pointer-events-none hidden md:block mx-4 sm:mx-6 lg:mx-8">
-            {[0, 25, 50, 75, 100].map((p) => (
-              <div
-                key={p}
-                className="absolute top-0 bottom-0 w-px bg-zinc-200/30"
-                style={{ left: `${p}%` }}
-              />
-            ))}
+    <footer className="bg-slate-900 text-white pt-16 pb-0 mb-0">
+      <div className="container mx-auto px-6">
+        <div className="grid md:grid-cols-6 gap-12">
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-0 mb-4">
+              <div className="">
+                <Image
+                  src="/thinkact-logo.svg"
+                  alt="ThinkAct Logo"
+                  height={50}
+                  width={50}
+                  className="h-14 w-auto"
+                />
+              </div>
+              <span className="font-semibold text-2xl text-white">
+                Think<span className="text-blue-400">Act</span>
+              </span>
+            </div>
+            <p className="text-slate-400 leading-relaxed mb-6">
+              TAMI eliminates mortgage paperwork with Intelligent Document Processing, automates underwriting, and accelerates closing from weeks to days while ensuring GSE compliance.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 py-12">
-            {/* Left section */}
-            <div className="md:col-span-2 space-y-6">
-              <div>
-                <Link href="/" className="flex items-center gap-0 -ml-2">
-                  <div className="">
-                    <Image
-                      src="/thinkact-logo.svg"
-                      alt="Logo"
-                      height={50}
-                      width={50}
-                      className="h-14 w-auto"
-                    />
-                  </div>
-                  <p className="font-semibold text-2xl text-zinc-900">
-                    Think<span className="text-blue-500">Act</span>
-                  </p>
+          <div>
+            <h4 className="text-lg font-bold text-white mb-4 border-l-2 border-blue-400 pl-2">
+              Platform
+            </h4>
+            <ul className="space-y-3 text-slate-400 md:ml-2">
+              <li>
+                <Link href="/#tami-pos" className="hover:text-white transition-colors">
+                  TAMI-POS
                 </Link>
+              </li>
+              <li>
+                <Link href="/#tami-loan-processor" className="hover:text-white transition-colors">
+                  TAMI-Loan Processor
+                </Link>
+              </li>
+              <li>
+                <Link href="/pricing" className="hover:text-white transition-colors">
+                  Pricing
+                </Link>
+              </li>
+            </ul>
+          </div>
 
-                <p className="text-zinc-600">
-                  Revolutionizing document processing with intelligent agentic
-                  AI automation, including advanced AI review and search.
-                  Proactively flagging compliance and operational risks based on
-                  document changes to ensure robust governance and efficiency.
+          <div>
+            <h4 className="text-lg font-bold text-white mb-4 border-l-2 border-blue-400 pl-2">
+              Company
+            </h4>
+            <ul className="space-y-3 text-slate-400 md:ml-2">
+              <li>
+                <Link href="/about-us" className="hover:text-white transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/careers" className="hover:text-white transition-colors">
+                  Careers
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-white transition-colors">
+                  Blog
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-bold text-white mb-4 border-l-2 border-blue-400 pl-2">
+              Contact Us
+            </h4>
+            <ul className="space-y-3 md:ml-2">
+              <li className="flex items-center space-x-3">
+                <FaMapMarkerAlt
+                  size={18}
+                  className="shrink-0 text-slate-400"
+                />
+                <p className="text-slate-400 hover:text-white transition">
+                  New Jersey, USA
                 </p>
-              </div>
-              <div className="flex space-x-4 mt-6">
-                {[FaFacebookF, FaTwitter, FaInstagram].map((Icon, idx) => (
-                  <a
-                    key={idx}
-                    href="#"
-                    className="text-zinc-500 hover:text-primary transition"
-                    aria-label="Social Link"
-                  >
-                    <Icon size={20} />
-                  </a>
-                ))}
+              </li>
+              <li className="flex items-center space-x-3">
+                <FaEnvelope size={18} className="shrink-0 text-slate-400" />
                 <a
-                  href="https://www.linkedin.com/company/108176624"
-                  className="text-zinc-500 hover:text-primary transition"
-                  aria-label="LinkedIn"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:hello@thinkact.ai"
+                  className="text-slate-400 hover:text-white transition"
                 >
-                  <FaLinkedinIn size={20} />
+                  hello@thinkact.ai
                 </a>
-              </div>
-            </div>
-
-            {/* Links and contact */}
-            <div className="md:col-span-2 grid md:grid-cols-2 gap-8 relative">
-              <div className="md:ml-[109px] w-full">
-                <h4 className="text-lg font-bold text-zinc-900 mb-4 border-l-2 border-primary pl-2">
-                  Useful Links
-                </h4>
-                <ul className="space-y-2 md:ml-2">
-                  {['about-us', 'careers', 'blog'].map((path, idx) => (
-                    <li key={idx}>
-                      <Link
-                        href={`/${path}`}
-                        className="hover:text-primary transition"
-                      >
-                        {path
-                          .replace('-', ' ')
-                          .replace(/\b\w/g, (l) => l.toUpperCase())}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="md:ml-[162px] w-full">
-                <h4 className="text-lg font-bold text-zinc-900 mb-4 border-l-2 border-primary pl-2">
-                  Contact Us
-                </h4>
-                <ul className="space-y-3 md:ml-2">
-                  <li className="flex items-center space-x-3">
-                    <FaMapMarkerAlt
-                      size={18}
-                      className="shrink-0 text-zinc-500"
-                    />
-                    <p className="hover:text-primary transition">
-                      New Jersey, USA
-                    </p>
-                  </li>
-                  <li className="flex items-center space-x-3">
-                    <FaEnvelope size={18} className="shrink-0 text-zinc-500" />
-                    <a
-                      href="mailto:hello@thinkact.ai"
-                      className="hover:text-primary transition"
-                    >
-                      hello@thinkact.ai
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
 
       {/* Bottom bar */}
-      <div className="bg-gray-300 py-4 text-zinc-700">
-        <div className="flex flex-col md:flex-row justify-between items-center container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="bg-slate-800 text-slate-300 mt-8 mb-0 pb-0">
+        <div className="flex flex-col md:flex-row justify-between items-center container mx-auto px-6 py-4">
           <div className="text-sm">
-            © {currentYear} ThinkAct. All Rights Reserved.
+            © {new Date().getFullYear()} ThinkAct. All Rights Reserved.
           </div>
-          <div className="flex space-x-6 text-sm mt-2 sm:mt-0">
-            <Link href="/privacy-policy" className="hover:underline">
+          <div className="flex space-x-6 text-sm mt-2 md:mt-0">
+            <Link href="/privacy-policy" className="hover:text-white hover:underline">
               Privacy Policy
             </Link>
-            <Link href="/terms-conditions" className="hover:underline">
-            Terms of Services
+            <Link href="/terms-conditions" className="hover:text-white hover:underline">
+              Terms of Services
             </Link>
           </div>
         </div>

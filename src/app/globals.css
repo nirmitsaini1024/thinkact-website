@@ -134,12 +134,15 @@ html {
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
+    margin: 0;
   }
 }
 
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 @keyframes fadeIn {

@@ -36,6 +36,8 @@ export default function TAMIPage() {
   const [posCarouselIndex, setPosCarouselIndex] = useState<number>(0) // Carousel index for POS section
   const [isPosCarouselHovered, setIsPosCarouselHovered] = useState<boolean>(false) // Track hover state for POS carousel
   const [isProcessorCarouselHovered, setIsProcessorCarouselHovered] = useState<boolean>(false) // Track hover state for Processor carousel
+  const [isPosCarouselTouched, setIsPosCarouselTouched] = useState<boolean>(false) // Track touch interaction for POS carousel (mobile)
+  const [isProcessorCarouselTouched, setIsProcessorCarouselTouched] = useState<boolean>(false) // Track touch interaction for Processor carousel (mobile)
   const [isMarqueePaused, setIsMarqueePaused] = useState<boolean>(false)
   const [activeButton, setActiveButton] = useState<'left' | 'right' | null>(null)
   const marqueeRef = useRef<HTMLDivElement>(null)
@@ -50,6 +52,8 @@ export default function TAMIPage() {
   const processorCarouselTouchEnd = useRef<number | null>(null)
   const processorCarouselMouseStart = useRef<number | null>(null)
   const processorCarouselMouseEnd = useRef<number | null>(null)
+  const posCarouselResumeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null) // Timeout to resume auto-scroll after touch
+  const processorCarouselResumeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null) // Timeout to resume auto-scroll after touch
 
   // Auto-scroll animation with seamless loop
   useEffect(() => {
@@ -104,27 +108,41 @@ export default function TAMIPage() {
     }
   }, [isMarqueePaused])
 
-  // Autoplay for POS Carousel - advances every 5 seconds (pauses on hover)
+  // Autoplay for POS Carousel - advances every 5 seconds (pauses on hover or touch)
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!isPosCarouselHovered) {
+      // Pause auto-scroll if hovered (desktop) or touched (mobile)
+      if (!isPosCarouselHovered && !isPosCarouselTouched) {
         setPosCarouselIndex((prev) => (prev === 2 ? 0 : prev + 1))
       }
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [isPosCarouselHovered])
+  }, [isPosCarouselHovered, isPosCarouselTouched])
 
-  // Autoplay for Processor Carousel - advances every 5 seconds (pauses on hover)
+  // Autoplay for Processor Carousel - advances every 5 seconds (pauses on hover or touch)
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!isProcessorCarouselHovered) {
+      // Pause auto-scroll if hovered (desktop) or touched (mobile)
+      if (!isProcessorCarouselHovered && !isProcessorCarouselTouched) {
         setProcessorCarouselIndex((prev) => (prev === 2 ? 0 : prev + 1))
       }
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [isProcessorCarouselHovered])
+  }, [isProcessorCarouselHovered, isProcessorCarouselTouched])
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      if (posCarouselResumeTimeout.current) {
+        clearTimeout(posCarouselResumeTimeout.current)
+      }
+      if (processorCarouselResumeTimeout.current) {
+        clearTimeout(processorCarouselResumeTimeout.current)
+      }
+    }
+  }, [])
 
   // Manual scroll handlers
   const handleScrollLeft = () => {
@@ -164,7 +182,7 @@ export default function TAMIPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white mb-0 pb-0">
       <section className="relative bg-gradient-to-b from-slate-50 to-white overflow-hidden min-h-screen flex items-center">
         <div 
           className="absolute inset-0 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] bg-[size:65px_65px]"
@@ -174,7 +192,7 @@ export default function TAMIPage() {
         ></div>
         <div className="container mx-auto px-4 md:px-6 relative flex flex-col justify-center w-full py-16 md:py-24">
           <div className="grid lg:grid-cols-2 gap-10 xl:gap-14 items-center w-full">
-            <div className="max-w-2xl relative">
+            <div className="max-w-2xl relative ml-4 md:ml-8">
               <Badge className="bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 px-3 py-1 text-sm sm:text-base w-fit absolute top-0 mt-4 sm:mt-0">
                 <Brain className="w-4 h-4 mr-2" />
                 AI-Powered Mortgage Intelligence Platform
@@ -203,10 +221,12 @@ export default function TAMIPage() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-3 pt-3">
+              <div className="flex flex-wrap gap-3 pt-2 justify-center -ml-60 ">
+                <Link href="/book-a-demo">
                 <Button size="lg" className="h-12 px-7 text-base bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200">
                   Book a demo
                 </Button>
+                </Link>
               </div>
 
             </div>
@@ -256,7 +276,7 @@ export default function TAMIPage() {
       </section>
 
       {/* Features Section */}
-      <section id="b2p-platform" className="relative bg-slate-100 overflow-hidden py-2 md:py-3 min-h-[93vh] md:h-[93vh] flex items-center">
+      <section id="b2p-platform" className="hidden relative bg-slate-100 overflow-hidden py-2 md:py-3 min-h-[93vh] md:h-[93vh]">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] bg-[size:65px_65px]"></div>
         <div className="container mx-auto px-4 md:px-6 flex flex-col gap-2 md:gap-3 relative">
           <div className="text-center max-w-3xl mx-auto mb-2 md:mb-3">
@@ -642,7 +662,7 @@ export default function TAMIPage() {
         <div className="absolute inset-0 bg-grid-slate-100/60 [mask-image:linear-gradient(180deg,rgba(255,255,255,0.8),transparent)]" />
         <div className="container mx-auto px-4 md:px-6 w-full relative">
           <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-start w-full">
-            <div className="max-w-2xl relative">
+            <div className="max-w-2xl relative ml-4 md:ml-8">
               <Badge className="bg-green-100 text-green-700 w-fit px-3 py-1 text-sm mb-4 sm:mb-5">TAMI POS</Badge>
               <div className="space-y-5">
                 <h2 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight">
@@ -719,12 +739,32 @@ export default function TAMIPage() {
                   className="relative overflow-hidden cursor-grab active:cursor-grabbing"
                   onTouchStart={(e) => {
                     posCarouselTouchStart.current = e.touches[0].clientX
+                    // Pause auto-scroll on touch
+                    setIsPosCarouselTouched(true)
+                    // Clear any existing resume timeout
+                    if (posCarouselResumeTimeout.current) {
+                      clearTimeout(posCarouselResumeTimeout.current)
+                      posCarouselResumeTimeout.current = null
+                    }
                   }}
                   onTouchMove={(e) => {
                     posCarouselTouchEnd.current = e.touches[0].clientX
                   }}
                   onTouchEnd={() => {
-                    if (!posCarouselTouchStart.current || !posCarouselTouchEnd.current) return
+                    if (!posCarouselTouchStart.current || !posCarouselTouchEnd.current) {
+                      // Even if no swipe detected, still handle resume timeout
+                      posCarouselTouchStart.current = null
+                      posCarouselTouchEnd.current = null
+                      // Resume auto-scroll after 4 seconds of inactivity
+                      if (posCarouselResumeTimeout.current) {
+                        clearTimeout(posCarouselResumeTimeout.current)
+                      }
+                      posCarouselResumeTimeout.current = setTimeout(() => {
+                        setIsPosCarouselTouched(false)
+                        posCarouselResumeTimeout.current = null
+                      }, 4000)
+                      return
+                    }
                     const distance = posCarouselTouchStart.current - posCarouselTouchEnd.current
                     const minSwipeDistance = 50
 
@@ -738,6 +778,15 @@ export default function TAMIPage() {
 
                     posCarouselTouchStart.current = null
                     posCarouselTouchEnd.current = null
+                    
+                    // Resume auto-scroll after 4 seconds of inactivity
+                    if (posCarouselResumeTimeout.current) {
+                      clearTimeout(posCarouselResumeTimeout.current)
+                    }
+                    posCarouselResumeTimeout.current = setTimeout(() => {
+                      setIsPosCarouselTouched(false)
+                      posCarouselResumeTimeout.current = null
+                    }, 4000)
                   }}
                   onMouseDown={(e) => {
                     posCarouselMouseStart.current = e.clientX
@@ -786,7 +835,7 @@ export default function TAMIPage() {
                     {/* Slide 1: Smart Upload */}
                     <div className="w-full flex-shrink-0">
                       <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-2 md:p-3">
-                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
                           <div className="space-y-0.5 md:space-y-1">
                         <div>
                               <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm">
@@ -852,7 +901,7 @@ export default function TAMIPage() {
                     {/* Slide 2: Auto-Classification */}
                     <div className="w-full flex-shrink-0">
                       <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-2 md:p-3">
-                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
                           <div className="space-y-0.5 md:space-y-1">
                         <div>
                           <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm">
@@ -923,7 +972,7 @@ export default function TAMIPage() {
                     {/* Slide 3: Real-Time Tracking */}
                     <div className="w-full flex-shrink-0">
                       <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-2 md:p-3">
-                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
                           <div className="space-y-0.5 md:space-y-1">
                         <div>
                           <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm">
@@ -1006,14 +1055,14 @@ export default function TAMIPage() {
 
             {/* Navigation Arrows - Positioned outside Card to avoid covering content */}
             <button
-              onClick={() => setPosCarouselIndex((prev) => (prev === 0 ? 3 : prev - 1))}
+              onClick={() => setPosCarouselIndex((prev) => (prev === 0 ? 2 : prev - 1))}
               className="absolute left-2 md:-left-4 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/5 backdrop-blur-sm shadow-lg border border-slate-200/5 hover:bg-white/60 hover:opacity-100 hover:shadow-xl transition-all flex items-center justify-center text-slate-700 hover:text-blue-600"
               aria-label="Previous slide"
             >
               <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
             </button>
             <button
-              onClick={() => setPosCarouselIndex((prev) => (prev === 3 ? 0 : prev + 1))}
+              onClick={() => setPosCarouselIndex((prev) => (prev === 2 ? 0 : prev + 1))}
               className="absolute right-2 md:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/5 backdrop-blur-sm shadow-lg border border-slate-200/5 hover:bg-white/60 hover:opacity-100 hover:shadow-xl transition-all flex items-center justify-center text-slate-700 hover:text-blue-600"
               aria-label="Next slide"
             >
@@ -1027,7 +1076,7 @@ export default function TAMIPage() {
       <section id="tami-loan-processor" className="relative bg-white overflow-hidden py-3 md:py-4 flex items-center min-h-[93vh] md:h-[93vh]">
         <div className="container mx-auto px-4 md:px-6 w-full relative">
           <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center w-full">
-            <div className="max-w-2xl relative">
+            <div className="max-w-2xl relative ml-4 md:ml-8">
               <Badge className="bg-blue-50 text-blue-700 border-blue-200 px-3 py-1 w-fit text-sm sm:text-base mb-2 md:mb-3">
                 <Brain className="w-4 h-4 mr-2" />
                 AI Loan Processing Platform
@@ -1042,11 +1091,8 @@ export default function TAMIPage() {
               </p>
 
               <div className="flex flex-wrap gap-3 pt-2 mt-4">
-                <Button size="lg" className="h-11 px-6 text-sm bg-blue-600 hover:bg-blue-700 shadow-xl shadow-blue-600/20">
+                <Button size="lg" className="h-11 px-6 text-sm bg-blue-600 hover:bg-blue-700 shadow-xl shadow-blue-600/20 ml-50 ">
                   Start Your AI Journey
-                </Button>
-                <Button size="lg" variant="outline" className="h-11 px-6 text-sm border-2 border-slate-300 text-slate-700 bg-transparent hover:bg-slate-50">
-                  Watch Demo
                 </Button>
               </div>
             </div>
@@ -1144,12 +1190,32 @@ export default function TAMIPage() {
                   className="relative overflow-hidden cursor-grab active:cursor-grabbing"
                   onTouchStart={(e) => {
                     processorCarouselTouchStart.current = e.touches[0].clientX
+                    // Pause auto-scroll on touch
+                    setIsProcessorCarouselTouched(true)
+                    // Clear any existing resume timeout
+                    if (processorCarouselResumeTimeout.current) {
+                      clearTimeout(processorCarouselResumeTimeout.current)
+                      processorCarouselResumeTimeout.current = null
+                    }
                   }}
                   onTouchMove={(e) => {
                     processorCarouselTouchEnd.current = e.touches[0].clientX
                   }}
                   onTouchEnd={() => {
-                    if (!processorCarouselTouchStart.current || !processorCarouselTouchEnd.current) return
+                    if (!processorCarouselTouchStart.current || !processorCarouselTouchEnd.current) {
+                      // Even if no swipe detected, still handle resume timeout
+                      processorCarouselTouchStart.current = null
+                      processorCarouselTouchEnd.current = null
+                      // Resume auto-scroll after 4 seconds of inactivity
+                      if (processorCarouselResumeTimeout.current) {
+                        clearTimeout(processorCarouselResumeTimeout.current)
+                      }
+                      processorCarouselResumeTimeout.current = setTimeout(() => {
+                        setIsProcessorCarouselTouched(false)
+                        processorCarouselResumeTimeout.current = null
+                      }, 4000)
+                      return
+                    }
                     const distance = processorCarouselTouchStart.current - processorCarouselTouchEnd.current
                     const minSwipeDistance = 50
 
@@ -1163,6 +1229,15 @@ export default function TAMIPage() {
 
                     processorCarouselTouchStart.current = null
                     processorCarouselTouchEnd.current = null
+                    
+                    // Resume auto-scroll after 4 seconds of inactivity
+                    if (processorCarouselResumeTimeout.current) {
+                      clearTimeout(processorCarouselResumeTimeout.current)
+                    }
+                    processorCarouselResumeTimeout.current = setTimeout(() => {
+                      setIsProcessorCarouselTouched(false)
+                      processorCarouselResumeTimeout.current = null
+                    }, 4000)
                   }}
                   onMouseDown={(e) => {
                     processorCarouselMouseStart.current = e.clientX
@@ -1211,7 +1286,7 @@ export default function TAMIPage() {
                     {/* Slide 1: Document Processing */}
                     <div className="w-full flex-shrink-0">
                       <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-4 md:gap-6 items-start w-full p-2 md:p-3">
-                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
                       <div className="space-y-1.5 md:space-y-2">
                         <div>
                           <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 md:mb-1 text-xs">
@@ -1281,7 +1356,7 @@ export default function TAMIPage() {
                     {/* Slide 2: Smart Analysis */}
                     <div className="w-full flex-shrink-0">
                       <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-4 md:gap-6 items-start w-full p-2 md:p-3">
-                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
                       <div className="space-y-1.5 md:space-y-2">
                         <div>
                           <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 md:mb-1 text-xs">
@@ -1351,7 +1426,7 @@ export default function TAMIPage() {
                     {/* Slide 3: Live Dashboard */}
                     <div className="w-full flex-shrink-0">
                       <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-4 md:gap-6 items-start w-full p-2 md:p-3">
-                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
                       <div className="space-y-1.5 md:space-y-2">
                         <div>
                           <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 md:mb-1 text-xs">
@@ -1445,7 +1520,7 @@ export default function TAMIPage() {
       {/* Integrations and Built For Sections - Combined on one screen */}
       <section className="relative min-h-[93vh] md:h-[93vh] flex flex-col overflow-hidden">
         {/* Integrations Section */}
-        <div className="flex-[0_0_30%] bg-white flex items-center min-h-0 overflow-y-auto">
+        <div className="flex-[0_0_30%] bg-white flex items-center min-h-0 overflow-hidden">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full py-4 md:py-6">
             <div className="mb-3 md:mb-4">
               <div className="mb-2 md:mb-3 flex items-center justify-between">
@@ -1587,10 +1662,10 @@ export default function TAMIPage() {
         </div>
       </section>
 
-      <section className="relative min-h-[93vh] md:h-[93vh] flex flex-col overflow-hidden mt-0 md:mt-0">
+      <section className="relative flex flex-col overflow-hidden mt-0 md:mt-0">
         {/* Trusted by Industry Experts - Top Half */}
-        <div className="flex-[0_0_70%] flex items-center bg-white text-slate-900 overflow-hidden py-4 md:py-0">
-          <div className="container mx-auto px-4 md:px-6 w-full py-1">
+        <div className="flex-auto flex bg-white text-slate-900 overflow-hidden py-6 md:py-8">
+          <div className="container mx-auto px-4 md:px-6 w-full py-2">
             <div className="text-center mb-2 max-w-3xl mx-auto">
               <Badge className="bg-blue-50 text-blue-700 border-blue-100 mb-1 px-2 py-0.5 text-xs">Customer Success</Badge>
               <h2 className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tight mb-0.5">Trusted by Industry Experts</h2>
@@ -1640,16 +1715,16 @@ export default function TAMIPage() {
         </div>
 
         {/* Move from Manual Work to Intelligent Automation - Bottom Half */}
-        <div className="flex-[0_0_30%] flex items-center bg-gradient-to-br from-blue-600 to-cyan-600 text-white overflow-hidden py-4 md:py-0">
-          <div className="container mx-auto px-4 md:px-6 text-center w-full py-1">
-            <div className="max-w-4xl mx-auto space-y-1 md:space-y-1.5">
+        <div className="flex-[0_0_30%] flex items-center bg-gradient-to-br from-blue-600 to-cyan-600 text-white overflow-hidden py-2 md:py-4">
+          <div className="container mx-auto px-4 md:px-6 text-center w-full py-2">
+            <div className="max-w-4xl mx-auto space-y-3 md:space-y-4">
               <h2 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tight">
                 Move from Manual Work to Intelligent Automation
               </h2>
               <p className="text-sm md:text-base lg:text-lg text-blue-50">
                 Give your borrowers a delightful experience — and your team superpowers.
               </p>
-              <div className="flex flex-wrap justify-center gap-2">
+              <div className="flex justify-center">
                 <Button
                   size="lg"
                   variant="secondary"
@@ -1657,20 +1732,13 @@ export default function TAMIPage() {
                 >
                   Get Started
                 </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="h-9 md:h-10 px-4 md:px-6 text-xs md:text-sm border-2 border-white text-white hover:bg-white/10 bg-transparent"
-                >
-                  Book a Demo
-                </Button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <footer className="bg-slate-900 text-white py-16">
+      <footer className="bg-slate-900 text-white pt-16 pb-0 mb-0">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-6 gap-12">
             <div className="md:col-span-2">
@@ -1689,7 +1757,7 @@ export default function TAMIPage() {
                 </span>
               </div>
               <p className="text-slate-400 leading-relaxed mb-6">
-                Revolutionizing document processing with intelligent agentic AI automation, including advanced AI review and search. Proactively flagging compliance and operational risks based on document changes to ensure robust governance and efficiency.
+              TAMI eliminates mortgage paperwork with Intelligent Document Processing, automates underwriting, and accelerates closing from weeks to days while ensuring GSE compliance.
               </p>
             </div>
 
@@ -1700,12 +1768,12 @@ export default function TAMIPage() {
               <ul className="space-y-3 text-slate-400 md:ml-2">
                 <li>
                   <Link href="/#tami-pos" className="hover:text-white transition-colors">
-                    POS
+                    TAMI-POS
                   </Link>
                 </li>
                 <li>
                   <Link href="/#tami-loan-processor" className="hover:text-white transition-colors">
-                    Loan Processor
+                    TAMI-Loan Processor
                   </Link>
                 </li>
                 <li>
@@ -1768,8 +1836,8 @@ export default function TAMIPage() {
         </div>
 
         {/* Bottom bar */}
-        <div className="bg-slate-800 py-4 text-slate-300 mt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center container mx-auto px-6">
+        <div className="bg-slate-800 text-slate-300 mt-8 mb-0 pb-0">
+          <div className="flex flex-col md:flex-row justify-between items-center container mx-auto px-6 py-4">
             <div className="text-sm">
               © {new Date().getFullYear()} ThinkAct. All Rights Reserved.
             </div>

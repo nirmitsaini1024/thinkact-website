@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -26,8 +26,37 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   level = 0,
 }) => {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState<boolean>(false);
+  const [currentHash, setCurrentHash] = useState<string>('');
   const hasChildren = !!(item.children || item.items || item.items2);
   const pathname = usePathname();
+
+  // Track hash changes for active state
+  React.useEffect(() => {
+    setCurrentHash(window.location.hash);
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [pathname]);
+
+  // Auto-expand if item is active (e.g., Framework when on /platform)
+  React.useEffect(() => {
+    if (hasChildren && pathname === item.path) {
+      setIsSubMenuOpen(true);
+    }
+  }, [pathname, item.path, hasChildren]);
+
+  const isItemActive = (): boolean => {
+    if (item.path.includes('#')) {
+      const [basePath, hash] = item.path.split('#');
+      if (basePath === '/platform') {
+        return pathname === '/platform' && (currentHash === `#${hash}` || currentHash === '');
+      }
+      return pathname === '/' && currentHash === `#${hash}`;
+    }
+    return pathname === item.path || pathname?.startsWith(item.path);
+  };
 
   const toggleSubMenu = (): void => {
     if (hasChildren) {
@@ -120,6 +149,8 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
     return children;
   };
 
+  const active = isItemActive();
+
   return (
     <div className={`${level === 0 ? 'border-b border-gray-200' : ''}`}>
       <div
@@ -127,8 +158,17 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
           flex items-center justify-between
           px-4 py-3
           ${
+            active
+              ? 'bg-blue-50'
+              : ''
+          }
+          ${
             level === 0
-              ? 'text-lg font-semibold text-gray-800'
+              ? active
+                ? 'text-lg font-semibold text-blue-600'
+                : 'text-lg font-semibold text-gray-800'
+              : active
+              ? 'text-base text-blue-600 font-medium'
               : 'text-base text-gray-700'
           }
           ${hasChildren ? 'cursor-pointer hover:bg-gray-100' : ''}
@@ -137,7 +177,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
       >
         <div className="flex items-center">
           {item.icon && (
-            <span className="mr-2 text-zinc-500">
+            <span className={`mr-2 ${active ? 'text-blue-600' : 'text-zinc-500'}`}>
               {React.cloneElement(item.icon as React.ReactElement<{ className?: string }>, {
                 className: 'w-4 h-4',
               })}
@@ -149,7 +189,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
             <Link
               href={item.path || '#'}
               onClick={(e) => handleSmoothScroll(e, item.path || '#')}
-              className="hover:underline"
+              className={active ? 'font-medium' : 'hover:underline'}
             >
               {item.name}
             </Link>
@@ -160,7 +200,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
           <div className="w-6 h-6 flex items-center justify-center">
             <IoIosArrowDown
               size={16}
-              className={`text-gray-600 transition-transform duration-200 ${
+              className={`${active ? 'text-blue-600' : 'text-gray-600'} transition-transform duration-200 ${
                 isSubMenuOpen ? 'rotate-180' : 'rotate-0'
               }`}
             />
