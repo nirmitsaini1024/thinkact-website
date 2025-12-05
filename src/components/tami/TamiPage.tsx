@@ -238,10 +238,13 @@ export default function TAMIPage() {
                 <div className="relative overflow-hidden shadow-2xl border-0 rounded-2xl bg-gradient-to-br from-slate-50 via-blue-50/30 to-cyan-50/20 p-5 sm:p-6">
                   {/* Image Section */}
                   <div className="relative group rounded-xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50 mb-5">
-                    <img
+                    <Image
                       src="/images/Tami4.jpg"
                       alt="TAMI Platform Ecosystem - Borrower to Processor Hub"
+                      width={1200}
+                      height={800}
                       className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                     />
                   </div>
                   
@@ -467,10 +470,13 @@ export default function TAMIPage() {
 
             {/* TAMI Wheel Image - Center of Row 2 */}
             <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-2 md:p-3 flex items-center justify-center h-full">
-              <img
+              <Image
                 src="/images/Tami3.png"
                 alt="TAMI Platform Wheel"
+                width={300}
+                height={300}
                 className="w-full h-auto max-h-[150px] object-contain"
+                sizes="(max-width: 768px) 100vw, 300px"
               />
             </div>
 
@@ -681,10 +687,13 @@ export default function TAMIPage() {
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
               <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-3 sm:p-4">
                 <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50">
-                  <img
+                  <Image
                     src="/images/screenshot-202025-11-23-20at-207.png"
                     alt="Borrower and lender completing mortgage application"
+                    width={1200}
+                    height={800}
                     className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                   />
                 </div>
               </div>
@@ -887,10 +896,13 @@ export default function TAMIPage() {
                       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
                       <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50">
-                          <img
+                          <Image
                             src="/images/screenshot-202025-11-23-20at-207.png"
                             alt="Document Upload Interface"
+                            width={1200}
+                            height={800}
                             className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                           />
                         </div>
                       </div>
@@ -1104,10 +1116,13 @@ export default function TAMIPage() {
                 <div className="relative overflow-hidden shadow-2xl border-0 rounded-2xl bg-gradient-to-br from-slate-50 via-blue-50/30 to-cyan-50/20 p-3 sm:p-4">
                   {/* Image Section */}
                   <div className="relative group rounded-xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50 mb-3">
-                    <img
+                    <Image
                       src="/images/e.png"
                       alt="TAMI AI Loan Processor Platform Interface"
+                      width={1200}
+                      height={800}
                       className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                     />
                   </div>
                   
@@ -1342,10 +1357,13 @@ export default function TAMIPage() {
                       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
                       <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50">
-                          <img
+                          <Image
                             src="/document-processing-dashboard-with-ai-analysis.jpg"
                             alt="Document Processing Interface"
+                            width={1200}
+                            height={600}
                             className="w-full h-auto max-h-[320px] md:max-h-[380px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                           />
                         </div>
                       </div>
@@ -1412,10 +1430,13 @@ export default function TAMIPage() {
                       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
                       <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50">
-                          <img
+                          <Image
                             src="/financial-analysis-dashboard.png"
                             alt="Income Analysis Interface"
+                            width={1200}
+                            height={600}
                             className="w-full h-auto max-h-[320px] md:max-h-[380px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                           />
                         </div>
                       </div>
@@ -1482,10 +1503,13 @@ export default function TAMIPage() {
                       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
                       <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50">
-                          <img
+                          <Image
                             src="/compliance-dashboard-with-risk-monitoring-and-aler.jpg"
                             alt="Live Dashboard Interface"
+                            width={1200}
+                            height={600}
                             className="w-full h-auto max-h-[320px] md:max-h-[380px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
                           />
                         </div>
                       </div>
@@ -1585,9 +1609,11 @@ export default function TAMIPage() {
                               flexShrink: 0
                             }}
                           >
-                            <img
+                            <Image
                               src="/images/meridian-link.svg"
                               alt="MeridianLink"
+                              width={200}
+                              height={56}
                               className="h-10 md:h-14 w-auto opacity-80 hover:opacity-100 transition-opacity"
                               style={{ display: 'block', width: 'auto', height: 'auto' }}
                             />
