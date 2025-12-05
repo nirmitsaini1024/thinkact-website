@@ -29,16 +29,27 @@ import {
 import Link from "next/link"
 import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
+import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa"
 
 export default function TAMIPage() {
-  const [selectedDemo, setSelectedDemo] = useState<string>("document")
-  const [selectedPOSDemo, setSelectedPOSDemo] = useState<string>("upload") // New state for POS demo
+  const [processorCarouselIndex, setProcessorCarouselIndex] = useState<number>(0) // Carousel index for Processor section
+  const [posCarouselIndex, setPosCarouselIndex] = useState<number>(0) // Carousel index for POS section
+  const [isPosCarouselHovered, setIsPosCarouselHovered] = useState<boolean>(false) // Track hover state for POS carousel
+  const [isProcessorCarouselHovered, setIsProcessorCarouselHovered] = useState<boolean>(false) // Track hover state for Processor carousel
   const [isMarqueePaused, setIsMarqueePaused] = useState<boolean>(false)
   const [activeButton, setActiveButton] = useState<'left' | 'right' | null>(null)
   const marqueeRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<number | null>(null)
   const scrollPositionRef = useRef<number>(0)
   const setWidthRef = useRef<number>(0)
+  const posCarouselTouchStart = useRef<number | null>(null)
+  const posCarouselTouchEnd = useRef<number | null>(null)
+  const posCarouselMouseStart = useRef<number | null>(null)
+  const posCarouselMouseEnd = useRef<number | null>(null)
+  const processorCarouselTouchStart = useRef<number | null>(null)
+  const processorCarouselTouchEnd = useRef<number | null>(null)
+  const processorCarouselMouseStart = useRef<number | null>(null)
+  const processorCarouselMouseEnd = useRef<number | null>(null)
 
   // Auto-scroll animation with seamless loop
   useEffect(() => {
@@ -92,6 +103,28 @@ export default function TAMIPage() {
       }
     }
   }, [isMarqueePaused])
+
+  // Autoplay for POS Carousel - advances every 5 seconds (pauses on hover)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isPosCarouselHovered) {
+        setPosCarouselIndex((prev) => (prev === 2 ? 0 : prev + 1))
+      }
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [isPosCarouselHovered])
+
+  // Autoplay for Processor Carousel - advances every 5 seconds (pauses on hover)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isProcessorCarouselHovered) {
+        setProcessorCarouselIndex((prev) => (prev === 2 ? 0 : prev + 1))
+      }
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [isProcessorCarouselHovered])
 
   // Manual scroll handlers
   const handleScrollLeft = () => {
@@ -223,7 +256,7 @@ export default function TAMIPage() {
       </section>
 
       {/* Features Section */}
-      <section id="b2p-platform" className="relative bg-slate-100 overflow-hidden py-2 md:py-3 min-h-screen flex items-center">
+      <section id="b2p-platform" className="relative bg-slate-100 overflow-hidden py-2 md:py-3 min-h-[93vh] md:h-[93vh] flex items-center">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] bg-[size:65px_65px]"></div>
         <div className="container mx-auto px-4 md:px-6 flex flex-col gap-2 md:gap-3 relative">
           <div className="text-center max-w-3xl mx-auto mb-2 md:mb-3">
@@ -605,7 +638,7 @@ export default function TAMIPage() {
       </section>
 
       {/* TAMI POS Section 1 - Heading, Image, and Subheading */}
-      <section className="relative w-full bg-white py-3 md:py-4 overflow-hidden flex items-center min-h-screen">
+      <section id="tami-pos" className="relative w-full bg-white py-3 md:py-4 overflow-hidden flex items-center min-h-[93vh] md:h-[93vh]">
         <div className="absolute inset-0 bg-grid-slate-100/60 [mask-image:linear-gradient(180deg,rgba(255,255,255,0.8),transparent)]" />
         <div className="container mx-auto px-4 md:px-6 w-full relative">
           <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-start w-full">
@@ -619,7 +652,8 @@ export default function TAMIPage() {
                   The <span className="text-blue-600">AI POS Agent</span> That Completes Applications For You
                 </p>
                 <p className="text-lg md:text-xl lg:text-2xl text-slate-600 leading-relaxed">
-                  Upload your documents — <span className="text-blue-600">TAMI</span> does the rest with <span className="text-blue-600">intelligent automation</span>.
+                  Upload your documents — <span className="text-blue-600">TAMI</span> does the rest with <span className="text-blue-600">intelligent automation 
+</span>and a built-in guided assistant.
                 </p>
               </div>
             </div>
@@ -640,125 +674,169 @@ export default function TAMIPage() {
       </section>
 
       {/* TAMI-POS in Action Section */}
-      <section className="relative bg-slate-100 overflow-hidden py-2 md:py-3 flex items-center min-h-screen mt-8 md:mt-12">
+      <section className="relative bg-slate-100 overflow-hidden py-2 md:py-3 flex items-center min-h-[93vh] md:h-[93vh] mt-4 md:mt-6">
         <div className="container mx-auto px-4 md:px-6 w-full relative">
-          <div className="text-center mb-2 md:mb-3 w-full">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-1 md:mb-2">TAMI-<span className="text-blue-600">POS in Action</span></h2>
+          <div className="text-center mb-2 md:mb-3 w-full mt-1 md:mt-3">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-1 md:mb-1.5">TAMI-<span className="text-blue-600">POS in Action</span></h2>
           </div>
 
-          {/* POS Demo Tabs */}
-          <div className="w-full mb-2 md:mb-3">
-            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-2 md:gap-3 mb-2 md:mb-3 p-2 bg-slate-100 rounded-2xl mx-auto overflow-x-auto">
-              <Button
-                variant="ghost"
-                size="lg"
-                onClick={() => setSelectedPOSDemo("upload")}
-                className={`text-base h-12 px-6 rounded-xl transition-colors min-w-[170px] shrink-0 ${
-                  selectedPOSDemo === "upload"
-                    ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
-                }`}
+          {/* POS Active Tab Heading */}
+          <div className="w-full mb-4 md:mb-5">
+            <div className="text-center">
+              <div 
+                className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-blue-600 text-white rounded-xl shadow-lg"
+                onMouseEnter={() => setIsPosCarouselHovered(true)}
+                onMouseLeave={() => setIsPosCarouselHovered(false)}
               >
-                <Upload className="w-5 h-5 mr-2" />
-                Smart Upload
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                onClick={() => setSelectedPOSDemo("classification")}
-                className={`text-base h-12 px-6 rounded-xl transition-colors min-w-[170px] shrink-0 ${
-                  selectedPOSDemo === "classification"
-                    ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
-                }`}
-              >
-                <FileCheck className="w-5 h-5 mr-2" />
-                Auto-Classification
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                onClick={() => setSelectedPOSDemo("tracking")}
-                className={`text-base h-12 px-6 rounded-xl transition-colors min-w-[170px] shrink-0 ${
-                  selectedPOSDemo === "tracking"
-                    ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
-                }`}
-              >
-                <Eye className="w-5 h-5 mr-2" />
-                Real-Time Tracking
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                onClick={() => setSelectedPOSDemo("communication")}
-                className={`text-base h-12 px-6 rounded-xl transition-colors min-w-[170px] shrink-0 ${
-                  selectedPOSDemo === "communication"
-                    ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
-                }`}
-              >
-                <MessageSquare className="w-5 h-5 mr-2" />
-                Communication Hub
-              </Button>
+                {posCarouselIndex === 0 && (
+                  <>
+                    <Upload className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                    <h3 className="text-xs md:text-sm font-semibold">Smart Assistant</h3>
+                  </>
+                )}
+                {posCarouselIndex === 1 && (
+                  <>
+                    <FileCheck className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                    <h3 className="text-xs md:text-sm font-semibold">Auto-Classification</h3>
+                  </>
+                )}
+                {posCarouselIndex === 2 && (
+                  <>
+                    <Eye className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                    <h3 className="text-xs md:text-sm font-semibold">Real-Time Loan Visibility</h3>
+                  </>
+                )}
+              </div>
+            </div>
             </div>
 
-            {/* POS Demo Content */}
-            <Card className="border-2 shadow-2xl overflow-visible rounded-2xl">
+          {/* POS Carousel */}
+          <div className="w-full mb-2 md:mb-3 relative">
+            <Card className="border-2 shadow-2xl overflow-hidden rounded-2xl relative">
               <CardContent className="p-0">
-                {selectedPOSDemo === "upload" && (
-                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
-                    <div className="max-w-2xl relative">
-                      <div className="space-y-2 md:space-y-3">
+                {/* Carousel Container */}
+                <div 
+                  className="relative overflow-hidden cursor-grab active:cursor-grabbing"
+                  onTouchStart={(e) => {
+                    posCarouselTouchStart.current = e.touches[0].clientX
+                  }}
+                  onTouchMove={(e) => {
+                    posCarouselTouchEnd.current = e.touches[0].clientX
+                  }}
+                  onTouchEnd={() => {
+                    if (!posCarouselTouchStart.current || !posCarouselTouchEnd.current) return
+                    const distance = posCarouselTouchStart.current - posCarouselTouchEnd.current
+                    const minSwipeDistance = 50
+
+                    if (distance > minSwipeDistance) {
+                      // Swipe left - next slide
+                      setPosCarouselIndex((prev) => (prev === 2 ? 0 : prev + 1))
+                    } else if (distance < -minSwipeDistance) {
+                      // Swipe right - previous slide
+                      setPosCarouselIndex((prev) => (prev === 0 ? 2 : prev - 1))
+                    }
+
+                    posCarouselTouchStart.current = null
+                    posCarouselTouchEnd.current = null
+                  }}
+                  onMouseDown={(e) => {
+                    posCarouselMouseStart.current = e.clientX
+                    e.preventDefault()
+                  }}
+                  onMouseMove={(e) => {
+                    if (posCarouselMouseStart.current !== null) {
+                      posCarouselMouseEnd.current = e.clientX
+                    }
+                  }}
+                  onMouseUp={() => {
+                    if (!posCarouselMouseStart.current || !posCarouselMouseEnd.current) {
+                      posCarouselMouseStart.current = null
+                      posCarouselMouseEnd.current = null
+                      return
+                    }
+                    const distance = posCarouselMouseStart.current - posCarouselMouseEnd.current
+                    const minSwipeDistance = 50
+
+                    if (distance > minSwipeDistance) {
+                      // Swipe left - next slide
+                      setPosCarouselIndex((prev) => (prev === 2 ? 0 : prev + 1))
+                    } else if (distance < -minSwipeDistance) {
+                      // Swipe right - previous slide
+                      setPosCarouselIndex((prev) => (prev === 0 ? 2 : prev - 1))
+                    }
+
+                    posCarouselMouseStart.current = null
+                    posCarouselMouseEnd.current = null
+                  }}
+                  onMouseEnter={() => {
+                    setIsPosCarouselHovered(true)
+                  }}
+                  onMouseLeave={() => {
+                    // Reset on mouse leave to prevent stuck states
+                    posCarouselMouseStart.current = null
+                    posCarouselMouseEnd.current = null
+                    setIsPosCarouselHovered(false)
+                  }}
+                >
+                  {/* Carousel Slides */}
+                  <div 
+                    className="flex transition-transform duration-[400ms] ease-out"
+                    style={{ transform: `translateX(-${posCarouselIndex * 100}%)` }}
+                  >
+                    {/* Slide 1: Smart Upload */}
+                    <div className="w-full flex-shrink-0">
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-2 md:p-3">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                          <div className="space-y-0.5 md:space-y-1">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-2 text-xs">
-                            <Upload className="w-3 h-3 mr-1.5" />
+                              <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm">
+                            <Upload className="w-3 h-3 mr-1" />
                             Secure Document Upload
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">Upload Any Document Format</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-2 md:mb-3">
+                              <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5">Upload Any Document Format</h3>
+                              <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-0.5 md:mb-1">
                             Borrowers can securely upload PDFs, images, Word docs, and more. TAMI handles all formats with
                             enterprise-grade security.
                           </p>
                         </div>
-                        <div className="space-y-1.5 md:space-y-2">
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div className="space-y-0.5">
+                        <div className="flex items-start gap-1.5 md:gap-2">
+                          <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">Multi-Format Support</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">
+                            <p className="font-semibold text-foreground text-sm">Multi-Format Support</p>
+                            <p className="text-sm text-muted-foreground">
                               PDF, JPG, PNG, DOCX, HEIC - all processed instantly
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-1.5 md:gap-2">
+                          <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">Drag & Drop Interface</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">Intuitive upload experience on any device</p>
+                            <p className="font-semibold text-foreground text-sm">Drag & Drop Interface</p>
+                            <p className="text-sm text-muted-foreground">Intuitive upload experience on any device</p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-1.5 md:gap-2">
+                          <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">Bank-Level Security</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">End-to-end encryption for all documents</p>
+                            <p className="font-semibold text-foreground text-sm">Bank-Level Security</p>
+                            <p className="text-sm text-muted-foreground">End-to-end encryption for all documents</p>
                           </div>
                         </div>
                       </div>
-                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
-                          <Badge variant="secondary" className="bg-green-100 text-green-700">
+                            <div className="flex gap-1.5 md:gap-2 pt-0.5">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 text-sm">
                             Secure
                           </Badge>
-                          <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                          <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-sm">
                             Any Format
                           </Badge>
                         </div>
                       </div>
                     </div>
-                    <div className="relative w-full max-w-[680px] mx-0 lg:ml-8">
-                      <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
-                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-3 sm:p-4">
+                        <div className="relative w-full max-w-[680px] mx-0 lg:ml-8 order-1 lg:order-2">
+                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
+                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50">
                           <img
                             src="/images/screenshot-202025-11-23-20at-207.png"
@@ -769,63 +847,64 @@ export default function TAMIPage() {
                       </div>
                     </div>
                   </div>
-                )}
+                    </div>
 
-                {selectedPOSDemo === "classification" && (
-                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
-                    <div className="max-w-2xl relative">
-                      <div className="space-y-2 md:space-y-3">
+                    {/* Slide 2: Auto-Classification */}
+                    <div className="w-full flex-shrink-0">
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-2 md:p-3">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                          <div className="space-y-0.5 md:space-y-1">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-2 text-xs">
-                            <FileCheck className="w-3 h-3 mr-1.5" />
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm">
+                            <FileCheck className="w-3 h-3 mr-1" />
                             Intelligent Auto-Classification
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">AI Identifies Every Document Type</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-2 md:mb-3">
+                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5">AI Identifies Every Document Type</h3>
+                          <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-0.5 md:mb-1">
                             TAMI automatically identifies W-2s, 1040s, 1065s, paystubs, bank statements, and more with
                             99.9% accuracy using OCR and IDP.
                           </p>
                         </div>
-                        <div className="space-y-1.5 md:space-y-2">
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div className="space-y-0.5">
+                        <div className="flex items-start gap-1.5 md:gap-2">
+                          <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">Smart Recognition</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">
+                            <p className="font-semibold text-foreground text-sm">Smart Recognition</p>
+                            <p className="text-sm text-muted-foreground">
                               W-2, 1040, 1065, paystubs, bank statements auto-tagged
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-1.5 md:gap-2">
+                          <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">OCR Data Extraction</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">
+                            <p className="font-semibold text-foreground text-sm">OCR Data Extraction</p>
+                            <p className="text-sm text-muted-foreground">
                               Key data pulled automatically from every document
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-1.5 md:gap-2">
+                          <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">Zero Manual Sorting</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">Documents organized instantly upon upload</p>
+                            <p className="font-semibold text-foreground text-sm">Zero Manual Sorting</p>
+                            <p className="text-sm text-muted-foreground">Documents organized instantly upon upload</p>
                           </div>
                         </div>
                         </div>
-                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
-                          <Badge variant="secondary" className="bg-green-100 text-green-700">
+                            <div className="flex gap-1.5 md:gap-2 pt-0.5">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 text-sm">
                             99.9% accurate
                           </Badge>
-                          <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                          <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-sm">
                             Instant
                           </Badge>
                         </div>
                       </div>
                     </div>
-                    <div className="relative w-full max-w-[680px] mx-0 lg:ml-8">
-                      <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
-                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-3 sm:p-4">
+                        <div className="relative w-full max-w-[680px] mx-0 lg:ml-8 order-1 lg:order-2">
+                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
+                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50 aspect-video">
                           <div className="absolute inset-0 bg-slate-100 flex items-center justify-center">
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center pointer-events-none">
@@ -839,63 +918,73 @@ export default function TAMIPage() {
                       </div>
                     </div>
                   </div>
-                )}
+                    </div>
 
-                {selectedPOSDemo === "tracking" && (
-                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
-                    <div className="max-w-2xl relative">
-                      <div className="space-y-2 md:space-y-3">
+                    {/* Slide 3: Real-Time Tracking */}
+                    <div className="w-full flex-shrink-0">
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-2 md:p-3">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                          <div className="space-y-0.5 md:space-y-1">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-2 text-xs">
-                            <Eye className="w-3 h-3 mr-1.5" />
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm">
+                            <Eye className="w-3 h-3 mr-1" />
                             Real-Time Status Tracking
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">Complete Visibility For Everyone</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-2 md:mb-3">
-                            Borrowers and loan officers get real-time status updates, smart checklists, and expiration
-                            tracking all in one dashboard.
+                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5">Complete Visibility & Seamless Communication — For Everyone</h3>
+                          <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-0.5 md:mb-1">
+                          Borrowers, loan officers, and processors get a single, real-time view of the loan file with smart checklists, progress tracking, expiration alerts, and unified messaging—all in one dashboard.
                           </p>
                         </div>
-                        <div className="space-y-1.5 md:space-y-2">
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div className="space-y-0.5">
+                        <div className="flex items-start gap-1.5 md:gap-2">
+                          <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">Live Progress Bar</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">
-                              Borrowers see exactly where they are in the process
+                            <p className="font-semibold text-foreground text-sm">Live Progress Bar</p>
+                            <p className="text-sm text-muted-foreground">
+                              Borrowers see exactly where they are in the process.
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-1.5 md:gap-2">
+                          <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">Missing Document Tracker</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">Smart checklist based on borrower profile</p>
+                            <p className="font-semibold text-foreground text-sm">Missing Document Tracker</p>
+                            <p className="text-sm text-muted-foreground">Profile-based smart checklist that updates automatically as documents are submitted.
+                            </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="flex items-start gap-1.5 md:gap-2">
+                          <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">Expiration Alerts</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">
-                              Automatic notifications before documents expire
+                            <p className="font-semibold text-foreground text-sm">Expiration/Past Due Alerts</p>
+                            <p className="text-sm text-muted-foreground">
+                            Automatic notifications before documents expire, so nothing holds up the file.
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-start gap-1.5 md:gap-2">
+                          <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="font-semibold text-foreground text-sm">Unified Messaging & Automated Follow-Ups</p>
+                            <p className="text-sm text-muted-foreground">
+                            Every conversation and update are stored in a single unified communication hub and intelligent follow-ups.
                             </p>
                           </div>
                         </div>
                         </div>
-                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
-                          <Badge variant="secondary" className="bg-green-100 text-green-700">
+                            <div className="flex gap-1.5 md:gap-2 pt-0.5">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 text-sm">
                             100% visibility
                           </Badge>
-                          <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                          <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-sm">
                             Proactive
                           </Badge>
                         </div>
                       </div>
                     </div>
-                    <div className="relative w-full max-w-[680px] mx-0 lg:ml-8">
-                      <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
-                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-3 sm:p-4">
+                        <div className="relative w-full max-w-[680px] mx-0 lg:ml-8 order-1 lg:order-2">
+                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
+                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50 aspect-video">
                           <div className="absolute inset-0 bg-slate-100 flex items-center justify-center">
                             <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center pointer-events-none">
@@ -909,83 +998,33 @@ export default function TAMIPage() {
                       </div>
                     </div>
                   </div>
-                )}
-
-                {selectedPOSDemo === "communication" && (
-                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
-                    <div className="max-w-2xl relative">
-                      <div className="space-y-2 md:space-y-3">
-                        <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-2 text-xs">
-                            <MessageSquare className="w-3 h-3 mr-1.5" />
-                            Unified Communication Hub
-                          </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-2">In-App Chat, Email & SMS</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-2 md:mb-3">
-                            Borrowers and loan officers communicate seamlessly through in-app messaging, email, or SMS
-                            with automated reminders for missing documents.
-                          </p>
-                        </div>
-                        <div className="space-y-1.5 md:space-y-2">
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">Multi-Channel Messaging</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">In-app, email, and SMS all synchronized</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">Automated Reminders</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">
-                              Smart follow-ups for VOE, appraisal, missing docs
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-2 md:gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm md:text-base">Central Inbox</p>
-                            <p className="text-xs md:text-sm text-muted-foreground">All communication history in one place</p>
-                          </div>
-                        </div>
-                        </div>
-                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
-                          <Badge variant="secondary" className="bg-green-100 text-green-700">
-                            40-50% fewer calls
-                          </Badge>
-                          <Badge variant="secondary" className="bg-blue-100 text-blue-700">
-                            Unified
-                          </Badge>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="relative w-full max-w-[680px] mx-0 lg:ml-8">
-                      <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
-                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-3 sm:p-4">
-                        <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50 aspect-video">
-                          <div className="absolute inset-0 bg-slate-100 flex items-center justify-center">
-                            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center pointer-events-none">
-                              <Play className="w-12 h-12 text-white opacity-90 drop-shadow-lg transition-transform duration-300 group-hover:scale-110" />
-                            </div>
-                            <span className="relative z-10 text-slate-700 font-semibold text-center">
-                              [Communication Hub Video Demo]
-                            </span>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
-                )}
+                </div>
               </CardContent>
             </Card>
+
+            {/* Navigation Arrows - Positioned outside Card to avoid covering content */}
+            <button
+              onClick={() => setPosCarouselIndex((prev) => (prev === 0 ? 3 : prev - 1))}
+              className="absolute left-2 md:-left-4 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/5 backdrop-blur-sm shadow-lg border border-slate-200/5 hover:bg-white/60 hover:opacity-100 hover:shadow-xl transition-all flex items-center justify-center text-slate-700 hover:text-blue-600"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+            </button>
+            <button
+              onClick={() => setPosCarouselIndex((prev) => (prev === 3 ? 0 : prev + 1))}
+              className="absolute right-2 md:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/5 backdrop-blur-sm shadow-lg border border-slate-200/5 hover:bg-white/60 hover:opacity-100 hover:shadow-xl transition-all flex items-center justify-center text-slate-700 hover:text-blue-600"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+            </button>
           </div>
         </div>
       </section>
 
       {/* TAMI Loan Processor */}
-      <section className="relative bg-white overflow-hidden py-3 md:py-4 flex items-center min-h-screen">
+      <section id="tami-loan-processor" className="relative bg-white overflow-hidden py-3 md:py-4 flex items-center min-h-[93vh] md:h-[93vh]">
         <div className="container mx-auto px-4 md:px-6 w-full relative">
           <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center w-full">
             <div className="max-w-2xl relative">
@@ -999,9 +1038,7 @@ export default function TAMIPage() {
               </h2>
 
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed mt-3 md:mt-4">
-                Intelligent Document Processing that accelerates mortgage closing from{" "}
-                <span className="font-semibold text-slate-900">weeks to days</span> with G.S.E.
-                compliance.
+              Intelligent document processing that transforms every file into fast, accurate decisions — delivering AI-driven loan processing with full GSE compliance, unmatched cost efficiency, and turn times in days, not weeks.
               </p>
 
               <div className="flex flex-wrap gap-3 pt-2 mt-4">
@@ -1059,279 +1096,356 @@ export default function TAMIPage() {
       </section>
 
       {/* See TAMI In Action */}
-      <section className="relative bg-slate-100 overflow-hidden py-2 md:py-3 min-h-screen flex items-center mt-8 md:mt-12">
+      <section className="relative bg-slate-100 overflow-hidden py-1 md:py-2 min-h-[93vh] md:h-[93vh] flex items-center mt-4 md:mt-6">
         <div className="container mx-auto px-4 md:px-6 w-full relative">
-          <div className="text-center mb-2 md:mb-3 w-full">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-0.5">See TAMI-<span className="text-blue-600">Processor In Action</span></h2>
+          <div className="text-center mb-1 md:mb-2 w-full">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-0.5">See TAMI-<span className="text-blue-600">Processor In Action</span></h2>
             <p className="text-xs md:text-sm text-slate-600 leading-relaxed max-w-3xl mx-auto">
               Experience real-time intelligent automation across every mortgage workflow
             </p>
           </div>
 
-          {/* Interactive Demo Tabs */}
-          <div className="w-full mb-2 md:mb-3">
-            <div className="flex flex-nowrap md:flex-wrap justify-start md:justify-center gap-2 md:gap-3 mb-2 md:mb-3 p-2 bg-slate-100 rounded-2xl mx-auto overflow-x-auto">
-              <Button
-                variant="ghost"
-                size="lg"
-                onClick={() => setSelectedDemo("document")}
-                className={`text-sm h-10 px-5 rounded-xl transition-colors min-w-[160px] shrink-0 ${
-                  selectedDemo === "document"
-                    ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
-                }`}
+          {/* Processor Active Tab Heading */}
+          <div className="w-full mb-1 md:mb-2">
+            <div className="text-center">
+              <div 
+                className="inline-flex items-center gap-1.5 md:gap-2 px-4 md:px-6 py-2 md:py-2.5 bg-blue-600 text-white rounded-xl shadow-lg"
+                onMouseEnter={() => setIsProcessorCarouselHovered(true)}
+                onMouseLeave={() => setIsProcessorCarouselHovered(false)}
               >
-                <FileCheck className="w-4 h-4 mr-2" />
-                Document Processing
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                onClick={() => setSelectedDemo("analysis")}
-                className={`text-sm h-10 px-5 rounded-xl transition-colors min-w-[160px] shrink-0 ${
-                  selectedDemo === "analysis"
-                    ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
-                }`}
-              >
-                <TrendingUp className="w-4 h-4 mr-2" />
-                Smart Analysis
-              </Button>
-              <Button
-                variant="ghost"
-                size="lg"
-                onClick={() => setSelectedDemo("dashboard")}
-                className={`text-sm h-10 px-5 rounded-xl transition-colors min-w-[160px] shrink-0 ${
-                  selectedDemo === "dashboard"
-                    ? "bg-blue-600 text-white shadow-lg hover:bg-blue-700"
-                    : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
-                }`}
-              >
-                <Shield className="w-4 h-4 mr-2" />
-                Live Dashboard
-              </Button>
+                {processorCarouselIndex === 0 && (
+                  <>
+                    <FileCheck className="w-4 h-4 md:w-5 md:h-5" />
+                    <h3 className="text-sm md:text-base font-semibold">Document Processing</h3>
+                  </>
+                )}
+                {processorCarouselIndex === 1 && (
+                  <>
+                    <TrendingUp className="w-4 h-4 md:w-5 md:h-5" />
+                    <h3 className="text-sm md:text-base font-semibold">Smart Analysis</h3>
+                  </>
+                )}
+                {processorCarouselIndex === 2 && (
+                  <>
+                    <Shield className="w-4 h-4 md:w-5 md:h-5" />
+                    <h3 className="text-sm md:text-base font-semibold">Live Dashboard</h3>
+                  </>
+                )}
+              </div>
+            </div>
             </div>
 
-            {/* Demo Content */}
-            <Card className="border-2 shadow-2xl overflow-visible rounded-2xl w-full">
+          {/* Processor Carousel */}
+          <div className="w-full mb-1 md:mb-2 relative">
+            <Card className="border-2 shadow-2xl overflow-hidden rounded-2xl relative">
               <CardContent className="p-0">
-                {selectedDemo === "document" && (
-                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
-                    <div className="max-w-2xl relative">
-                      <div className="space-y-2 md:space-y-2.5">
+                {/* Carousel Container */}
+                <div 
+                  className="relative overflow-hidden cursor-grab active:cursor-grabbing"
+                  onTouchStart={(e) => {
+                    processorCarouselTouchStart.current = e.touches[0].clientX
+                  }}
+                  onTouchMove={(e) => {
+                    processorCarouselTouchEnd.current = e.touches[0].clientX
+                  }}
+                  onTouchEnd={() => {
+                    if (!processorCarouselTouchStart.current || !processorCarouselTouchEnd.current) return
+                    const distance = processorCarouselTouchStart.current - processorCarouselTouchEnd.current
+                    const minSwipeDistance = 50
+
+                    if (distance > minSwipeDistance) {
+                      // Swipe left - next slide
+                      setProcessorCarouselIndex((prev) => (prev === 2 ? 0 : prev + 1))
+                    } else if (distance < -minSwipeDistance) {
+                      // Swipe right - previous slide
+                      setProcessorCarouselIndex((prev) => (prev === 0 ? 2 : prev - 1))
+                    }
+
+                    processorCarouselTouchStart.current = null
+                    processorCarouselTouchEnd.current = null
+                  }}
+                  onMouseDown={(e) => {
+                    processorCarouselMouseStart.current = e.clientX
+                    e.preventDefault()
+                  }}
+                  onMouseMove={(e) => {
+                    if (processorCarouselMouseStart.current !== null) {
+                      processorCarouselMouseEnd.current = e.clientX
+                    }
+                  }}
+                  onMouseUp={() => {
+                    if (!processorCarouselMouseStart.current || !processorCarouselMouseEnd.current) {
+                      processorCarouselMouseStart.current = null
+                      processorCarouselMouseEnd.current = null
+                      return
+                    }
+                    const distance = processorCarouselMouseStart.current - processorCarouselMouseEnd.current
+                    const minSwipeDistance = 50
+
+                    if (distance > minSwipeDistance) {
+                      // Swipe left - next slide
+                      setProcessorCarouselIndex((prev) => (prev === 2 ? 0 : prev + 1))
+                    } else if (distance < -minSwipeDistance) {
+                      // Swipe right - previous slide
+                      setProcessorCarouselIndex((prev) => (prev === 0 ? 2 : prev - 1))
+                    }
+
+                    processorCarouselMouseStart.current = null
+                    processorCarouselMouseEnd.current = null
+                  }}
+                  onMouseEnter={() => {
+                    setIsProcessorCarouselHovered(true)
+                  }}
+                  onMouseLeave={() => {
+                    // Reset on mouse leave to prevent stuck states
+                    processorCarouselMouseStart.current = null
+                    processorCarouselMouseEnd.current = null
+                    setIsProcessorCarouselHovered(false)
+                  }}
+                >
+                  {/* Carousel Slides */}
+                  <div 
+                    className="flex transition-transform duration-[400ms] ease-out"
+                    style={{ transform: `translateX(-${processorCarouselIndex * 100}%)` }}
+                  >
+                    {/* Slide 1: Document Processing */}
+                    <div className="w-full flex-shrink-0">
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-4 md:gap-6 items-start w-full p-2 md:p-3">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                      <div className="space-y-1.5 md:space-y-2">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-1.5 text-xs">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 md:mb-1 text-xs">
                             <FileCheck className="w-3 h-3 mr-1.5" />
                             Intelligent Document Processing
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-1.5">Automate Document Review</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-1.5 md:mb-2">
+                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5 md:mb-1">Automate Document Review</h3>
+                          <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-1 md:mb-1.5">
                             Upload any loan document and watch TAMI instantly extract, verify, and analyze critical
                             information with 99.9% accuracy.
                           </p>
                         </div>
-                        <div className="space-y-1.5 md:space-y-2">
-                          <div className="flex items-start gap-2 md:gap-2.5">
-                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="space-y-1 md:space-y-1.5">
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-sm md:text-base">Auto-Classification</p>
-                              <p className="text-xs md:text-sm text-muted-foreground">
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Auto-Classification</p>
+                              <p className="text-xs text-muted-foreground">
                                 Automatically identifies document types and extracts key data
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-2.5">
-                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-sm md:text-base">Risk Highlighting</p>
-                              <p className="text-xs md:text-sm text-muted-foreground">
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Risk Highlighting</p>
+                              <p className="text-xs text-muted-foreground">
                                 Flags potential compliance issues and missing information
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-2.5">
-                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-sm md:text-base">Zero Manual Entry</p>
-                              <p className="text-xs md:text-sm text-muted-foreground">
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Zero Manual Entry</p>
+                              <p className="text-xs text-muted-foreground">
                                 Eliminates data entry errors and saves hours per loan
                               </p>
                             </div>
                           </div>
                         </div>
-                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
-                          <Badge variant="secondary" className="bg-green-100 text-green-700">
+                        <div className="flex gap-1.5 md:gap-2 pt-1 md:pt-1.5">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 text-xs">
                             75% faster
                           </Badge>
-                          <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                          <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-xs">
                             Error-free
                           </Badge>
                         </div>
                       </div>
                     </div>
-                    <div className="relative w-full max-w-[680px] mx-0 lg:ml-8">
-                      <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
-                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-3 sm:p-4">
+                        <div className="relative w-full max-w-[680px] mx-0 lg:ml-8 order-1 lg:order-2">
+                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
+                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50">
                           <img
                             src="/document-processing-dashboard-with-ai-analysis.jpg"
                             alt="Document Processing Interface"
-                            className="w-full h-auto max-h-[400px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            className="w-full h-auto max-h-[320px] md:max-h-[380px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                           />
                         </div>
                       </div>
                     </div>
                   </div>
-                )}
+                    </div>
 
-                {selectedDemo === "analysis" && (
-                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
-                    <div className="max-w-2xl relative">
-                      <div className="space-y-2 md:space-y-2.5">
+                    {/* Slide 2: Smart Analysis */}
+                    <div className="w-full flex-shrink-0">
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-4 md:gap-6 items-start w-full p-2 md:p-3">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                      <div className="space-y-1.5 md:space-y-2">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-1.5 text-xs">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 md:mb-1 text-xs">
                             <TrendingUp className="w-3 h-3 mr-1.5" />
                             AI-Powered Income Analysis
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-1.5">Business Income Intelligence</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-1.5 md:mb-2">
+                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5 md:mb-1">Business Income Intelligence</h3>
+                          <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-1 md:mb-1.5">
                             Automated cash flow analysis for all entity types with real-time Fannie Mae compliance
                             calculations.
                           </p>
                         </div>
-                        <div className="space-y-1.5 md:space-y-2">
-                          <div className="flex items-start gap-2 md:gap-2.5">
-                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="space-y-1 md:space-y-1.5">
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-sm md:text-base">Multi-Entity Support</p>
-                              <p className="text-xs md:text-sm text-muted-foreground">
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Multi-Entity Support</p>
+                              <p className="text-xs text-muted-foreground">
                                 C-Corp, S-Corp, LLC, Sole Prop, Partnership—all automated
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-2.5">
-                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-sm md:text-base">Cash Flow Breakdown</p>
-                              <p className="text-xs md:text-sm text-muted-foreground">
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Cash Flow Breakdown</p>
+                              <p className="text-xs text-muted-foreground">
                                 Year-by-year analysis with anomaly detection
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-2.5">
-                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-sm md:text-base">Fannie Mae Compliant</p>
-                              <p className="text-xs md:text-sm text-muted-foreground">
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Fannie Mae Compliant</p>
+                              <p className="text-xs text-muted-foreground">
                                 Real-time guideline compliance with instant calculations
                               </p>
                             </div>
                           </div>
                         </div>
-                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
-                          <Badge variant="secondary" className="bg-green-100 text-green-700">
+                        <div className="flex gap-1.5 md:gap-2 pt-1 md:pt-1.5">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 text-xs">
                             10x faster
                           </Badge>
-                          <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                          <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-xs">
                             99.9% accurate
                           </Badge>
                         </div>
                       </div>
                     </div>
-                    <div className="relative w-full max-w-[680px] mx-0 lg:ml-8">
-                      <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
-                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-3 sm:p-4">
+                        <div className="relative w-full max-w-[680px] mx-0 lg:ml-8 order-1 lg:order-2">
+                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
+                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50">
                           <img
                             src="/financial-analysis-dashboard.png"
                             alt="Income Analysis Interface"
-                            className="w-full h-auto max-h-[400px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            className="w-full h-auto max-h-[320px] md:max-h-[380px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                           />
                         </div>
                       </div>
                     </div>
                   </div>
-                )}
+                    </div>
 
-                {selectedDemo === "dashboard" && (
-                  <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start w-full p-3 md:p-4">
-                    <div className="max-w-2xl relative">
-                      <div className="space-y-2 md:space-y-2.5">
+                    {/* Slide 3: Live Dashboard */}
+                    <div className="w-full flex-shrink-0">
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-4 md:gap-6 items-start w-full p-2 md:p-3">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1">
+                      <div className="space-y-1.5 md:space-y-2">
                         <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-1 md:mb-1.5 text-xs">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 md:mb-1 text-xs">
                             <Shield className="w-3 h-3 mr-1.5" />
                             Real-Time Risk Monitoring
                           </Badge>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-1 md:mb-1.5">Live Compliance Dashboard</h3>
-                          <p className="text-base md:text-lg lg:text-xl text-slate-600 leading-relaxed mb-1.5 md:mb-2">
+                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5 md:mb-1">Live Compliance Dashboard</h3>
+                          <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-1 md:mb-1.5">
                             Monitor all loans in real-time with instant alerts for compliance issues, credit risks, and
                             required actions.
                           </p>
                         </div>
-                        <div className="space-y-1.5 md:space-y-2">
-                          <div className="flex items-start gap-2 md:gap-2.5">
-                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div className="space-y-1 md:space-y-1.5">
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-sm md:text-base">24/7 Monitoring</p>
-                              <p className="text-xs md:text-sm text-muted-foreground">
+                              <p className="font-semibold text-foreground text-xs md:text-sm">24/7 Monitoring</p>
+                              <p className="text-xs text-muted-foreground">
                                 Continuous risk assessment across your entire pipeline
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-2.5">
-                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-sm md:text-base">Instant Alerts</p>
-                              <p className="text-xs md:text-sm text-muted-foreground">
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Instant Alerts</p>
+                              <p className="text-xs text-muted-foreground">
                                 Proactive notifications for compliance and credit concerns
                               </p>
                             </div>
                           </div>
-                          <div className="flex items-start gap-2 md:gap-2.5">
-                            <CheckCircle2 className="w-4 h-4 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-sm md:text-base">Dynamic Eligibility</p>
-                              <p className="text-xs md:text-sm text-muted-foreground">
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Dynamic Eligibility</p>
+                              <p className="text-xs text-muted-foreground">
                                 Real-time qualification status as documents are uploaded
                               </p>
                             </div>
                           </div>
                         </div>
-                        <div className="flex gap-2 md:gap-3 pt-1.5 md:pt-2">
-                          <Badge variant="secondary" className="bg-green-100 text-green-700">
+                        <div className="flex gap-1.5 md:gap-2 pt-1 md:pt-1.5">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 text-xs">
                             Proactive
                           </Badge>
-                          <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                          <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-xs">
                             100% compliant
                           </Badge>
                         </div>
                       </div>
                     </div>
-                    <div className="relative w-full max-w-[680px] mx-0 lg:ml-8">
-                      <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
-                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-3 sm:p-4">
+                        <div className="relative w-full max-w-[680px] mx-0 lg:ml-8 order-1 lg:order-2">
+                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
+                      <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
                         <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50">
                           <img
                             src="/compliance-dashboard-with-risk-monitoring-and-aler.jpg"
                             alt="Live Dashboard Interface"
-                            className="w-full h-auto max-h-[400px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            className="w-full h-auto max-h-[320px] md:max-h-[380px] object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                           />
                         </div>
                       </div>
                     </div>
                   </div>
-                )}
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
+
+            {/* Navigation Arrows - Positioned outside Card to avoid covering content */}
+            <button
+              onClick={() => setProcessorCarouselIndex((prev) => (prev === 0 ? 2 : prev - 1))}
+              className="absolute left-2 md:-left-4 lg:-left-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/5 backdrop-blur-sm shadow-lg border border-slate-200/5 hover:bg-white/60 hover:opacity-100 hover:shadow-xl transition-all flex items-center justify-center text-slate-700 hover:text-blue-600"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+            </button>
+            <button
+              onClick={() => setProcessorCarouselIndex((prev) => (prev === 2 ? 0 : prev + 1))}
+              className="absolute right-2 md:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/5 backdrop-blur-sm shadow-lg border border-slate-200/5 hover:bg-white/60 hover:opacity-100 hover:shadow-xl transition-all flex items-center justify-center text-slate-700 hover:text-blue-600"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+            </button>
           </div>
 
         </div>
       </section>
 
       {/* Integrations and Built For Sections - Combined on one screen */}
-      <section className="relative min-h-screen md:h-screen flex flex-col overflow-hidden">
+      <section className="relative min-h-[93vh] md:h-[93vh] flex flex-col overflow-hidden">
         {/* Integrations Section */}
-        <div className="flex-1 bg-white flex items-center min-h-0 overflow-y-auto">
+        <div className="flex-[0_0_30%] bg-white flex items-center min-h-0 overflow-y-auto">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full py-4 md:py-6">
             <div className="mb-3 md:mb-4">
               <div className="mb-2 md:mb-3 flex items-center justify-between">
@@ -1414,7 +1528,7 @@ export default function TAMIPage() {
         </div>
 
         {/* Built For Forward Thinking Lending institutions Section */}
-        <div className="flex-1 bg-slate-100 flex items-center min-h-0 overflow-hidden pb-8 md:pb-0">
+        <div className="flex-[0_0_70%] bg-slate-100 flex items-center min-h-0 overflow-hidden pb-8 md:pb-0">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full py-4 md:py-6">
             <div className="text-center mb-4 md:mb-6 max-w-5xl mx-auto px-4 sm:px-2">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2 md:mb-3 leading-tight break-words md:whitespace-nowrap">
@@ -1473,9 +1587,9 @@ export default function TAMIPage() {
         </div>
       </section>
 
-      <section className="relative min-h-screen md:h-screen flex flex-col overflow-hidden mt-0 md:mt-0">
+      <section className="relative min-h-[93vh] md:h-[93vh] flex flex-col overflow-hidden mt-0 md:mt-0">
         {/* Trusted by Industry Experts - Top Half */}
-        <div className="min-h-[50vh] md:h-1/2 flex items-center bg-white text-slate-900 overflow-hidden py-4 md:py-0">
+        <div className="flex-[0_0_70%] flex items-center bg-white text-slate-900 overflow-hidden py-4 md:py-0">
           <div className="container mx-auto px-4 md:px-6 w-full py-1">
             <div className="text-center mb-2 max-w-3xl mx-auto">
               <Badge className="bg-blue-50 text-blue-700 border-blue-100 mb-1 px-2 py-0.5 text-xs">Customer Success</Badge>
@@ -1526,7 +1640,7 @@ export default function TAMIPage() {
         </div>
 
         {/* Move from Manual Work to Intelligent Automation - Bottom Half */}
-        <div className="min-h-[50vh] md:h-1/2 flex items-center bg-gradient-to-br from-blue-600 to-cyan-600 text-white overflow-hidden py-4 md:py-0">
+        <div className="flex-[0_0_30%] flex items-center bg-gradient-to-br from-blue-600 to-cyan-600 text-white overflow-hidden py-4 md:py-0">
           <div className="container mx-auto px-4 md:px-6 text-center w-full py-1">
             <div className="max-w-4xl mx-auto space-y-1 md:space-y-1.5">
               <h2 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold tracking-tight">
@@ -1558,7 +1672,7 @@ export default function TAMIPage() {
 
       <footer className="bg-slate-900 text-white py-16">
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-5 gap-12">
+          <div className="grid md:grid-cols-6 gap-12">
             <div className="md:col-span-2">
               <div className="flex items-center gap-0 mb-4">
                 <div className="">
@@ -1575,27 +1689,23 @@ export default function TAMIPage() {
                 </span>
               </div>
               <p className="text-slate-400 leading-relaxed mb-6">
-                Transforming mortgage processing with intelligent AI automation.
+                Revolutionizing document processing with intelligent agentic AI automation, including advanced AI review and search. Proactively flagging compliance and operational risks based on document changes to ensure robust governance and efficiency.
               </p>
-              <p className="text-sm text-slate-500">© 2025 ThinkAct. All rights reserved.</p>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Platform</h4>
-              <ul className="space-y-3 text-slate-400">
+              <h4 className="text-lg font-bold text-white mb-4 border-l-2 border-blue-400 pl-2">
+                Platform
+              </h4>
+              <ul className="space-y-3 text-slate-400 md:ml-2">
                 <li>
-                  <Link href="/" className="hover:text-white transition-colors">
-                    Features
+                  <Link href="/#tami-pos" className="hover:text-white transition-colors">
+                    POS
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" className="hover:text-white transition-colors">
-                    Integrations
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/" className="hover:text-white transition-colors">
-                    Security
+                  <Link href="/#tami-loan-processor" className="hover:text-white transition-colors">
+                    Loan Processor
                   </Link>
                 </li>
                 <li>
@@ -1607,55 +1717,69 @@ export default function TAMIPage() {
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-3 text-slate-400">
+              <h4 className="text-lg font-bold text-white mb-4 border-l-2 border-blue-400 pl-2">
+                Company
+              </h4>
+              <ul className="space-y-3 text-slate-400 md:ml-2">
                 <li>
-                  <Link href="/" className="hover:text-white transition-colors">
-                    About
+                  <Link href="/about-us" className="hover:text-white transition-colors">
+                    About Us
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" className="hover:text-white transition-colors">
+                  <Link href="/careers" className="hover:text-white transition-colors">
                     Careers
                   </Link>
                 </li>
                 <li>
-                  <Link href="/" className="hover:text-white transition-colors">
+                  <Link href="/blog" className="hover:text-white transition-colors">
                     Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/" className="hover:text-white transition-colors">
-                    Contact
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-semibold mb-4">Resources</h4>
-              <ul className="space-y-3 text-slate-400">
-                <li>
-                  <Link href="/" className="hover:text-white transition-colors">
-                    Documentation
-                  </Link>
+              <h4 className="text-lg font-bold text-white mb-4 border-l-2 border-blue-400 pl-2">
+                Contact Us
+              </h4>
+              <ul className="space-y-3 md:ml-2">
+                <li className="flex items-center space-x-3">
+                  <FaMapMarkerAlt
+                    size={18}
+                    className="shrink-0 text-slate-400"
+                  />
+                  <p className="text-slate-400 hover:text-white transition">
+                    New Jersey, USA
+                  </p>
                 </li>
-                <li>
-                  <Link href="/" className="hover:text-white transition-colors">
-                    Help Center
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/" className="hover:text-white transition-colors">
-                    Case Studies
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/" className="hover:text-white transition-colors">
-                    Webinars
-                  </Link>
+                <li className="flex items-center space-x-3">
+                  <FaEnvelope size={18} className="shrink-0 text-slate-400" />
+                  <a
+                    href="mailto:hello@thinkact.ai"
+                    className="text-slate-400 hover:text-white transition"
+                  >
+                    hello@thinkact.ai
+                  </a>
                 </li>
               </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="bg-slate-800 py-4 text-slate-300 mt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center container mx-auto px-6">
+            <div className="text-sm">
+              © {new Date().getFullYear()} ThinkAct. All Rights Reserved.
+            </div>
+            <div className="flex space-x-6 text-sm mt-2 md:mt-0">
+              <Link href="/privacy-policy" className="hover:text-white hover:underline">
+                Privacy Policy
+              </Link>
+              <Link href="/terms-conditions" className="hover:text-white hover:underline">
+                Terms of Services
+              </Link>
             </div>
           </div>
         </div>
