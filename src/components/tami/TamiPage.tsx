@@ -704,7 +704,7 @@ export default function TAMIPage() {
 
       {/* TAMI-POS in Action Section */}
       <section className="relative bg-slate-100 overflow-x-hidden py-2 md:py-3 flex items-center min-h-[93vh] md:h-[93vh] mt-4 md:mt-6">
-        <div className="container mx-auto px-4 md:px-6 w-full relative max-w-full overflow-x-hidden">
+        <div className="container mx-auto px-4 md:px-6 w-full relative">
           <div className="text-center mb-2 md:mb-3 w-full mt-1 md:mt-3">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-1 md:mb-1.5">TAMI-<span className="text-blue-600">POS in Action</span></h2>
           </div>
