@@ -223,9 +223,14 @@ const Navbar: React.FC = () => {
             if (element) {
               element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+            // Update hash in URL
+            window.history.pushState(null, '', `#${hash}`);
+            setCurrentHash(`#${hash}`);
           }, 500);
         } else {
-          // Already on platform page, just scroll
+          // Already on platform page, update hash and scroll
+          window.history.pushState(null, '', `#${hash}`);
+          setCurrentHash(`#${hash}`);
           const element = document.getElementById(hash);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -241,9 +246,14 @@ const Navbar: React.FC = () => {
             if (element) {
               element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+            // Update hash in URL
+            window.history.pushState(null, '', `#${hash}`);
+            setCurrentHash(`#${hash}`);
           }, 500);
         } else {
-          // Already on home page, just scroll
+          // Already on home page, update hash and scroll
+          window.history.pushState(null, '', `#${hash}`);
+          setCurrentHash(`#${hash}`);
           const element = document.getElementById(hash);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -251,6 +261,16 @@ const Navbar: React.FC = () => {
         }
       }
       handleMenuClose();
+    }
+  };
+
+  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
+    if (pathname === '/') {
+      e.preventDefault();
+      // Clear hash and scroll to top
+      window.history.pushState(null, '', '/');
+      setCurrentHash('');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -420,9 +440,9 @@ const Navbar: React.FC = () => {
                     {item.path && item.path.includes('#') ? (
                       <a
                         href={item.path}
-                        className={`flex items-center transition-colors duration-200 cursor-pointer ${
+                        className={`flex items-center transition-colors duration-200 cursor-pointer relative pb-1 ${
                           active 
-                            ? 'text-blue-600 font-medium' 
+                            ? 'text-blue-600 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-blue-600' 
                             : 'hover:text-zinc-900'
                         }`}
                         onClick={(e) => {
@@ -442,14 +462,16 @@ const Navbar: React.FC = () => {
                     ) : (
                       <Link 
                         href={item.path || '#'} 
-                        className={`flex items-center transition-colors duration-200 ${
+                        className={`flex items-center transition-colors duration-200 relative pb-1 ${
                           active 
-                            ? 'text-blue-600 font-medium' 
+                            ? 'text-blue-600 font-medium after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-blue-600' 
                             : 'hover:text-zinc-900'
                         }`}
                         onClick={(e) => {
                           if (item.hasDropdown && !item.path) {
                             e.preventDefault();
+                          } else if (item.path === '/') {
+                            handleHomeClick(e);
                           }
                         }}
                       >
@@ -535,9 +557,9 @@ const Navbar: React.FC = () => {
                       handleSmoothScroll(e, item.path);
                       handleMenuClose();
                     }}
-                    className={`block py-3 border-b border-zinc-200 transition-colors duration-200 cursor-pointer ${
+                    className={`block py-3 border-b border-zinc-200 transition-colors duration-200 cursor-pointer relative ${
                       active 
-                        ? 'text-blue-600 font-medium' 
+                        ? 'text-blue-600 font-medium after:absolute after:bottom-0 after:left-0 after:w-20 after:h-px after:bg-blue-600' 
                         : 'hover:text-blue-600'
                     }`}
                   >
@@ -547,10 +569,15 @@ const Navbar: React.FC = () => {
                   <Link
                     key={item.name}
                     href={item.path}
-                    onClick={handleMenuClose}
-                    className={`block py-3 border-b border-zinc-200 transition-colors duration-200 ${
+                    onClick={(e) => {
+                      if (item.path === '/') {
+                        handleHomeClick(e);
+                      }
+                      handleMenuClose();
+                    }}
+                    className={`block py-3 border-b border-zinc-200 transition-colors duration-200 relative ${
                       active 
-                        ? 'text-blue-600 font-medium' 
+                        ? 'text-blue-600 font-medium after:absolute after:bottom-0 after:left-0 after:w-20 after:h-px after:bg-blue-600' 
                         : 'hover:text-blue-600'
                     }`}
                   >

@@ -703,8 +703,8 @@ export default function TAMIPage() {
       </section>
 
       {/* TAMI-POS in Action Section */}
-      <section className="relative bg-slate-100 overflow-hidden py-2 md:py-3 flex items-center min-h-[93vh] md:h-[93vh] mt-4 md:mt-6">
-        <div className="container mx-auto px-4 md:px-6 w-full relative">
+      <section className="relative bg-slate-100 overflow-x-hidden py-2 md:py-3 flex items-center min-h-[93vh] md:h-[93vh] mt-4 md:mt-6">
+        <div className="container mx-auto px-4 md:px-6 w-full relative max-w-full overflow-x-hidden">
           <div className="text-center mb-2 md:mb-3 w-full mt-1 md:mt-3">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-1 md:mb-1.5">TAMI-<span className="text-blue-600">POS in Action</span></h2>
           </div>
@@ -713,26 +713,26 @@ export default function TAMIPage() {
           <div className="w-full mb-4 md:mb-5">
             <div className="text-center">
               <div 
-                className="inline-flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-blue-600 text-white rounded-xl shadow-lg"
+                className="inline-flex flex-wrap items-center justify-center gap-1.5 md:gap-2 px-4 md:px-4 py-1.5 md:py-2 bg-blue-600 text-white rounded-xl shadow-lg w-[95%] sm:w-auto mx-auto"
                 onMouseEnter={() => setIsPosCarouselHovered(true)}
                 onMouseLeave={() => setIsPosCarouselHovered(false)}
               >
                 {posCarouselIndex === 0 && (
                   <>
-                    <Upload className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                    <h3 className="text-xs md:text-sm font-semibold">Smart Assistant</h3>
+                    <Upload className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0" />
+                    <h3 className="text-xs md:text-sm font-semibold whitespace-normal text-center">Smart Assistant</h3>
                   </>
                 )}
                 {posCarouselIndex === 1 && (
                   <>
-                    <FileCheck className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                    <h3 className="text-xs md:text-sm font-semibold">Auto-Classification</h3>
+                    <FileCheck className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0" />
+                    <h3 className="text-xs md:text-sm font-semibold whitespace-normal text-center">Auto-Classification</h3>
                   </>
                 )}
                 {posCarouselIndex === 2 && (
                   <>
-                    <Eye className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                    <h3 className="text-xs md:text-sm font-semibold">Real-Time Loan Visibility</h3>
+                    <Eye className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0" />
+                    <h3 className="text-[10px] sm:text-xs md:text-sm font-semibold whitespace-normal text-center">Real-Time Loan Visibility</h3>
                   </>
                 )}
               </div>
@@ -740,12 +740,13 @@ export default function TAMIPage() {
             </div>
 
           {/* POS Carousel */}
-          <div className="w-full mb-2 md:mb-3 relative">
-            <Card className="border-2 shadow-2xl overflow-hidden rounded-2xl relative">
-              <CardContent className="p-0">
+          <div className="w-full mb-2 md:mb-3 relative overflow-x-hidden" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+            <Card className="border-2 shadow-2xl overflow-hidden rounded-2xl relative w-full" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+              <CardContent className="p-0 overflow-x-hidden" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
                 {/* Carousel Container */}
                 <div 
-                  className="relative overflow-hidden cursor-grab active:cursor-grabbing"
+                  className="relative overflow-hidden cursor-grab active:cursor-grabbing w-full"
+                  style={{ maxWidth: '100%', boxSizing: 'border-box' }}
                   onTouchStart={(e) => {
                     posCarouselTouchStart.current = e.touches[0].clientX
                     // Pause auto-scroll on touch
@@ -838,58 +839,57 @@ export default function TAMIPage() {
                 >
                   {/* Carousel Slides */}
                   <div 
-                    className="flex transition-transform duration-[400ms] ease-out"
-                    style={{ transform: `translateX(-${posCarouselIndex * 100}%)` }}
+                    className="flex transition-transform duration-[400ms] ease-out w-full"
+                    style={{ transform: `translateX(-${posCarouselIndex * 100}%)`, maxWidth: '100%', boxSizing: 'border-box' }}
                   >
                     {/* Slide 1: Smart Upload */}
-                    <div className="w-full flex-shrink-0">
-                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-2 md:p-3">
-                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
-                          <div className="space-y-0.5 md:space-y-1">
-                        <div>
-                              <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm">
-                            <Upload className="w-3 h-3 mr-1" />
-                            Secure Document Upload
+                    <div className="w-full flex-shrink-0 min-w-0" style={{ maxWidth: '100%' }}>
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-1 md:p-3 min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+                        <div className="w-full max-w-full lg:max-w-2xl relative order-2 lg:order-1 ml-0 md:ml-8 px-1 md:px-0 overflow-hidden min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+                          <div className="space-y-0.5 md:space-y-1 w-full min-w-0">
+                        <div className="w-full min-w-0">
+                              <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm break-words w-full sm:w-auto inline-flex flex-wrap">
+                            <Upload className="w-3 h-3 mr-1 flex-shrink-0" />
+                            <span className="break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Secure Document Upload, Multi Lingual Support, Auto Fill</span>
                           </Badge>
-                              <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5">Upload Any Document Format</h3>
-                              <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-0.5 md:mb-1">
-                            Borrowers can securely upload PDFs, images, Word docs, and more. TAMI handles all formats with
-                            enterprise-grade security.
+                              <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5 break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Guided 1003 Filing — Auto-Filled, Multilingual, Effortless.</h3>
+                              <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-0.5 md:mb-1 break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                              TAMI&apos;s guided assistant walks borrowers through every step with clear explanations, multilingual support, and instant auto-fill validation—delivering a faster, more accurate application.
                           </p>
                         </div>
-                            <div className="space-y-0.5">
-                        <div className="flex items-start gap-1.5 md:gap-2">
+                            <div className="space-y-0.5 w-full min-w-0">
+                        <div className="flex items-start gap-1.5 md:gap-2 w-full min-w-0">
                           <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm">Multi-Format Support</p>
-                            <p className="text-sm text-muted-foreground">
-                              PDF, JPG, PNG, DOCX, HEIC - all processed instantly
+                          <div className="min-w-0 flex-1 w-full">
+                            <p className="font-semibold text-foreground text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Intelligent Guided Assistant</p>
+                            <p className="text-sm text-muted-foreground break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                            Real-time guidance through every 1003 section—improving accuracy and reducing back-and-forth with processors.
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-1.5 md:gap-2">
+                        <div className="flex items-start gap-1.5 md:gap-2 w-full min-w-0">
                           <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm">Drag & Drop Interface</p>
-                            <p className="text-sm text-muted-foreground">Intuitive upload experience on any device</p>
+                          <div className="min-w-0 flex-1 w-full">
+                            <p className="font-semibold text-foreground text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Multilingual Support</p>
+                            <p className="text-sm text-muted-foreground break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Spanish, Arabic , Hindi, and more—borrowers complete the application in the language they&apos;re most comfortable with.</p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-1.5 md:gap-2">
+                        <div className="flex items-start gap-1.5 md:gap-2 w-full min-w-0">
                           <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm">Bank-Level Security</p>
-                            <p className="text-sm text-muted-foreground">End-to-end encryption for all documents</p>
+                          <div className="min-w-0 flex-1 w-full">
+                            <p className="font-semibold text-foreground text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Auto-Fill & Validation</p>
+                            <p className="text-sm text-muted-foreground break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>TAMI auto-extracts data from uploaded documents to prefill and validate fields instantly, lowering errors and avoiding conditions.</p>
                           </div>
                         </div>
                       </div>
-                            <div className="flex gap-1.5 md:gap-2 pt-0.5">
+                            {/* <div className="flex gap-1.5 md:gap-2 pt-0.5">
                           <Badge variant="secondary" className="bg-green-100 text-green-700 text-sm">
                             Secure
                           </Badge>
                           <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-sm">
                             Any Format
                           </Badge>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                         <div className="relative w-full max-w-[680px] mx-0 lg:ml-8 order-1 lg:order-2">
@@ -911,54 +911,53 @@ export default function TAMIPage() {
                     </div>
 
                     {/* Slide 2: Auto-Classification */}
-                    <div className="w-full flex-shrink-0">
-                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-2 md:p-3">
-                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
-                          <div className="space-y-0.5 md:space-y-1">
-                        <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm">
-                            <FileCheck className="w-3 h-3 mr-1" />
-                            Intelligent Auto-Classification
+                    <div className="w-full flex-shrink-0 min-w-0" style={{ maxWidth: '100%' }}>
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-1 md:p-3 min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+                        <div className="w-full max-w-full lg:max-w-2xl relative order-2 lg:order-1 ml-0 md:ml-8 px-1 md:px-0 overflow-hidden min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+                          <div className="space-y-0.5 md:space-y-1 w-full min-w-0">
+                        <div className="w-full min-w-0">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm break-words w-full sm:w-auto inline-flex flex-wrap">
+                            <FileCheck className="w-3 h-3 mr-1 flex-shrink-0" />
+                            <span className="break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Intelligent Auto-Classification</span>
                           </Badge>
-                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5">AI Identifies Every Document Type</h3>
-                          <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-0.5 md:mb-1">
-                            TAMI automatically identifies W-2s, 1040s, 1065s, paystubs, bank statements, and more with
-                            99.9% accuracy using OCR and IDP.
+                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5 break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>AI Identifies Every Document Type</h3>
+                          <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-0.5 md:mb-1 break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                          TAMI automatically recognizes W-2s, 1040s, 1065s, paystubs, bank statements, and dozens of other borrower and business documents with <strong className="break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>high precision</strong>, using advanced OCR and intelligent document processing (IDP). Built to support <strong className="break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>borrowers, sole proprietors, and multi-entity corporate structures,</strong> TAMI handles even the most complex files.
                           </p>
                         </div>
-                            <div className="space-y-0.5">
-                        <div className="flex items-start gap-1.5 md:gap-2">
+                            <div className="space-y-0.5 w-full min-w-0">
+                        <div className="flex items-start gap-1.5 md:gap-2 w-full min-w-0">
                           <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm">Smart Recognition</p>
-                            <p className="text-sm text-muted-foreground">
-                              W-2, 1040, 1065, paystubs, bank statements auto-tagged
+                          <div className="min-w-0 flex-1 w-full">
+                            <p className="font-semibold text-foreground text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Smart Recognition</p>
+                            <p className="text-sm text-muted-foreground break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                            Automatically classifies W-2, 1040, 1065, paystubs, bank statements, corporate returns, and multi-entity packages.
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-1.5 md:gap-2">
+                        <div className="flex items-start gap-1.5 md:gap-2 w-full min-w-0">
                           <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm">OCR Data Extraction</p>
-                            <p className="text-sm text-muted-foreground">
-                              Key data pulled automatically from every document
+                          <div className="min-w-0 flex-1 w-full">
+                            <p className="font-semibold text-foreground text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>OCR + Intelligent Data Extraction</p>
+                            <p className="text-sm text-muted-foreground break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                            Key data points are extracted from every document instantly — even across multi-business tax returns.
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-1.5 md:gap-2">
+                        <div className="flex items-start gap-1.5 md:gap-2 w-full min-w-0">
                           <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm">Zero Manual Sorting</p>
-                            <p className="text-sm text-muted-foreground">Documents organized instantly upon upload</p>
+                          <div className="min-w-0 flex-1 w-full">
+                            <p className="font-semibold text-foreground text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Zero Manual Sorting</p>
+                            <p className="text-sm text-muted-foreground break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Documents are auto-organized and tagged the moment they&apos;re uploaded.</p>
                           </div>
                         </div>
                         </div>
-                            <div className="flex gap-1.5 md:gap-2 pt-0.5">
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 text-sm">
-                            99.9% accurate
+                            <div className="flex flex-wrap gap-1.5 md:gap-2 pt-0.5 w-full">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                          High-Precision Automation 
                           </Badge>
-                          <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-sm">
-                            Instant
+                          <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                          Instant Classification
                           </Badge>
                         </div>
                       </div>
@@ -982,62 +981,62 @@ export default function TAMIPage() {
                     </div>
 
                     {/* Slide 3: Real-Time Tracking */}
-                    <div className="w-full flex-shrink-0">
-                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-2 md:p-3">
-                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
-                          <div className="space-y-0.5 md:space-y-1">
-                        <div>
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm">
-                            <Eye className="w-3 h-3 mr-1" />
-                            Real-Time Status Tracking
+                    <div className="w-full flex-shrink-0 min-w-0" style={{ maxWidth: '100%' }}>
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-1 md:p-3 min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+                        <div className="w-full max-w-full lg:max-w-2xl relative order-2 lg:order-1 ml-0 md:ml-8 px-1 md:px-0 overflow-hidden min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+                          <div className="space-y-0.5 md:space-y-1 w-full min-w-0">
+                        <div className="w-full min-w-0">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm break-words w-full sm:w-auto inline-flex flex-wrap">
+                            <Eye className="w-3 h-3 mr-1 flex-shrink-0" />
+                            <span className="break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Real-Time Status Tracking</span>
                           </Badge>
-                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5">Complete Visibility & Seamless Communication — For Everyone</h3>
-                          <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-0.5 md:mb-1">
+                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5 break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Complete Visibility & Seamless Communication — For Everyone</h3>
+                          <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-0.5 md:mb-1 break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                           Borrowers, loan officers, and processors get a single, real-time view of the loan file with smart checklists, progress tracking, expiration alerts, and unified messaging—all in one dashboard.
                           </p>
                         </div>
-                            <div className="space-y-0.5">
-                        <div className="flex items-start gap-1.5 md:gap-2">
+                            <div className="space-y-0.5 w-full min-w-0">
+                        <div className="flex items-start gap-1.5 md:gap-2 w-full min-w-0">
                           <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm">Live Progress Bar</p>
-                            <p className="text-sm text-muted-foreground">
+                          <div className="min-w-0 flex-1 w-full">
+                            <p className="font-semibold text-foreground text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Live Progress Bar</p>
+                            <p className="text-sm text-muted-foreground break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                               Borrowers see exactly where they are in the process.
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-1.5 md:gap-2">
+                        <div className="flex items-start gap-1.5 md:gap-2 w-full min-w-0">
                           <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm">Missing Document Tracker</p>
-                            <p className="text-sm text-muted-foreground">Profile-based smart checklist that updates automatically as documents are submitted.
+                          <div className="min-w-0 flex-1 w-full">
+                            <p className="font-semibold text-foreground text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Missing Document Tracker</p>
+                            <p className="text-sm text-muted-foreground break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Profile-based smart checklist that updates automatically as documents are submitted.
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-1.5 md:gap-2">
+                        <div className="flex items-start gap-1.5 md:gap-2 w-full min-w-0">
                           <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm">Expiration/Past Due Alerts</p>
-                            <p className="text-sm text-muted-foreground">
+                          <div className="min-w-0 flex-1 w-full">
+                            <p className="font-semibold text-foreground text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Expiration/Past Due Alerts</p>
+                            <p className="text-sm text-muted-foreground break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                             Automatic notifications before documents expire, so nothing holds up the file.
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-start gap-1.5 md:gap-2">
+                        <div className="flex items-start gap-1.5 md:gap-2 w-full min-w-0">
                           <CheckCircle2 className="w-3 h-3 md:w-3.5 md:h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-semibold text-foreground text-sm">Unified Messaging & Automated Follow-Ups</p>
-                            <p className="text-sm text-muted-foreground">
+                          <div className="min-w-0 flex-1 w-full">
+                            <p className="font-semibold text-foreground text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>Unified Messaging & Automated Follow-Ups</p>
+                            <p className="text-sm text-muted-foreground break-words w-full" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                             Every conversation and update are stored in a single unified communication hub and intelligent follow-ups.
                             </p>
                           </div>
                         </div>
                         </div>
-                            <div className="flex gap-1.5 md:gap-2 pt-0.5">
-                          <Badge variant="secondary" className="bg-green-100 text-green-700 text-sm">
+                            <div className="flex flex-wrap gap-1.5 md:gap-2 pt-0.5 w-full">
+                          <Badge variant="secondary" className="bg-green-100 text-green-700 text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                             100% visibility
                           </Badge>
-                          <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-sm">
+                          <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-sm break-words" style={{ wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                             Proactive
                           </Badge>
                         </div>
@@ -1157,9 +1156,9 @@ export default function TAMIPage() {
       </section>
 
       {/* See TAMI In Action */}
-      <section className="relative bg-slate-100 overflow-hidden py-1 md:py-2 min-h-[93vh] md:h-[93vh] flex items-center mt-4 md:mt-6">
-        <div className="container mx-auto px-4 md:px-6 w-full relative">
-          <div className="text-center mb-1 md:mb-2 w-full">
+      <section className="relative bg-slate-100 overflow-y-auto py-1 md:py-2 min-h-[93vh] md:min-h-[93vh] flex flex-col mt-4 md:mt-6">
+        <div className="container mx-auto px-4 md:px-6 w-full relative flex-1 flex flex-col">
+          <div className="text-center mb-1 md:mb-2 w-full flex-shrink-0">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight mb-0.5">See TAMI-<span className="text-blue-600">Processor In Action</span></h2>
             <p className="text-xs md:text-sm text-slate-600 leading-relaxed max-w-3xl mx-auto">
               Experience real-time intelligent automation across every mortgage workflow
@@ -1177,13 +1176,13 @@ export default function TAMIPage() {
                 {processorCarouselIndex === 0 && (
                   <>
                     <FileCheck className="w-4 h-4 md:w-5 md:h-5" />
-                    <h3 className="text-sm md:text-base font-semibold">Document Processing</h3>
+                    <h3 className="text-sm md:text-base font-semibold">Intelligent Document Processing</h3>
                   </>
                 )}
                 {processorCarouselIndex === 1 && (
                   <>
                     <TrendingUp className="w-4 h-4 md:w-5 md:h-5" />
-                    <h3 className="text-sm md:text-base font-semibold">Smart Analysis</h3>
+                    <h3 className="text-sm md:text-base font-semibold">Smart Income Analysis</h3>
                   </>
                 )}
                 {processorCarouselIndex === 2 && (
@@ -1197,7 +1196,7 @@ export default function TAMIPage() {
             </div>
 
           {/* Processor Carousel */}
-          <div className="w-full mb-1 md:mb-2 relative">
+          <div className="w-full mb-1 md:mb-2 relative flex-1 min-h-0">
             <Card className="border-2 shadow-2xl overflow-hidden rounded-2xl relative">
               <CardContent className="p-0">
                 {/* Carousel Container */}
@@ -1310,8 +1309,7 @@ export default function TAMIPage() {
                           </Badge>
                           <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5 md:mb-1">Automate Document Review</h3>
                           <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-1 md:mb-1.5">
-                            Upload any loan document and watch TAMI instantly extract, verify, and analyze critical
-                            information with 99.9% accuracy.
+                          Upload any loan document and watch TAMI extract, verify, and analyze income, assets, debts, identity, legal, and property data—instantly.
                           </p>
                         </div>
                         <div className="space-y-1 md:space-y-1.5">
@@ -1320,7 +1318,7 @@ export default function TAMIPage() {
                             <div>
                               <p className="font-semibold text-foreground text-xs md:text-sm">Auto-Classification</p>
                               <p className="text-xs text-muted-foreground">
-                                Automatically identifies document types and extracts key data
+                              Recognizes financial, legal, identity, business, and property documents (including appraisals).
                               </p>
                             </div>
                           </div>
@@ -1329,7 +1327,7 @@ export default function TAMIPage() {
                             <div>
                               <p className="font-semibold text-foreground text-xs md:text-sm">Risk Highlighting</p>
                               <p className="text-xs text-muted-foreground">
-                                Flags potential compliance issues and missing information
+                              Flags compliance issues, inconsistencies, missing info, and appraisal red flags.
                               </p>
                             </div>
                           </div>
@@ -1338,8 +1336,50 @@ export default function TAMIPage() {
                             <div>
                               <p className="font-semibold text-foreground text-xs md:text-sm">Zero Manual Entry</p>
                               <p className="text-xs text-muted-foreground">
-                                Eliminates data entry errors and saves hours per loan
+                              Eliminates hand-keying and saves hours per loan. 
                               </p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Income, Asset & Debt Extraction</p>
+                              <p className="text-xs text-muted-foreground">
+                              Auto-captures balances, liabilities, DTI, reserves, and cash-flow from tax returns, paystubs, bank statements, and credit reports. 
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">KYC & Identity Verification</p>
+                              <p className="text-xs text-muted-foreground">
+                              Extracts IDs, passports, SSN cards, and more.
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Immigration & Legal Docs</p>
+                              <p className="text-xs text-muted-foreground">
+                              Reads visas, EADs, I-94s, divorce decrees, child-support/alimony orders, etc.
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Appraisal Intelligence</p>
+                              <p className="text-xs text-muted-foreground">
+                              Extracts key property data, comps, adjustments, and risk signals directly from appraisal reports.
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">And Much More…</p>
                             </div>
                           </div>
                         </div>
@@ -1381,47 +1421,55 @@ export default function TAMIPage() {
                             <TrendingUp className="w-3 h-3 mr-1.5" />
                             AI-Powered Income Analysis
                           </Badge>
-                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5 md:mb-1">Business Income Intelligence</h3>
+                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5 md:mb-1">AI Income Intelligence</h3>
                           <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-1 md:mb-1.5">
-                            Automated cash flow analysis for all entity types with real-time Fannie Mae compliance
-                            calculations.
+                          Automated analysis for every income type—from simple W-2 earnings to complex multi-entity business returns—powered by real-time, GSE-compliant cash-flow calculations.
                           </p>
                         </div>
                         <div className="space-y-1 md:space-y-1.5">
                           <div className="flex items-start gap-1.5 md:gap-2">
                             <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-xs md:text-sm">Multi-Entity Support</p>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">All Income Types Supported</p>
                               <p className="text-xs text-muted-foreground">
-                                C-Corp, S-Corp, LLC, Sole Prop, Partnership—all automated
+                              Salary, hourly, commission, bonus, overtime, rental, retirement, alimony, child support—every income stream calculated automatically.
                               </p>
                             </div>
                           </div>
                           <div className="flex items-start gap-1.5 md:gap-2">
                             <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-xs md:text-sm">Cash Flow Breakdown</p>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">All Business Entities Covered</p>
                               <p className="text-xs text-muted-foreground">
-                                Year-by-year analysis with anomaly detection
+                              C-Corp, S-Corp, LLC, Sole Prop, Partnerships—full automation of 1120, 1120S, 1065, Schedule C, K-1s, P&L, Balance Sheets, and passthrough cash-flow analysis.
                               </p>
                             </div>
                           </div>
                           <div className="flex items-start gap-1.5 md:gap-2">
                             <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-xs md:text-sm">Fannie Mae Compliant</p>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Automated Cash-Flow Intelligence</p>
                               <p className="text-xs text-muted-foreground">
-                                Real-time guideline compliance with instant calculations
+                              Multi-year trend analysis, anomaly detection, add-backs, expense adjustments, liquidity insights, and business cash-flow evaluation.
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-start gap-1.5 md:gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <div>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">GSE Mac Compliant</p>
+                              <p className="text-xs text-muted-foreground">
+                              Instant guideline-mapped calculations with real-time eligibility and consistency checks.
                               </p>
                             </div>
                           </div>
                         </div>
                         <div className="flex gap-1.5 md:gap-2 pt-1 md:pt-1.5">
                           <Badge variant="secondary" className="bg-green-100 text-green-700 text-xs">
-                            10x faster
+                           3x faster
                           </Badge>
                           <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-xs">
-                            99.9% accurate
+                          High-accuracy automated calculations
                           </Badge>
                         </div>
                       </div>
@@ -1454,37 +1502,36 @@ export default function TAMIPage() {
                             <Shield className="w-3 h-3 mr-1.5" />
                             Real-Time Risk Monitoring
                           </Badge>
-                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5 md:mb-1">Live Compliance Dashboard</h3>
+                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-0.5 md:mb-1">Live Compliance, Risk & Pipeline Intelligence</h3>
                           <p className="text-sm md:text-base lg:text-lg text-slate-600 leading-relaxed mb-1 md:mb-1.5">
-                            Monitor all loans in real-time with instant alerts for compliance issues, credit risks, and
-                            required actions.
+                          Stay ahead of risk with real-time monitoring across your entire loan pipeline. TAMI provides instant alerts for compliance issues, credit risks, missing documents, and required actions—before they become bottlenecks.
                           </p>
                         </div>
                         <div className="space-y-1 md:space-y-1.5">
                           <div className="flex items-start gap-1.5 md:gap-2">
                             <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-xs md:text-sm">24/7 Monitoring</p>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">24/7 Automated Monitoring</p>
                               <p className="text-xs text-muted-foreground">
-                                Continuous risk assessment across your entire pipeline
+                              Continuous, intelligent risk assessment on every loan from intake to closing.
                               </p>
                             </div>
                           </div>
                           <div className="flex items-start gap-1.5 md:gap-2">
                             <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-xs md:text-sm">Instant Alerts</p>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Instant Compliance & Credit Alerts</p>
                               <p className="text-xs text-muted-foreground">
-                                Proactive notifications for compliance and credit concerns
+                              Proactive notifications for guideline issues, discrepancies, and emerging credit concerns.
                               </p>
                             </div>
                           </div>
                           <div className="flex items-start gap-1.5 md:gap-2">
                             <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-xs md:text-sm">Dynamic Eligibility</p>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">Dynamic Eligibility Insights</p>
                               <p className="text-xs text-muted-foreground">
-                                Real-time qualification status as documents are uploaded
+                              Real-time qualification updates as documents are uploaded and borrower data changes.
                               </p>
                             </div>
                           </div>
@@ -1494,7 +1541,10 @@ export default function TAMIPage() {
                             Proactive
                           </Badge>
                           <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-xs">
-                            100% compliant
+                          Continuously Updated 
+                          </Badge>
+                          <Badge variant="secondary" className="bg-blue-100 text-blue-700 text-xs">
+                          Compliance-Ready
                           </Badge>
                         </div>
                       </div>
@@ -1542,13 +1592,13 @@ export default function TAMIPage() {
       </section>
 
       {/* Integrations and Built For Sections - Combined on one screen */}
-      <section className="relative min-h-[93vh] md:h-[93vh] flex flex-col overflow-hidden">
+      <section className="relative flex flex-col overflow-hidden">
         {/* Integrations Section */}
-        <div className="flex-[0_0_30%] bg-white flex items-center min-h-0 overflow-hidden">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full py-4 md:py-6">
-            <div className="mb-3 md:mb-4">
-              <div className="mb-2 md:mb-3 flex items-center justify-between">
-                <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+        <div className="bg-white flex items-center min-h-0 overflow-hidden">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full py-2 md:py-3">
+            <div className="mb-1 md:mb-2">
+              <div className="mb-1 flex items-center justify-between">
+                <h2 className="text-xl md:text-2xl font-bold tracking-tight text-slate-900">
                   Integrations
                 </h2>
                 <div className="flex items-center gap-2">
@@ -1556,26 +1606,26 @@ export default function TAMIPage() {
                     variant="outline"
                     size="icon"
                     onClick={handleScrollLeft}
-                    className={`h-10 w-10 rounded-full border-slate-300 hover:bg-slate-100 transition-colors ${
+                    className={`h-8 w-8 rounded-full border-slate-300 hover:bg-slate-100 transition-colors ${
                       activeButton === 'left' ? 'bg-blue-600 border-blue-600 text-white hover:bg-blue-700' : ''
                     }`}
                   >
-                    <ChevronLeft className="h-5 w-5" />
+                    <ChevronLeft className="h-4 w-4" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={handleScrollRight}
-                    className={`h-10 w-10 rounded-full border-slate-300 hover:bg-slate-100 transition-colors ${
+                    className={`h-8 w-8 rounded-full border-slate-300 hover:bg-slate-100 transition-colors ${
                       activeButton === 'right' ? 'bg-blue-600 border-blue-600 text-white hover:bg-blue-700' : ''
                     }`}
                   >
-                    <ChevronRight className="h-5 w-5" />
+                    <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
               
-              <div className="relative overflow-hidden py-2 md:py-3">
+              <div className="relative overflow-hidden py-1 md:py-2">
                 {/* Left blur gradient */}
                 <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
                 {/* Right blur gradient */}
@@ -1599,7 +1649,7 @@ export default function TAMIPage() {
                         {[...Array(8)].map((_, i) => (
                           <div 
                             key={`${setIndex}-${i}`} 
-                            className="flex items-center justify-center h-16 md:h-20"
+                            className="flex items-center justify-center h-12 md:h-16"
                             style={{ 
                               width: '250px',
                               minWidth: '250px',
@@ -1614,7 +1664,7 @@ export default function TAMIPage() {
                               alt="MeridianLink"
                               width={200}
                               height={56}
-                              className="h-10 md:h-14 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                              className="h-8 md:h-12 w-auto opacity-80 hover:opacity-100 transition-opacity"
                               style={{ display: 'block', width: 'auto', height: 'auto' }}
                             />
                           </div>
@@ -1629,19 +1679,19 @@ export default function TAMIPage() {
         </div>
 
         {/* Built For Forward Thinking Lending institutions Section */}
-        <div className="flex-[0_0_70%] bg-slate-100 flex items-center min-h-0 overflow-hidden pb-8 md:pb-0">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full py-4 md:py-6">
-            <div className="text-center mb-4 md:mb-6 max-w-5xl mx-auto px-4 sm:px-2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2 md:mb-3 leading-tight break-words md:whitespace-nowrap">
+        <div className="bg-slate-100 flex items-center min-h-0 overflow-hidden pb-6 md:pb-4">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full py-3 md:py-4">
+            <div className="text-center mb-3 md:mb-4 max-w-5xl mx-auto px-4 sm:px-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mb-1 md:mb-2 leading-tight break-words md:whitespace-nowrap">
                 Built For <span className="text-blue-700">Forward Thinking </span><span className="text-black">Lending institutions</span>
               </h2>
-              <p className="text-sm sm:text-base text-slate-600">
+              <p className="text-xs sm:text-sm text-slate-600">
                 Empowering Mortgage Brokers, Credit Unions, Local Banks, and Underwriters to transform loan processing
                 with AI
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 max-w-6xl mx-auto">
               <Card className="border-2 hover:border-blue-600 hover:shadow-xl transition-all group">
                 <CardContent className="p-3 md:p-4 text-center">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform">

@@ -21,7 +21,7 @@ export default function TermsAndConditions() {
           <div>
             <h2 className="text-2xl font-bold mb-5">1. Introduction</h2>
             <p className="text-gray-700 leading-relaxed">
-              These Terms of Service ("Terms") govern your access to and use of the Smart AI Docs software service, including any associated websites, networks, applications, and other services provided by Smart AI Docs (collectively, the "Service"). These Terms constitute a legally binding agreement between you and Smart AI Docs (ThinkAct AI,"we," "us," or "our"). By accessing or using our Service, you acknowledge that you have read, understood, and agree to be bound by these Terms.
+              These Terms of Service ("Terms") govern your access to and use of the ThinkAct AI software service, including any associated websites, networks, applications, and other services provided by ThinkAct AI (collectively, the "Service"). These Terms constitute a legally binding agreement between you and ThinkAct AI (ThinkAct AI,"we," "us," or "our"). By accessing or using our Service, you acknowledge that you have read, understood, and agree to be bound by these Terms.
             </p>
           </div>
 
@@ -60,7 +60,7 @@ export default function TermsAndConditions() {
           <div>
             <h2 className="text-2xl font-bold mb-5">6. Service Description</h2>
             <p className="text-gray-700 leading-relaxed">
-              The Smart AI Docs Service is a SAAS that allows users to interact with our agents for specific services in the website or through mobile apps. The specific features and functionality available to you will depend on the Subscription plan you select.
+              The ThinkAct AI Service is a SAAS that allows users to interact with our agents for specific services in the website or through mobile apps. The specific features and functionality available to you will depend on the Subscription plan you select.
             </p>
           </div>
 
@@ -162,7 +162,7 @@ export default function TermsAndConditions() {
           <div>
             <h2 className="text-2xl font-bold mb-5">15. Intellectual Property</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              All content provided by Smart AI Docs, including but not limited to the Service, website, text, graphics, logos, icons, images, audio clips, digital downloads, data compilations, and software, is the property of Smart AI Docs or its content suppliers and is protected by international copyright, trademark, and other intellectual property laws. The compilation of all content on the Service is the exclusive property of Smart AI Docs and is protected by international copyright laws. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of Smart AI Docs. We grant you a limited, non-exclusive, non-transferable, revocable license to use the Service for your internal business purposes or personal use, as applicable, in accordance with these Terms. This license does not include the right to:
+              All content provided by ThinkAct AI, including but not limited to the Service, website, text, graphics, logos, icons, images, audio clips, digital downloads, data compilations, and software, is the property of ThinkAct AI or its content suppliers and is protected by international copyright, trademark, and other intellectual property laws. The compilation of all content on the Service is the exclusive property of ThinkAct AI and is protected by international copyright laws. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of ThinkAct AI. We grant you a limited, non-exclusive, non-transferable, revocable license to use the Service for your internal business purposes or personal use, as applicable, in accordance with these Terms. This license does not include the right to:
             </p>
             <ul className="list-disc pl-5 space-y-3 text-gray-700">
               <li>Modify or copy the Service or any content therein</li>
@@ -204,7 +204,7 @@ export default function TermsAndConditions() {
           <div>
             <h2 className="text-2xl font-bold mb-5">20. Indemnification</h2>
             <p className="text-gray-700 leading-relaxed">
-              You agree to indemnify, defend, and hold harmless Smart AI Docs, its officers, directors, employees, agents, and affiliates from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys' fees) that such parties may incur as a result of or arising from your violation of these Terms, your User Data, or your use of the Service. Smart AI Docs reserves the right to assume the exclusive defense and control of any matter otherwise subject to indemnification by you, in which event you will cooperate with Smart AI Docs in asserting any available defenses.
+              You agree to indemnify, defend, and hold harmless ThinkAct AI, its officers, directors, employees, agents, and affiliates from and against any and all claims, liabilities, damages, losses, costs, expenses, or fees (including reasonable attorneys' fees) that such parties may incur as a result of or arising from your violation of these Terms, your User Data, or your use of the Service. ThinkAct AI reserves the right to assume the exclusive defense and control of any matter otherwise subject to indemnification by you, in which event you will cooperate with ThinkAct AI in asserting any available defenses.
             </p>
           </div>
 
@@ -225,21 +225,21 @@ export default function TermsAndConditions() {
           <div>
             <h2 className="text-2xl font-bold mb-5">23. Entire Agreement</h2>
             <p className="text-gray-700 leading-relaxed">
-              These Terms, including our Privacy Policy and any other agreements referenced herein, constitute the entire agreement between you and Smart AI Docs regarding your use of our Service and supersede any prior agreements between you and Smart AI Docs relating to your use of our Service.
+              These Terms, including our Privacy Policy and any other agreements referenced herein, constitute the entire agreement between you and ThinkAct AI regarding your use of our Service and supersede any prior agreements between you and ThinkAct AI relating to your use of our Service.
             </p>
           </div>
 
           <div>
             <h2 className="text-2xl font-bold mb-5">24. Waiver and Severability</h2>
             <p className="text-gray-700 leading-relaxed">
-              The failure of Smart AI Docs to enforce any right or provision of these Terms will not be deemed a waiver of such right or provision. If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions will remain in full force and effect.
+              The failure of ThinkAct AI to enforce any right or provision of these Terms will not be deemed a waiver of such right or provision. If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions will remain in full force and effect.
             </p>
           </div>
 
           <div>
             <h2 className="text-2xl font-bold mb-5">25. Assignment</h2>
             <p className="text-gray-700 leading-relaxed">
-              These Terms, and any rights and licenses granted hereunder, may not be transferred or assigned by you without the prior written consent of Smart AI Docs, but may be assigned by Smart AI Docs without restriction.
+              These Terms, and any rights and licenses granted hereunder, may not be transferred or assigned by you without the prior written consent of ThinkAct AI, but may be assigned by ThinkAct AI without restriction.
             </p>
           </div>
 

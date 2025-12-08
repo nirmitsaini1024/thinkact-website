@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
           <div>
             <h2 className="text-2xl font-bold mb-5">1. INTRODUCTION</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              This Privacy Policy describes how Smart AI Docs (“ThinkAct AI”"we," "us," or "our") collects, uses, and discloses your personal information when you use our software as a service (the "Service").
+              This Privacy Policy describes how ThinkAct AI (“ThinkAct AI”"we," "us," "TAMI," or "our") collects, uses, and discloses your personal information when you use our software as a service (the "Service").
             </p>
             <p className="text-gray-700 leading-relaxed mb-4">
               We are committed to protecting your personal information and your right to privacy. When you visit our software as a service and use our products, you trust us with your personal information. We take your privacy very seriously. In this Privacy Policy, we seek to explain to you in the clearest way possible what information we collect, how we use it, and what rights you have in relation to it.
@@ -32,9 +32,9 @@ export default function PrivacyPolicy() {
             </p>
             <ul className="list-disc pl-5 space-y-3 text-gray-700">
               <li><strong>"Personal Information"</strong> means any information that identifies, relates to, describes, or is capable of being associated with, or could reasonably be linked, directly or indirectly, with a particular consumer or household.</li>
-              <li><strong>"Service"</strong> refers to the Smart AI Docs software as a service platform.</li>
+              <li><strong>"Service or TAMI"</strong> refers to the ThinkAct AI software as a service platform.</li>
               <li><strong>"User," "you," and "your"</strong> refers to the individual or entity accessing or using the Service.</li>
-              <li><strong>"Company"</strong> refers to Smart AI Docs.</li>
+              <li><strong>"Company"</strong> refers to ThinkAct AI.</li>
             </ul>
           </div>
 

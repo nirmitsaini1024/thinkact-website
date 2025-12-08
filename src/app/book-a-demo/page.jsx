@@ -178,7 +178,7 @@ export default function BookADemo() {
           <div className="bg-white rounded-xl shadow-md p-6 md:p-8 border border-gray-100">
             <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
               <div className="h-8 w-2 bg-blue-600 rounded mr-3"></div>
-              Schedule Your Demo
+              Book Your Demo
             </h2>
             <p className="text-gray-600 mb-6">
               Please fill out the form below to schedule a demo. Our team will reach out to confirm your appointment.
@@ -413,7 +413,7 @@ export default function BookADemo() {
                     : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-700'
                 }`}
               >
-                {isSubmitting ? 'Submitting...' : 'Schedule Demo'}
+                {isSubmitting ? 'Submitting...' : 'Book Demo'}
               </button>
               
               <p className="text-sm text-gray-500 text-center mt-4">
