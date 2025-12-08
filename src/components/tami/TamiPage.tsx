@@ -703,7 +703,7 @@ export default function TAMIPage() {
       </section>
 
       {/* TAMI-POS in Action Section */}
-      <section className="relative bg-slate-100 overflow-x-hidden py-2 md:py-3 flex items-center min-h-[93vh] md:h-[93vh] mt-4 md:mt-6">
+      <section className="relative bg-slate-100 py-2 md:py-3 flex items-center min-h-[93vh] md:h-[93vh] mt-4 md:mt-6">
         <div className="container mx-auto px-4 md:px-6 w-full relative">
           <div className="text-center mb-2 md:mb-3 w-full mt-1 md:mt-3">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-1 md:mb-1.5">TAMI-<span className="text-blue-600">POS in Action</span></h2>
@@ -740,13 +740,12 @@ export default function TAMIPage() {
             </div>
 
           {/* POS Carousel */}
-          <div className="w-full mb-2 md:mb-3 relative overflow-x-hidden" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
-            <Card className="border-2 shadow-2xl overflow-hidden rounded-2xl relative w-full" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
-              <CardContent className="p-0 overflow-x-hidden" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+          <div className="w-full mb-1 md:mb-2 relative">
+            <Card className="border-2 shadow-2xl overflow-hidden rounded-2xl relative">
+              <CardContent className="p-0">
                 {/* Carousel Container */}
                 <div 
-                  className="relative overflow-hidden cursor-grab active:cursor-grabbing w-full"
-                  style={{ maxWidth: '100%', boxSizing: 'border-box' }}
+                  className="relative overflow-hidden cursor-grab active:cursor-grabbing"
                   onTouchStart={(e) => {
                     posCarouselTouchStart.current = e.touches[0].clientX
                     // Pause auto-scroll on touch
@@ -839,13 +838,13 @@ export default function TAMIPage() {
                 >
                   {/* Carousel Slides */}
                   <div 
-                    className="flex transition-transform duration-[400ms] ease-out w-full"
-                    style={{ transform: `translateX(-${posCarouselIndex * 100}%)`, maxWidth: '100%', boxSizing: 'border-box' }}
+                    className="flex transition-transform duration-[400ms] ease-out"
+                    style={{ transform: `translateX(-${posCarouselIndex * 100}%)` }}
                   >
                     {/* Slide 1: Smart Upload */}
-                    <div className="w-full flex-shrink-0 min-w-0" style={{ maxWidth: '100%' }}>
-                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-1 md:p-3 min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
-                        <div className="w-full max-w-full lg:max-w-2xl relative order-2 lg:order-1 ml-0 md:ml-8 px-1 md:px-0 overflow-hidden min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+                    <div className="w-full flex-shrink-0">
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-4 md:gap-6 items-start w-full p-2 md:p-3">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
                           <div className="space-y-0.5 md:space-y-1 w-full min-w-0">
                         <div className="w-full min-w-0">
                               <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm break-words w-full sm:w-auto inline-flex flex-wrap">
@@ -911,9 +910,9 @@ export default function TAMIPage() {
                     </div>
 
                     {/* Slide 2: Auto-Classification */}
-                    <div className="w-full flex-shrink-0 min-w-0" style={{ maxWidth: '100%' }}>
-                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-1 md:p-3 min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
-                        <div className="w-full max-w-full lg:max-w-2xl relative order-2 lg:order-1 ml-0 md:ml-8 px-1 md:px-0 overflow-hidden min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+                    <div className="w-full flex-shrink-0">
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-4 md:gap-6 items-start w-full p-2 md:p-3">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
                           <div className="space-y-0.5 md:space-y-1 w-full min-w-0">
                         <div className="w-full min-w-0">
                           <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm break-words w-full sm:w-auto inline-flex flex-wrap">
@@ -981,9 +980,9 @@ export default function TAMIPage() {
                     </div>
 
                     {/* Slide 3: Real-Time Tracking */}
-                    <div className="w-full flex-shrink-0 min-w-0" style={{ maxWidth: '100%' }}>
-                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-2 md:gap-3 items-start w-full p-1 md:p-3 min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
-                        <div className="w-full max-w-full lg:max-w-2xl relative order-2 lg:order-1 ml-0 md:ml-8 px-1 md:px-0 overflow-hidden min-w-0" style={{ maxWidth: '100%', boxSizing: 'border-box' }}>
+                    <div className="w-full flex-shrink-0">
+                      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-4 md:gap-6 items-start w-full p-2 md:p-3">
+                        <div className="max-w-2xl relative w-full order-2 lg:order-1 ml-4 md:ml-8">
                           <div className="space-y-0.5 md:space-y-1 w-full min-w-0">
                         <div className="w-full min-w-0">
                           <Badge variant="secondary" className="bg-green-100 text-green-700 mb-0.5 text-sm break-words w-full sm:w-auto inline-flex flex-wrap">
