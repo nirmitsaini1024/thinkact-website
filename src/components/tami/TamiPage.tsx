@@ -221,7 +221,7 @@ export default function TAMIPage() {
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-3 pt-2 justify-center -ml-60 ">
+              <div className="flex flex-wrap gap-3 pt-2 justify-center md:-ml-60">
                 <Link href="/book-a-demo">
                 <Button size="lg" className="h-12 px-7 text-base bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200">
                   Book a demo
