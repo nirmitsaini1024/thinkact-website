@@ -11,8 +11,8 @@ import {
   Lock,
   TrendingUp,
   Brain,
+  Bot,
   CheckCircle2,
-  Users,
   Star,
   BookOpen,
   Eye,
@@ -21,8 +21,6 @@ import {
   Upload,
   Play,
   Zap,
-  Briefcase,
-  Building2,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react"
@@ -190,19 +188,28 @@ export default function TAMIPage() {
             backgroundImage: 'linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)'
           }}
         ></div>
+        
         <div className="container mx-auto px-4 md:px-6 relative flex flex-col justify-center w-full py-16 md:py-24">
           <div className="grid lg:grid-cols-2 gap-10 xl:gap-14 items-center w-full">
             <div className="max-w-2xl relative ml-4 md:ml-8">
-              <Badge className="bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 px-3 py-1 text-sm sm:text-base w-fit absolute top-0 mt-4 sm:mt-0">
+
+              <Badge className="bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100 px-3 py-1 text-sm sm:text-base w-fit mb-4">
                 <Brain className="w-4 h-4 mr-2" />
                 AI-Powered Mortgage Intelligence Platform
               </Badge>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight pt-16 sm:pt-8">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight">
                 <span className="block">
-                  <span className="text-black">TAMI</span>
-                  <span className="text-blue-600"> B2P </span>
-                  <span className="text-black">Hub</span>
+                  <span className="flex items-center gap-2 md:gap-3 flex-wrap">
+                    <img 
+                      src="/assets/Tami_logo.jpg" 
+                      alt="TAMI" 
+                      className="h-[1.7rem] w-auto sm:h-[2.2rem] md:h-[2.8rem] lg:h-[3.4rem] flex-shrink-0" 
+                    />
+                    <span className="text-black">TAMI</span>
+                    <span className="text-blue-600">B2P</span>
+                    <span className="text-black">Hub</span>
+                  </span>
                 </span>
                 <span className="block mt-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
                   The <span id="btp-width" className="inline-block">Borrower-to-Processor</span> Platform
@@ -222,11 +229,13 @@ export default function TAMIPage() {
               </div>
 
               <div className="flex flex-wrap gap-3 pt-2 justify-center md:-ml-60">
-                <Link href="/book-a-demo">
-                <Button size="lg" className="h-12 px-7 text-base bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200">
+                <Button 
+                  size="lg" 
+                  className="h-12 px-7 text-base bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200"
+                  onClick={() => window.open('https://koalendar.com/e/meet-with-sales-thinkactai', 'BookADemo', 'width=800,height=600,scrollbars=yes,resizable=yes')}
+                >
                   Book a demo
                 </Button>
-                </Link>
               </div>
 
             </div>
@@ -672,14 +681,22 @@ export default function TAMIPage() {
               <Badge className="bg-green-100 text-green-700 w-fit px-3 py-1 text-sm mb-4 sm:mb-5">TAMI POS</Badge>
               <div className="space-y-5">
                 <h2 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight">
-                  TAMI-<span className="text-blue-600">POS</span>
+                  <span className="flex items-center gap-2 md:gap-3 flex-wrap">
+                    <img 
+                      src="/assets/Tami_logo.jpg" 
+                      alt="TAMI" 
+                      className="h-[2.2rem] w-auto sm:h-[2.8rem] lg:h-[3.4rem] flex-shrink-0" 
+                    />
+                    <span>TAMI</span>
+                    <span className="text-blue-600">-POS</span>
+                  </span>
                 </h2>
                 <p className="text-2xl md:text-3xl lg:text-4xl text-slate-900 font-semibold leading-tight">
                   The <span className="text-blue-600">AI POS Agent</span> That Completes Applications For You
                 </p>
                 <p className="text-lg md:text-xl lg:text-2xl text-slate-600 leading-relaxed">
-                  Upload your documents — <span className="text-blue-600">TAMI</span> does the rest with <span className="text-blue-600">intelligent automation 
-</span>and a built-in guided assistant.
+                  Upload OR Email Your Documents your documents — <span className="text-blue-600">TAMI</span> does the rest with <span className="text-blue-600">intelligent automation 
+</span> and a built-in guided assistant.
                 </p>
               </div>
             </div>
@@ -703,7 +720,7 @@ export default function TAMIPage() {
       </section>
 
       {/* TAMI-POS in Action Section */}
-      <section className="relative bg-slate-100 py-2 md:py-3 flex items-center min-h-[93vh] md:h-[93vh] mt-4 md:mt-6">
+      <section className="relative bg-slate-100 overflow-x-hidden md:overflow-visible py-2 md:py-3 flex items-center min-h-[93vh] md:h-[93vh] mt-4 md:mt-6">
         <div className="container mx-auto px-4 md:px-6 w-full relative">
           <div className="text-center mb-2 md:mb-3 w-full mt-1 md:mt-3">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-1 md:mb-1.5">TAMI-<span className="text-blue-600">POS in Action</span></h2>
@@ -719,7 +736,7 @@ export default function TAMIPage() {
               >
                 {posCarouselIndex === 0 && (
                   <>
-                    <Upload className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0" />
+                    <Bot className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0" />
                     <h3 className="text-xs md:text-sm font-semibold whitespace-normal text-center">Smart Assistant</h3>
                   </>
                 )}
@@ -740,7 +757,7 @@ export default function TAMIPage() {
             </div>
 
           {/* POS Carousel */}
-          <div className="w-full mb-1 md:mb-2 relative">
+          <div className="w-full mb-1 md:mb-2 relative overflow-x-hidden md:overflow-visible">
             <Card className="border-2 shadow-2xl overflow-hidden rounded-2xl relative">
               <CardContent className="p-0">
                 {/* Carousel Container */}
@@ -964,15 +981,15 @@ export default function TAMIPage() {
                         <div className="relative w-full max-w-[680px] mx-0 lg:ml-8 order-1 lg:order-2">
                       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
                       <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
-                        <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50 aspect-video">
-                          <div className="absolute inset-0 bg-slate-100 flex items-center justify-center">
-                            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center pointer-events-none">
-                              <Play className="w-12 h-12 text-white opacity-90 drop-shadow-lg transition-transform duration-300 group-hover:scale-110" />
-                            </div>
-                            <span className="relative z-10 text-slate-700 font-semibold text-center">
-                              [Auto-Classification Video Demo]
-                            </span>
-                          </div>
+                        <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50">
+                          <Image
+                            src="/images/Auto-Classification.jpg"
+                            alt="Auto-Classification Interface"
+                            width={1200}
+                            height={800}
+                            className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                          />
                         </div>
                       </div>
                     </div>
@@ -1044,15 +1061,15 @@ export default function TAMIPage() {
                         <div className="relative w-full max-w-[680px] mx-0 lg:ml-8 order-1 lg:order-2">
                       <div className="absolute -inset-2 bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-emerald-400/20 rounded-[36px] blur-3xl"></div>
                       <div className="relative overflow-hidden shadow-2xl border border-slate-200/60 rounded-3xl bg-gradient-to-br from-slate-50 via-blue-50/40 to-cyan-50/20 p-1.5 sm:p-2">
-                        <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50 aspect-video">
-                          <div className="absolute inset-0 bg-slate-100 flex items-center justify-center">
-                            <div className="absolute inset-0 bg-black/10 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center pointer-events-none">
-                              <Play className="w-12 h-12 text-white opacity-90 drop-shadow-lg transition-transform duration-300 group-hover:scale-110" />
-                            </div>
-                            <span className="relative z-10 text-slate-700 font-semibold text-center">
-                              [Real-Time Tracking Video Demo]
-                            </span>
-                          </div>
+                        <div className="relative group rounded-2xl overflow-hidden shadow-xl w-full bg-white border-2 border-slate-200/50">
+                          <Image
+                            src="/images/Real-Time-Loan-Visibility.jpg"
+                            alt="Real-Time Loan Visibility Interface"
+                            width={1200}
+                            height={800}
+                            className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                          />
                         </div>
                       </div>
                     </div>
@@ -1092,8 +1109,16 @@ export default function TAMIPage() {
                 AI Loan Processing Platform
               </Badge>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-slate-900 whitespace-nowrap">
-                TAMI <span className="text-blue-600">Loan Processor</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-slate-900">
+                <span className="flex items-center gap-2 md:gap-3 flex-wrap">
+                  <img 
+                    src="/assets/Tami_logo.jpg" 
+                    alt="TAMI" 
+                    className="h-[1.5rem] w-auto sm:h-[1.8rem] md:h-[2.2rem] lg:h-[2.8rem] flex-shrink-0" 
+                  />
+                  <span>TAMI</span>
+                  <span className="text-blue-600">Loan Processor</span>
+                </span>
               </h2>
 
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed mt-3 md:mt-4">
@@ -1456,7 +1481,7 @@ export default function TAMIPage() {
                           <div className="flex items-start gap-1.5 md:gap-2">
                             <CheckCircle2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-green-600 mt-0.5 flex-shrink-0" />
                             <div>
-                              <p className="font-semibold text-foreground text-xs md:text-sm">GSE Mac Compliant</p>
+                              <p className="font-semibold text-foreground text-xs md:text-sm">GSE Compliant</p>
                               <p className="text-xs text-muted-foreground">
                               Instant guideline-mapped calculations with real-time eligibility and consistency checks.
                               </p>
@@ -1693,8 +1718,14 @@ export default function TAMIPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 max-w-6xl mx-auto">
               <Card className="border-2 hover:border-blue-600 hover:shadow-xl transition-all group">
                 <CardContent className="p-3 md:p-4 text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform">
-                    <Briefcase className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform overflow-hidden">
+                    <Image 
+                      src="/images/BrokerImage.jpg" 
+                      alt="Mortgage Brokers" 
+                      width={48} 
+                      height={48} 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <h3 className="text-sm md:text-base font-bold mb-1 md:mb-2">Mortgage Brokers</h3>
                   <p className="text-xs md:text-sm text-slate-600">Close deals faster with automated processing and instant updates.</p>
@@ -1703,8 +1734,14 @@ export default function TAMIPage() {
 
               <Card className="border-2 hover:border-blue-600 hover:shadow-xl transition-all group">
                 <CardContent className="p-3 md:p-4 text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-green-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform">
-                    <Users className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-green-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform overflow-hidden">
+                    <Image 
+                      src="/images/CreditUnionImage.jpg" 
+                      alt="Credit Unions" 
+                      width={48} 
+                      height={48} 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <h3 className="text-sm md:text-base font-bold mb-1 md:mb-2">Credit Unions</h3>
                   <p className="text-xs md:text-sm text-slate-600">
@@ -1715,8 +1752,14 @@ export default function TAMIPage() {
 
               <Card className="border-2 hover:border-blue-600 hover:shadow-xl transition-all group">
                 <CardContent className="p-3 md:p-4 text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-purple-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform">
-                    <Building2 className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-purple-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform overflow-hidden">
+                    <Image 
+                      src="/images/LocalBankImage.jpg" 
+                      alt="Local Banks" 
+                      width={48} 
+                      height={48} 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <h3 className="text-sm md:text-base font-bold mb-1 md:mb-2">Local Banks</h3>
                   <p className="text-xs md:text-sm text-slate-600">Compete with enterprise-grade AI while keeping your personal touch.</p>
@@ -1725,8 +1768,14 @@ export default function TAMIPage() {
 
               <Card className="border-2 hover:border-blue-600 hover:shadow-xl transition-all group">
                 <CardContent className="p-3 md:p-4 text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-orange-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform">
-                    <Shield className="w-5 h-5 md:w-6 md:h-6 text-orange-600" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-orange-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform overflow-hidden">
+                    <Image 
+                      src="/images/UnderwriterImage.jpg" 
+                      alt="Underwriters" 
+                      width={48} 
+                      height={48} 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <h3 className="text-sm md:text-base font-bold mb-1 md:mb-2">Underwriters</h3>
                   <p className="text-xs md:text-sm text-slate-600">Make faster decisions with AI-powered risk assessment and compliance.</p>
@@ -1832,7 +1881,15 @@ export default function TAMIPage() {
                 </span>
               </div>
               <p className="text-slate-400 leading-relaxed mb-6">
-              TAMI eliminates mortgage paperwork with Intelligent Document Processing, automates underwriting, and accelerates closing from weeks to days while ensuring GSE compliance.
+                <span className="inline-flex items-center gap-1.5">
+                  <img 
+                    src="/assets/Tami_logo.jpg" 
+                    alt="TAMI" 
+                    className="h-[0.8em] w-auto flex-shrink-0 align-middle" 
+                  />
+                  <span>TAMI</span>
+                </span>
+                {' '}eliminates mortgage paperwork with Intelligent Document Processing, automates underwriting, and accelerates closing from weeks to days while ensuring GSE compliance.
               </p>
             </div>
 
@@ -1898,12 +1955,12 @@ export default function TAMIPage() {
                 </li>
                 <li className="flex items-center space-x-3">
                   <FaEnvelope size={18} className="shrink-0 text-slate-400" />
-                  <a
-                    href="mailto:hello@thinkact.ai"
+                  <Link
+                    href="/upload-email-documents"
                     className="text-slate-400 hover:text-white transition"
                   >
                     hello@thinkact.ai
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

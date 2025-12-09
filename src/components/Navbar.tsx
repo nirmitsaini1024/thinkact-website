@@ -501,12 +501,13 @@ const Navbar: React.FC = () => {
                   Sign In
                 </button>
               </Link>
-              <Link href="/book-a-demo">
-                <button className="flex items-center bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition-colors duration-200">
-                  <FaCalendarDay size={16} className="mr-2" />
-                  Book a Demo
-                </button>
-              </Link>
+              <button 
+                onClick={() => window.open('https://koalendar.com/e/meet-with-sales-thinkactai', 'BookADemo', 'width=800,height=600,scrollbars=yes,resizable=yes')}
+                className="flex items-center bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition-colors duration-200"
+              >
+                <FaCalendarDay size={16} className="mr-2" />
+                Book a Demo
+              </button>
             </div>
 
             <div className="lg:hidden flex items-center space-x-2">

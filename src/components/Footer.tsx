@@ -92,12 +92,12 @@ const Footer: FC = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <FaEnvelope size={18} className="shrink-0 text-slate-400" />
-                <a
-                  href="mailto:hello@thinkact.ai"
+                <Link
+                  href="/upload-email-documents"
                   className="text-slate-400 hover:text-white transition"
                 >
                   hello@thinkact.ai
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
