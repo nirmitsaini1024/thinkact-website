@@ -42,6 +42,15 @@ export default function TAMIPage() {
   const animationRef = useRef<number | null>(null)
   const scrollPositionRef = useRef<number>(0)
   const setWidthRef = useRef<number>(0)
+  
+  // Cloud storage marquee state
+  const [isCloudMarqueePaused, setIsCloudMarqueePaused] = useState<boolean>(false)
+  const cloudMarqueeRef = useRef<HTMLDivElement>(null)
+  const cloudMarqueeContainerRef = useRef<HTMLDivElement>(null)
+  const cloudAnimationRef = useRef<number | null>(null)
+  const cloudScrollPositionRef = useRef<number>(0)
+  const cloudSetWidthRef = useRef<number>(0)
+  const isManuallyScrollingRef = useRef<boolean>(false)
   const posCarouselTouchStart = useRef<number | null>(null)
   const posCarouselTouchEnd = useRef<number | null>(null)
   const posCarouselMouseStart = useRef<number | null>(null)
@@ -105,6 +114,102 @@ export default function TAMIPage() {
       }
     }
   }, [isMarqueePaused])
+
+  // Auto-scroll animation for cloud storage marquee
+  useEffect(() => {
+    const calculateCloudSetWidth = () => {
+      if (cloudMarqueeRef.current) {
+        const firstSet = cloudMarqueeRef.current.querySelector('[data-cloud-set="1"]') as HTMLElement
+        if (firstSet) {
+          const width = firstSet.offsetWidth || firstSet.scrollWidth
+          if (width > 0) {
+            cloudSetWidthRef.current = width
+          }
+        }
+      }
+    }
+
+    const tryCalculateCloud = () => {
+      calculateCloudSetWidth()
+      if (cloudSetWidthRef.current === 0) {
+        setTimeout(calculateCloudSetWidth, 50)
+      }
+    }
+    
+    const timeoutId1 = setTimeout(tryCalculateCloud, 100)
+    const timeoutId2 = setTimeout(tryCalculateCloud, 300)
+    window.addEventListener('resize', calculateCloudSetWidth)
+
+    const container = cloudMarqueeContainerRef.current
+    if (!container) return
+
+    // Handle manual scrolling for infinite loop
+    const handleScroll = () => {
+      if (!container || !cloudMarqueeRef.current) return
+      
+      const scrollLeft = container.scrollLeft
+      
+      // If scrolled to the end (or very close), reset to beginning seamlessly
+      if (cloudSetWidthRef.current > 0) {
+        // Check if we've scrolled past one set width (the duplicated content starts)
+        if (scrollLeft >= cloudSetWidthRef.current - 1) {
+          isManuallyScrollingRef.current = true
+          // Reset to the beginning of the first set (subtract one set width)
+          const newScrollLeft = scrollLeft - cloudSetWidthRef.current
+          // Use requestAnimationFrame to ensure smooth transition
+          requestAnimationFrame(() => {
+            if (container) {
+              container.scrollLeft = newScrollLeft
+              cloudScrollPositionRef.current = newScrollLeft
+            }
+            setTimeout(() => {
+              isManuallyScrollingRef.current = false
+            }, 100)
+          })
+        } else if (scrollLeft < 0) {
+          // Handle negative scroll (shouldn't happen, but just in case)
+          isManuallyScrollingRef.current = true
+          container.scrollLeft = 0
+          cloudScrollPositionRef.current = 0
+          setTimeout(() => {
+            isManuallyScrollingRef.current = false
+          }, 100)
+        } else {
+          // Update the scroll position ref when manually scrolling
+          cloudScrollPositionRef.current = scrollLeft
+        }
+      }
+    }
+
+    container.addEventListener('scroll', handleScroll, { passive: true })
+
+    const animate = () => {
+      if (container && !isCloudMarqueePaused && !isManuallyScrollingRef.current) {
+        cloudScrollPositionRef.current += 0.5
+        
+        // Reset to 0 when we've scrolled one full set width for seamless loop
+        if (cloudSetWidthRef.current > 0 && cloudScrollPositionRef.current >= cloudSetWidthRef.current) {
+          cloudScrollPositionRef.current = cloudScrollPositionRef.current - cloudSetWidthRef.current
+        }
+        
+        container.scrollLeft = cloudScrollPositionRef.current
+      }
+      cloudAnimationRef.current = requestAnimationFrame(animate)
+    }
+    cloudAnimationRef.current = requestAnimationFrame(animate)
+    
+    return () => {
+      clearTimeout(timeoutId1)
+      clearTimeout(timeoutId2)
+      window.removeEventListener('resize', calculateCloudSetWidth)
+      if (container) {
+        container.removeEventListener('scroll', handleScroll)
+      }
+      if (cloudAnimationRef.current) {
+        cancelAnimationFrame(cloudAnimationRef.current)
+      }
+    }
+  }, [isCloudMarqueePaused])
 
   // Autoplay for POS Carousel - advances every 5 seconds (pauses on hover or touch)
   useEffect(() => {
@@ -178,6 +283,7 @@ export default function TAMIPage() {
       setIsMarqueePaused(false)
     }, 500)
   }
+
 
   return (
     <div className="min-h-screen bg-white mb-0 pb-0">
@@ -1619,7 +1725,7 @@ export default function TAMIPage() {
       <section className="relative flex flex-col overflow-hidden">
         {/* Integrations Section */}
         <div className="bg-white flex items-center min-h-0 overflow-hidden">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full py-2 md:py-3">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full py-1.5 md:py-2">
             <div className="mb-1 md:mb-2">
               <div className="mb-1 flex items-center justify-between">
                 <h2 className="text-xl md:text-2xl font-bold tracking-tight text-slate-900">
@@ -1693,6 +1799,83 @@ export default function TAMIPage() {
                             />
                           </div>
                         ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Cloud Storage Services Marquee */}
+              <div className="relative overflow-hidden py-1 md:py-1.5">
+                {/* Left blur gradient */}
+                <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+                {/* Right blur gradient */}
+                <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+                
+                <div 
+                  ref={cloudMarqueeContainerRef}
+                  className="flex overflow-x-auto overflow-y-hidden relative z-0" 
+                  style={{ scrollbarWidth: 'thin', scrollbarColor: '#cbd5e1 #f1f5f9' }}
+                >
+                  <div 
+                    ref={cloudMarqueeRef}
+                    className="flex items-center"
+                  >
+                    {/* Duplicate sets for seamless infinite loop */}
+                    {[...Array(2)].map((_, setIndex) => (
+                      <div 
+                        key={`cloud-set-${setIndex}`} 
+                        data-cloud-set={setIndex === 0 ? "1" : undefined} 
+                        className="flex"
+                      >
+                        {[...Array(4)].flatMap((_, repeatIndex) => 
+                          [
+                            { name: 'OneDrive', src: '/images/Microsoft_Office_OneDrive_(2019–2025).svg' },
+                            { name: 'Google Drive', src: '/images/Google_Drive_icon_(2020).svg' },
+                            { name: 'Dropbox', src: '/images/dropbox-official.svg' }
+                          ].map((service, i) => (
+                            <div 
+                              key={`${setIndex}-${repeatIndex}-${i}`} 
+                              className="flex flex-col items-center justify-center h-20 md:h-24"
+                              style={{ 
+                                width: '180px',
+                                minWidth: '180px',
+                                paddingLeft: '1.5rem', 
+                                paddingRight: '1.5rem',
+                                boxSizing: 'border-box',
+                                flexShrink: 0
+                              }}
+                            >
+                              <div className="mb-1.5 flex items-center justify-center" style={{ height: '40px', width: '100%', minHeight: '32px' }}>
+                                {service.name === 'OneDrive' && (
+                                  <img
+                                    src="/images/Microsoft_Office_OneDrive_(2019–2025).svg"
+                                    alt="OneDrive"
+                                    className="h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                                    style={{ display: 'block', width: 'auto', height: 'auto', maxHeight: '28px' }}
+                                  />
+                                )}
+                                {service.name === 'Google Drive' && (
+                                  <img
+                                    src="/images/Google_Drive_icon_(2020).svg"
+                                    alt="Google Drive"
+                                    className="h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                                    style={{ display: 'block', width: 'auto', height: 'auto', maxHeight: '28px' }}
+                                  />
+                                )}
+                                {service.name === 'Dropbox' && (
+                                  <img
+                                    src="/images/dropbox-official.svg"
+                                    alt="Dropbox"
+                                    className="h-8 md:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                                    style={{ display: 'block', width: 'auto', height: 'auto' }}
+                                  />
+                                )}
+                              </div>
+                              <span className="text-xs md:text-sm font-medium text-slate-700 text-center whitespace-nowrap">{service.name}</span>
+                            </div>
+                          ))
+                        )}
                       </div>
                     ))}
                   </div>
