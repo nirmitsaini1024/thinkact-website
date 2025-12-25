@@ -50,7 +50,6 @@ export default function TAMIPage() {
   const cloudAnimationRef = useRef<number | null>(null)
   const cloudScrollPositionRef = useRef<number>(0)
   const cloudSetWidthRef = useRef<number>(0)
-  const isManuallyScrollingRef = useRef<boolean>(false)
   const posCarouselTouchStart = useRef<number | null>(null)
   const posCarouselTouchEnd = useRef<number | null>(null)
   const posCarouselMouseStart = useRef<number | null>(null)
@@ -140,59 +139,16 @@ export default function TAMIPage() {
     const timeoutId2 = setTimeout(tryCalculateCloud, 300)
     window.addEventListener('resize', calculateCloudSetWidth)
 
-    const container = cloudMarqueeContainerRef.current
-    if (!container) return
-
-    // Handle manual scrolling for infinite loop
-    const handleScroll = () => {
-      if (!container || !cloudMarqueeRef.current) return
-      
-      const scrollLeft = container.scrollLeft
-      
-      // If scrolled to the end (or very close), reset to beginning seamlessly
-      if (cloudSetWidthRef.current > 0) {
-        // Check if we've scrolled past one set width (the duplicated content starts)
-        if (scrollLeft >= cloudSetWidthRef.current - 1) {
-          isManuallyScrollingRef.current = true
-          // Reset to the beginning of the first set (subtract one set width)
-          const newScrollLeft = scrollLeft - cloudSetWidthRef.current
-          // Use requestAnimationFrame to ensure smooth transition
-          requestAnimationFrame(() => {
-            if (container) {
-              container.scrollLeft = newScrollLeft
-              cloudScrollPositionRef.current = newScrollLeft
-            }
-            setTimeout(() => {
-              isManuallyScrollingRef.current = false
-            }, 100)
-          })
-        } else if (scrollLeft < 0) {
-          // Handle negative scroll (shouldn't happen, but just in case)
-          isManuallyScrollingRef.current = true
-          container.scrollLeft = 0
-          cloudScrollPositionRef.current = 0
-          setTimeout(() => {
-            isManuallyScrollingRef.current = false
-          }, 100)
-        } else {
-          // Update the scroll position ref when manually scrolling
-          cloudScrollPositionRef.current = scrollLeft
-        }
-      }
-    }
-
-    container.addEventListener('scroll', handleScroll, { passive: true })
-
     const animate = () => {
-      if (container && !isCloudMarqueePaused && !isManuallyScrollingRef.current) {
+      if (cloudMarqueeRef.current && !isCloudMarqueePaused) {
         cloudScrollPositionRef.current += 0.5
         
         // Reset to 0 when we've scrolled one full set width for seamless loop
         if (cloudSetWidthRef.current > 0 && cloudScrollPositionRef.current >= cloudSetWidthRef.current) {
-          cloudScrollPositionRef.current = cloudScrollPositionRef.current - cloudSetWidthRef.current
+          cloudScrollPositionRef.current = 0
         }
         
-        container.scrollLeft = cloudScrollPositionRef.current
+        cloudMarqueeRef.current.style.transform = `translateX(-${cloudScrollPositionRef.current}px)`
       }
       cloudAnimationRef.current = requestAnimationFrame(animate)
     }
@@ -202,9 +158,6 @@ export default function TAMIPage() {
       clearTimeout(timeoutId1)
       clearTimeout(timeoutId2)
       window.removeEventListener('resize', calculateCloudSetWidth)
-      if (container) {
-        container.removeEventListener('scroll', handleScroll)
-      }
       if (cloudAnimationRef.current) {
         cancelAnimationFrame(cloudAnimationRef.current)
       }
@@ -1812,14 +1765,13 @@ export default function TAMIPage() {
                 {/* Right blur gradient */}
                 <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
                 
-                <div 
-                  ref={cloudMarqueeContainerRef}
-                  className="flex overflow-x-auto overflow-y-hidden relative z-0" 
-                  style={{ scrollbarWidth: 'thin', scrollbarColor: '#cbd5e1 #f1f5f9' }}
-                >
+                <div className="flex overflow-hidden relative z-0">
                   <div 
                     ref={cloudMarqueeRef}
                     className="flex items-center"
+                    style={{
+                      willChange: 'transform',
+                    }}
                   >
                     {/* Duplicate sets for seamless infinite loop */}
                     {[...Array(2)].map((_, setIndex) => (
@@ -1832,7 +1784,8 @@ export default function TAMIPage() {
                           [
                             { name: 'OneDrive', src: '/images/Microsoft_Office_OneDrive_(2019–2025).svg' },
                             { name: 'Google Drive', src: '/images/Google_Drive_icon_(2020).svg' },
-                            { name: 'Dropbox', src: '/images/dropbox-official.svg' }
+                            { name: 'Dropbox', src: '/images/dropbox-official.svg' },
+                            { name: 'Microsoft Teams', src: '/images/microsoft-teams-svgrepo-com.svg' }
                           ].map((service, i) => (
                             <div 
                               key={`${setIndex}-${repeatIndex}-${i}`} 
@@ -1871,6 +1824,14 @@ export default function TAMIPage() {
                                     style={{ display: 'block', width: 'auto', height: 'auto' }}
                                   />
                                 )}
+                                {service.name === 'Microsoft Teams' && (
+                                  <img
+                                    src="/images/microsoft-teams-svgrepo-com.svg"
+                                    alt="Microsoft Teams"
+                                    className="h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                                    style={{ display: 'block', width: 'auto', height: 'auto', maxHeight: '28px' }}
+                                  />
+                                )}
                               </div>
                               <span className="text-xs md:text-sm font-medium text-slate-700 text-center whitespace-nowrap">{service.name}</span>
                             </div>
@@ -1898,70 +1859,70 @@ export default function TAMIPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3 max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-2 max-w-6xl mx-auto">
               <Card className="border-2 hover:border-blue-600 hover:shadow-xl transition-all group">
-                <CardContent className="p-3 md:p-4 text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform overflow-hidden">
+                <CardContent className="p-2 md:p-3 text-center">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-blue-100 flex items-center justify-center mx-auto mb-1.5 md:mb-2 group-hover:scale-110 transition-transform overflow-hidden">
                     <Image 
                       src="/images/BrokerImage.jpg" 
                       alt="Mortgage Brokers" 
-                      width={48} 
-                      height={48} 
+                      width={40} 
+                      height={40} 
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 className="text-sm md:text-base font-bold mb-1 md:mb-2">Mortgage Brokers</h3>
-                  <p className="text-xs md:text-sm text-slate-600">Close deals faster with automated processing and instant updates.</p>
+                  <h3 className="text-xs md:text-sm font-bold mb-1">Mortgage Brokers</h3>
+                  <p className="text-xs text-slate-600">Close deals faster with automated processing and instant updates.</p>
                 </CardContent>
               </Card>
 
               <Card className="border-2 hover:border-blue-600 hover:shadow-xl transition-all group">
-                <CardContent className="p-3 md:p-4 text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-green-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform overflow-hidden">
+                <CardContent className="p-2 md:p-3 text-center">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-green-100 flex items-center justify-center mx-auto mb-1.5 md:mb-2 group-hover:scale-110 transition-transform overflow-hidden">
                     <Image 
                       src="/images/CreditUnionImage.jpg" 
                       alt="Credit Unions" 
-                      width={48} 
-                      height={48} 
+                      width={40} 
+                      height={40} 
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 className="text-sm md:text-base font-bold mb-1 md:mb-2">Credit Unions</h3>
-                  <p className="text-xs md:text-sm text-slate-600">
+                  <h3 className="text-xs md:text-sm font-bold mb-1">Credit Unions</h3>
+                  <p className="text-xs text-slate-600">
                     Enhance member experience with real-time tracking and personalized service.
                   </p>
                 </CardContent>
               </Card>
 
               <Card className="border-2 hover:border-blue-600 hover:shadow-xl transition-all group">
-                <CardContent className="p-3 md:p-4 text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-purple-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform overflow-hidden">
+                <CardContent className="p-2 md:p-3 text-center">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-purple-100 flex items-center justify-center mx-auto mb-1.5 md:mb-2 group-hover:scale-110 transition-transform overflow-hidden">
                     <Image 
                       src="/images/LocalBankImage.jpg" 
                       alt="Local Banks" 
-                      width={48} 
-                      height={48} 
+                      width={40} 
+                      height={40} 
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 className="text-sm md:text-base font-bold mb-1 md:mb-2">Local Banks</h3>
-                  <p className="text-xs md:text-sm text-slate-600">Compete with enterprise-grade AI while keeping your personal touch.</p>
+                  <h3 className="text-xs md:text-sm font-bold mb-1">Local Banks</h3>
+                  <p className="text-xs text-slate-600">Compete with enterprise-grade AI while keeping your personal touch.</p>
                 </CardContent>
               </Card>
 
               <Card className="border-2 hover:border-blue-600 hover:shadow-xl transition-all group">
-                <CardContent className="p-3 md:p-4 text-center">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-orange-100 flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:scale-110 transition-transform overflow-hidden">
+                <CardContent className="p-2 md:p-3 text-center">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-orange-100 flex items-center justify-center mx-auto mb-1.5 md:mb-2 group-hover:scale-110 transition-transform overflow-hidden">
                     <Image 
                       src="/images/UnderwriterImage.jpg" 
                       alt="Underwriters" 
-                      width={48} 
-                      height={48} 
+                      width={40} 
+                      height={40} 
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 className="text-sm md:text-base font-bold mb-1 md:mb-2">Underwriters</h3>
-                  <p className="text-xs md:text-sm text-slate-600">Make faster decisions with AI-powered risk assessment and compliance.</p>
+                  <h3 className="text-xs md:text-sm font-bold mb-1">Underwriters</h3>
+                  <p className="text-xs text-slate-600">Make faster decisions with AI-powered risk assessment and compliance.</p>
                 </CardContent>
               </Card>
             </div>
