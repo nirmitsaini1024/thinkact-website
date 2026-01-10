@@ -1785,7 +1785,9 @@ export default function TAMIPage() {
                             { name: 'OneDrive', src: '/images/Microsoft_Office_OneDrive_(2019–2025).svg' },
                             { name: 'Google Drive', src: '/images/Google_Drive_icon_(2020).svg' },
                             { name: 'Dropbox', src: '/images/dropbox-official.svg' },
-                            { name: 'Microsoft Teams', src: '/images/microsoft-teams-svgrepo-com.svg' }
+                            { name: 'Microsoft Teams', src: '/images/microsoft-teams-svgrepo-com.svg' },
+                            { name: 'Slack', src: '/slack.png' },
+                            { name: 'Truv', src: '/truv.jpg' }
                           ].map((service, i) => (
                             <div 
                               key={`${setIndex}-${repeatIndex}-${i}`} 
@@ -1828,6 +1830,22 @@ export default function TAMIPage() {
                                   <img
                                     src="/images/microsoft-teams-svgrepo-com.svg"
                                     alt="Microsoft Teams"
+                                    className="h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                                    style={{ display: 'block', width: 'auto', height: 'auto', maxHeight: '28px' }}
+                                  />
+                                )}
+                                {service.name === 'Slack' && (
+                                  <img
+                                    src="/slack.png"
+                                    alt="Slack"
+                                    className="h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                                    style={{ display: 'block', width: 'auto', height: 'auto', maxHeight: '28px' }}
+                                  />
+                                )}
+                                {service.name === 'Truv' && (
+                                  <img
+                                    src="/truv.jpg"
+                                    alt="Truv"
                                     className="h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity"
                                     style={{ display: 'block', width: 'auto', height: 'auto', maxHeight: '28px' }}
                                   />
