@@ -1729,29 +1729,75 @@ export default function TAMIPage() {
                         data-set={setIndex === 0 ? "1" : undefined} 
                         className="flex"
                       >
-                        {[...Array(8)].map((_, i) => (
-                          <div 
-                            key={`${setIndex}-${i}`} 
-                            className="flex items-center justify-center h-12 md:h-16"
-                            style={{ 
-                              width: '250px',
-                              minWidth: '250px',
-                              paddingLeft: '2rem', 
-                              paddingRight: '2rem',
-                              boxSizing: 'border-box',
-                              flexShrink: 0
-                            }}
-                          >
-                            <Image
-                              src="/images/meridian-link.svg"
-                              alt="MeridianLink"
-                              width={200}
-                              height={56}
-                              className="h-8 md:h-12 w-auto opacity-80 hover:opacity-100 transition-opacity"
-                              style={{ display: 'block', width: 'auto', height: 'auto' }}
-                            />
-                          </div>
-                        ))}
+                        {[...Array(8)].map((_, i) => {
+                          const logos = [
+                            { name: 'MeridianLink', src: '/images/meridian-link.svg' },
+                            { name: 'Truv', src: '/truv.jpg' },
+                            { name: 'Advantage Credit', src: '/Advantage-Credit-Inc.png' },
+                            { name: 'Plaid', src: '/Plaid.png' }
+                          ];
+                          const logo = logos[i % logos.length];
+                          return (
+                            <div 
+                              key={`${setIndex}-${i}`} 
+                              className="flex items-center justify-center h-12 md:h-16"
+                              style={{ 
+                                width: '250px',
+                                minWidth: '250px',
+                                paddingLeft: '2rem', 
+                                paddingRight: '2rem',
+                                boxSizing: 'border-box',
+                                flexShrink: 0
+                              }}
+                            >
+                              {logo.name === 'MeridianLink' ? (
+                                <Image
+                                  src={logo.src}
+                                  alt={logo.name}
+                                  width={200}
+                                  height={56}
+                                  className="h-8 md:h-12 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                                  style={{ display: 'block', width: 'auto', height: 'auto' }}
+                                />
+                              ) : logo.name === 'Truv' ? (
+                                <img
+                                  src={logo.src}
+                                  alt={logo.name}
+                                  className="h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                                  style={{ 
+                                    display: 'block', 
+                                    maxHeight: '2.5rem',
+                                    maxWidth: '150px',
+                                    width: 'auto', 
+                                    height: 'auto',
+                                    objectFit: 'contain'
+                                  }}
+                                />
+                              ) : logo.name === 'Plaid' ? (
+                                <img
+                                  src={logo.src}
+                                  alt={logo.name}
+                                  className="h-6 md:h-9 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                                  style={{ 
+                                    display: 'block', 
+                                    maxHeight: '2.25rem',
+                                    maxWidth: '160px',
+                                    width: 'auto', 
+                                    height: 'auto',
+                                    objectFit: 'contain'
+                                  }}
+                                />
+                              ) : (
+                                <img
+                                  src={logo.src}
+                                  alt={logo.name}
+                                  className="h-8 md:h-12 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                                  style={{ display: 'block', width: 'auto', height: 'auto' }}
+                                />
+                              )}
+                            </div>
+                          );
+                        })}
                       </div>
                     ))}
                   </div>
@@ -1782,12 +1828,12 @@ export default function TAMIPage() {
                       >
                         {[...Array(4)].flatMap((_, repeatIndex) => 
                           [
-                            { name: 'OneDrive', src: '/images/Microsoft_Office_OneDrive_(2019–2025).svg' },
+                            { name: 'OneDrive', src: '/images/Microsoft_Office_OneDrive_(2019-2025).svg' },
                             { name: 'Google Drive', src: '/images/Google_Drive_icon_(2020).svg' },
                             { name: 'Dropbox', src: '/images/dropbox-official.svg' },
                             { name: 'Microsoft Teams', src: '/images/microsoft-teams-svgrepo-com.svg' },
                             { name: 'Slack', src: '/slack.png' },
-                            { name: 'Truv', src: '/truv.jpg' }
+                            { name: 'DocuSign', src: '/docusign.png' }
                           ].map((service, i) => (
                             <div 
                               key={`${setIndex}-${repeatIndex}-${i}`} 
@@ -1804,7 +1850,7 @@ export default function TAMIPage() {
                               <div className="mb-1.5 flex items-center justify-center" style={{ height: '40px', width: '100%', minHeight: '32px' }}>
                                 {service.name === 'OneDrive' && (
                                   <img
-                                    src="/images/Microsoft_Office_OneDrive_(2019–2025).svg"
+                                    src="/images/Microsoft_Office_OneDrive_(2019-2025).svg"
                                     alt="OneDrive"
                                     className="h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity"
                                     style={{ display: 'block', width: 'auto', height: 'auto', maxHeight: '28px' }}
@@ -1842,10 +1888,10 @@ export default function TAMIPage() {
                                     style={{ display: 'block', width: 'auto', height: 'auto', maxHeight: '28px' }}
                                   />
                                 )}
-                                {service.name === 'Truv' && (
+                                {service.name === 'DocuSign' && (
                                   <img
-                                    src="/truv.jpg"
-                                    alt="Truv"
+                                    src="/docusign.png"
+                                    alt="DocuSign"
                                     className="h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity"
                                     style={{ display: 'block', width: 'auto', height: 'auto', maxHeight: '28px' }}
                                   />
