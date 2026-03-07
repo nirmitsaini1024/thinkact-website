@@ -508,7 +508,7 @@ const Navbar: React.FC = () => {
                   alt="NVIDIA Inception Program"
                   width={120}
                   height={52}
-                  className="h-8 w-auto"
+                  className="h-14 w-auto"
                 />
               </a>
               {/* <Link href="/signin">
