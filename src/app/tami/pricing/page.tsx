@@ -183,7 +183,7 @@ export default function PricingPage() {
             Agentic Platform for Autonomous Workflows
           </p>
           <p className="text-xs text-muted-foreground">
-            © 2025 ThinkAct. All rights reserved.
+            © 2026 ThinkAct. All rights reserved.
           </p>
         </div>
       </footer>

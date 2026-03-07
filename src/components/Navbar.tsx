@@ -496,11 +496,26 @@ const Navbar: React.FC = () => {
             </div>
 
             <div className="hidden lg:flex items-center space-x-4">
-              <Link href="/signin">
+              <a
+                href="https://www.nvidia.com/en-us/startups/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+                aria-label="NVIDIA Inception Program"
+              >
+                <Image
+                  src="/nvidia-inception-program-badge-rgb-for-screen.svg"
+                  alt="NVIDIA Inception Program"
+                  width={120}
+                  height={52}
+                  className="h-8 w-auto"
+                />
+              </a>
+              {/* <Link href="/signin">
                 <button className="text-sm font-light text-zinc-700 hover:text-black px-4 py-2 rounded-full border border-zinc-300 hover:bg-zinc-100 transition-all duration-200">
                   Sign In
                 </button>
-              </Link>
+              </Link> */}
               <button 
                 onClick={() => window.open('https://koalendar.com/e/meet-with-sales-thinkactai', 'BookADemo', 'width=800,height=600,scrollbars=yes,resizable=yes')}
                 className="flex items-center bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-700 transition-colors duration-200"
