@@ -526,6 +526,21 @@ const Navbar: React.FC = () => {
             </div>
 
             <div className="lg:hidden flex items-center space-x-2">
+              <a
+                href="https://www.nvidia.com/en-us/startups/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+                aria-label="NVIDIA Inception Program"
+              >
+                <Image
+                  src="/nvidia-inception-program-badge-rgb-for-screen.svg"
+                  alt="NVIDIA Inception Program"
+                  width={88}
+                  height={38}
+                  className="h-9 w-auto"
+                />
+              </a>
               <button onClick={handleMenuToggle} className="text-zinc-800 p-2 transition-opacity duration-200 hover:opacity-70">
                 {isOpen ? <RxCross2 size={24} /> : <CgMenuLeft size={24} />}
               </button>
