@@ -424,7 +424,7 @@ const Navbar: React.FC = () => {
                 />
               </div>
               <p className="font-semibold text-2xl text-zinc-900">
-                Think<span className="text-blue-500">Act</span>
+                Think<span className="text-blue-500">Act</span> AI
               </p>
             </Link>
 
