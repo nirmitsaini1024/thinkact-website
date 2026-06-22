@@ -609,7 +609,7 @@ export default function AboutUs() {
                 </div>
               </div>
 
-              <div className="group h-full md:col-span-3">
+              {/* <div className="group h-full md:col-span-3">
                 <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-100 h-full flex flex-col">
                   <div className="flex flex-col items-center text-center flex-grow">
                     <Image
@@ -640,7 +640,7 @@ export default function AboutUs() {
                     </a>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
