@@ -73,8 +73,8 @@ export default function PricingPage() {
                 <h3 className="text-2xl font-bold text-foreground mb-2">Basic</h3>
                 <p className="text-muted-foreground mb-6">Perfect for small lending teams getting started</p>
                 
-                <Button className="w-full mb-8" variant="outline">
-                  Subscribe
+                <Button asChild className="w-full mb-8" variant="outline">
+                  <Link href="/signup?tier=FREE">Subscribe</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -93,8 +93,10 @@ export default function PricingPage() {
                 <h3 className="text-2xl font-bold text-foreground mb-2">Premium</h3>
                 <p className="text-muted-foreground mb-6">For growing teams scaling operations</p>
                 
-                <Button className="w-full mb-8 bg-primary hover:bg-primary/90">
-                  Subscribe <ArrowRight className="w-4 h-4 ml-2" />
+                <Button asChild className="w-full mb-8 bg-primary hover:bg-primary/90">
+                  <Link href="/signup?tier=GOLD">
+                    Subscribe <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
@@ -108,8 +110,8 @@ export default function PricingPage() {
                 <h3 className="text-2xl font-bold text-foreground mb-2">Enterprise</h3>
                 <p className="text-muted-foreground mb-6">For large institutions with high volume</p>
                 
-                <Button className="w-full mb-8" variant="outline">
-                  Subscribe
+                <Button asChild className="w-full mb-8" variant="outline">
+                  <Link href="/signup?tier=ENTERPRISE">Subscribe</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -124,11 +126,11 @@ export default function PricingPage() {
                   Start your free trial today and see how TAMI can accelerate your loan closings
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
-                  <Button size="lg" className="text-base h-12 px-8">
-                    Start Free Trial
+                  <Button asChild size="lg" className="text-base h-12 px-8">
+                    <Link href="/signup?tier=FREE">Start Free Trial</Link>
                   </Button>
-                  <Button size="lg" variant="outline" className="text-base h-12 px-8 border-2">
-                    Schedule a Demo
+                  <Button asChild size="lg" variant="outline" className="text-base h-12 px-8 border-2">
+                    <Link href="/book-a-demo">Schedule a Demo</Link>
                   </Button>
                 </div>
               </CardContent>
